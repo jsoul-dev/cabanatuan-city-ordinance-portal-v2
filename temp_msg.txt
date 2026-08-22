@@ -1,0 +1,4 @@
+fix(ordinances): add ScrollToTop to loading state
+
+Added the ScrollToTop component to the ordinance skeleton. This ensures that navigating to the ordinance page from a scrolled position will instantly snap to the top.
+
