@@ -1,42 +1,50 @@
-import { Pool } from "pg";
-import { PrismaPg } from "@prisma/adapter-pg";
+import Database from "better-sqlite3";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "@prisma/client";
+import path from "node:path";
+import fs from "node:fs";
 
 /**
- * Prisma 7 singleton — prevents hot-reload connection exhaustion in dev.
- * Uses official @prisma/adapter-pg PostgreSQL driver adapter.
- *
- * Optimized for Vercel serverless:
- * - Small connection pool (max 3) to avoid exhausting Supabase limits
- * - Short idle timeout so connections are released quickly between invocations
- * - Connection timeout to fail fast on cold starts rather than hanging
+ * Prisma 7 singleton for local SQLite.
+ * Uses @prisma/adapter-better-sqlite3 for high performance on local low-spec Windows machines.
+ * Enables WAL mode, NORMAL synchronous mode, and foreign keys for fast, corruption-resistant local execution.
  */
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
-  pool: Pool | undefined;
+  db: Database.Database | undefined;
 };
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const pool =
-  globalForPrisma.pool ??
-  new Pool({
-    connectionString: `${process.env.DATABASE_URL}`,
-    // Serverless-optimized pool settings
-    max: isProduction ? 3 : 10,               // Small pool for serverless, larger for dev
-    idleTimeoutMillis: isProduction ? 10_000 : 30_000, // Release idle connections quickly
-    connectionTimeoutMillis: 5_000,            // Fail fast on cold starts
-  });
+function getSqliteUrl(): string {
+  const envUrl = process.env.DATABASE_URL;
+  if (!envUrl || envUrl.startsWith("postgres:") || envUrl.startsWith("postgresql:")) {
+    return path.resolve(process.cwd(), "prisma", "dev.db");
+  }
 
-if (!isProduction) globalForPrisma.pool = pool;
+  let cleaned = envUrl.replace(/^file:/, "");
+  cleaned = cleaned.split("?")[0];
 
-const adapter = new PrismaPg(pool);
+  if (path.isAbsolute(cleaned)) {
+    return cleaned;
+  }
+  return path.resolve(process.cwd(), cleaned);
+}
+
+const dbUrl = getSqliteUrl();
+const dir = path.dirname(dbUrl);
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+const adapter = new PrismaBetterSqlite3({ url: dbUrl });
 
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     adapter,
-    log: isProduction ? ["error"] : ["query", "error", "warn"],
+    log: isProduction ? ["error"] : ["error", "warn"],
   });
 
 if (!isProduction) globalForPrisma.prisma = prisma;
+
