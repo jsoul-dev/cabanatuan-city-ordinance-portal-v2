@@ -28,13 +28,15 @@ type OrdinanceWithBarangay = Omit<Ordinance, "pdfUrl" | "tags"> & {
 interface OrdinanceExplorerClientProps {
   initialOrdinances: OrdinanceWithBarangay[];
   barangays: Barangay[];
+  initialSearch?: string;
 }
 
 export function OrdinanceExplorerClient({
   initialOrdinances,
   barangays,
+  initialSearch = "",
 }: OrdinanceExplorerClientProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [selectedType, setSelectedType] = useState<"ALL" | "CITY" | "BARANGAY">("ALL");
   const [selectedBarangayId, setSelectedBarangayId] = useState<string>("ALL");
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");

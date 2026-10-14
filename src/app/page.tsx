@@ -88,23 +88,32 @@ export default async function LandingPage() {
                 may bilis at transparency.
               </p>
 
-              {/* Action Buttons with Apple tactile feedback */}
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link href="/ordinances">
-                  <button
-                    type="button"
-                    className="inline-flex min-h-[48px] items-center gap-2.5 rounded-xl bg-neutral-900 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-neutral-900/15 transition-all hover:bg-neutral-800 active:scale-[0.98] dark:bg-white dark:text-black dark:shadow-white/5 dark:hover:bg-neutral-200"
-                  >
-                    <SearchIcon size={16} />
-                    <span>Maghanap ng Ordinansa</span>
-                    <ArrowRightIcon size={16} />
-                  </button>
-                </Link>
+              {/* Hero Ordinance Search Form */}
+              <form action="/ordinances" method="GET" className="mt-8 flex w-full max-w-lg items-center gap-2">
+                <div className="relative flex-1">
+                  <SearchIcon size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-mute)]" />
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Maghanap ng ordinansa (hal. traffic, curfew, basura)..."
+                    className="w-full rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-card)] py-3 pl-10 pr-4 text-sm font-medium text-[var(--text-ink)] placeholder-[var(--text-mute)] shadow-sm outline-none transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-neutral-800 active:scale-[0.98] dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+                >
+                  <span>Hanapin</span>
+                  <ArrowRightIcon size={14} />
+                </button>
+              </form>
 
+              {/* Action Buttons with Apple tactile feedback */}
+              <div className="mt-4 flex flex-wrap items-center gap-4">
                 <Link href="/chatbot">
                   <button
                     type="button"
-                    className="inline-flex min-h-[48px] items-center gap-2.5 rounded-xl border border-emerald-600/30 bg-emerald-50/80 px-5 py-3.5 text-sm font-bold text-emerald-800 transition-all hover:bg-emerald-100 active:scale-[0.98] dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:border-emerald-500/60 dark:hover:bg-emerald-900/40"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-emerald-600/30 bg-emerald-50/80 px-4 py-2.5 text-sm font-bold text-emerald-800 transition-all hover:bg-emerald-100 active:scale-[0.98] dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:border-emerald-500/60 dark:hover:bg-emerald-900/40"
                   >
                     <AiBotSparkleIcon size={16} />
                     <span>Magtanong sa AI Assistant</span>

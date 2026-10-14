@@ -14,7 +14,14 @@ export const metadata: Metadata = {
  * Ordinance Explorer Page (Server Component).
  * Responsive across BOTH crisp Light Mode and winauth.net Dark Mode.
  */
-export default async function OrdinancesPage() {
+export default async function OrdinancesPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ search?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : undefined;
+  const initialSearch = resolvedParams?.search || "";
+
   const rawOrdinances = await Promise.all([
     prisma.ordinance.findMany({
       where: {
@@ -76,6 +83,7 @@ export default async function OrdinancesPage() {
           <OrdinanceExplorerClient
             initialOrdinances={ordinances}
             barangays={barangays}
+            initialSearch={initialSearch}
           />
         </div>
       </main>
