@@ -4,7 +4,7 @@
 **Environment**: Local Offline Windows Environment (`local-demo` branch)  
 **Database**: Local SQLite (`prisma/dev.db` via `@prisma/adapter-better-sqlite3`, WAL mode)  
 **Storage**: Local Disk (`public/uploads/` via streaming route `/api/files/[...path]`)  
-**External Services**: Google Gemini 2.5 Flash Lite (`/api/chat` and `/api/ordinances/extract`) only; **0 calls to Supabase**  
+**External Services**: Google Gemini 3.5 Flash Lite (`/api/chat` and `/api/ordinances/extract`) only; **0 calls to Supabase**  
 **Test Engine**: Real Headless Chromium driven via Playwright automation scripts  
 **App Server**: Next.js 16.2.12 (Turbopack production build running on `http://localhost:3000`)
 
@@ -30,7 +30,7 @@ All **18 automated test suites** passed with verified screenshot artifacts on di
 | **A2** | **Ordinance Explorer Filters**<br>Year-range mode and category filters alone and combined. | Public | **PASS** | `02-explorer-initial.png`<br>`02-filters-category-year.png` | Year range toggle (2020–2024) combined with Category filter ("Environment") properly filtered 56 ordinances down to matching records; counts updated in real time. |
 | **A3** | **Split-Screen Ordinance Detail & PDF Modal**<br>Full article text, penalties, coverage, and PDF viewer modal. | Public | **PASS** | `03-ordinance-detail-split.png`<br>`03-pdf-modal.png` | Routed to `/ordinances/city-2023-045` in 46ms. Split-screen displays full legal text and metadata. Clicking "View Official PDF Document" opened interactive modal with zoom/download; Escape and close button work cleanly. |
 | **A4** | **Theme Toggle Persistence**<br>Switch Light/Dark mode and persist state across page reloads. | Public | **PASS** | `04-theme-toggle-1.png`<br>`04-theme-persisted.png` | Seamless theme toggle via `next-themes` button in navbar. `dark` class toggled on `<html>` element and persisted in `localStorage` across full page reload without hydration flash or contrast loss. |
-| **A5** | **AI Ordinance Chatbot (`/chatbot`)**<br>Tagalog, English, citations, out-of-scope honest redirect, clear history. | Public | **PASS** | `05-chatbot-conversation.png`<br>`05-chatbot-reloaded.png`<br>`05-chatbot-cleared.png` | Streaming AI response from Gemini 2.5 Flash Lite cited Sanggunian Panlungsod Res No. 2022-112 and 2023-045. Handled out-of-scope question ("NBA finals") honestly with non-legal redirect without fabricating law. Multi-turn history persisted on reload and cleared on "Clear Chat History". |
+| **A5** | **AI Ordinance Chatbot (`/chatbot`)**<br>Tagalog, English, citations, out-of-scope honest redirect, clear history. | Public | **PASS** | `05-chatbot-conversation.png`<br>`05-chatbot-reloaded.png`<br>`05-chatbot-cleared.png` | Streaming AI response from Gemini 3.5 Flash Lite cited Sanggunian Panlungsod Res No. 2022-112 and 2023-045. Handled out-of-scope question ("NBA finals") honestly with non-legal redirect without fabricating law. Multi-turn history persisted on reload and cleared on "Clear Chat History". |
 | **A6** | **Community Incident Report (`/report`)**<br>Validation check and submission to participating barangay. | Citizen | **PASS** | `06-report-initial.png`<br>`06-report-validation.png`<br>`06-report-submitted.png` | Empty submission prevented by validation. Filled valid violation report for participating barangay. Submitted successfully with confirmation banner (`div[role='alert']`) rendered. |
 
 ---
