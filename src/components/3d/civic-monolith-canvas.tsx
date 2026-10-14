@@ -317,14 +317,14 @@ export function CivicMonolithCanvas({
 
     // ANIMATION LOOP
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
       if (!isVisible) return;
 
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) / 1000;
 
       // Gentle continuous rotation
       if (!prefersReducedMotion) {

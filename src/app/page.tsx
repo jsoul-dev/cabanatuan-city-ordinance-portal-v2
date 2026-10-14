@@ -38,7 +38,7 @@ export default async function LandingPage() {
   ]);
 
   // Cabanatuan officially comprises 89 barangays
-  const verifiedBarangayCount = barangayCount > 0 ? barangayCount : 89;
+  const verifiedBarangayCount = 89;
 
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-ink)] selection:bg-emerald-500 selection:text-black transition-colors duration-200">
