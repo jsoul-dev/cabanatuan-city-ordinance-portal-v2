@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import path from "node:path";
+import fs from "node:fs";
 
 export async function GET(
   request: Request,
@@ -18,6 +20,22 @@ export async function GET(
     }
 
     const { pdfUrl } = ordinance;
+
+    // If it's a local file URL or relative upload path
+    if (pdfUrl.startsWith("/api/files/") || pdfUrl.startsWith("/uploads/") || pdfUrl.startsWith("uploads/")) {
+      const fileName = path.basename(pdfUrl);
+      const filePath = path.resolve(process.cwd(), "public", "uploads", fileName);
+      if (fs.existsSync(filePath)) {
+        const buffer = await fs.promises.readFile(filePath);
+        return new NextResponse(buffer, {
+          headers: {
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `inline; filename="${slug}.pdf"`,
+            "Cache-Control": "public, max-age=31536000, immutable",
+          },
+        });
+      }
+    }
 
     // If it's an external URL, just redirect to it
     if (pdfUrl.startsWith("http://") || pdfUrl.startsWith("https://")) {
