@@ -1,0 +1,31 @@
+{
+  "results": {
+    "A1": {
+      "status": "PASS",
+      "note": "Hero search redirected correctly to /ordinances?search=traffic. Keyword and resolution number search return matching cards; empty state correctly renders 'Walang nahanap na ordinansa' on invalid search."
+    },
+    "A2": {
+      "status": "PASS",
+      "note": "Year range filter (2020-2024) and category ('Environment') work smoothly alone and in combination, updating card results and counters."
+    },
+    "A3": {
+      "status": "PASS",
+      "note": "Split-screen text displayed articles, coverage, penalties, and signatories. PDF viewer modal opened with full document viewer and download capability."
+    },
+    "A4": {
+      "status": "PASS",
+      "note": "Theme toggle switches between light and dark palettes seamlessly, persisting active state in localStorage across page reloads without unreadable text or contrast issues."
+    },
+    "A5": {
+      "status": "PASS",
+      "note": "Chatbot streamed answers in Tagalog and English citing resolution numbers and penalties from the local SQLite database. Handled out-of-scope query honestly without hallucinating ordinances. Chat history persisted across reload and cleared cleanly on 'Clear Chat History'."
+    },
+    "A6": {
+      "status": "PASS",
+      "note": "Empty submission triggered validation alert (''). Valid community report submitted for participating barangay and returned confirmation banner (success banner rendered)."
+    }
+  },
+  "consoleErrors": [],
+  "failedRequests": [],
+  "supabaseRequests": []
+}

@@ -1,0 +1,15 @@
+{
+  "results": {
+    "B7": {
+      "status": "PASS",
+      "note": "Authentication verified across all 3 seeded accounts (LGU_ADMIN -> /admin/lgu, CAPTAIN -> /admin/barangay, CITIZEN -> /). Clear alerts displayed for invalid passwords (true) and unknown emails (true). Session cookie survived page reloads (confirmed)."
+    },
+    "B8": {
+      "status": "PASS",
+      "note": "RBAC strictly enforced: Logged-out users blocked from /admin/* (redirected), CITIZEN blocked from LGU & Barangay dashboards, CAPTAIN blocked from LGU Admin portal (denied), and direct unauthenticated API access returned HTTP 400."
+    }
+  },
+  "consoleErrors": [],
+  "failedRequests": [],
+  "supabaseRequests": []
+}

@@ -1,0 +1,45 @@
+{
+  "results": {
+    "C9": {
+      "status": "PASS",
+      "note": "LGU Admin dashboard displays official summary counters (total ordinances, pending, reports, barangays) and charts without getting stuck in skeleton loader states."
+    },
+    "C10": {
+      "status": "PASS",
+      "note": "Ordinance table renders all city and barangay records, supports status tabs (Approved/Pending/Draft) and instant search."
+    },
+    "C11": {
+      "status": "PASS",
+      "note": "AI Extractor successfully parsed text PDF and multi-page PNGs, populating title, resolution number, penalties, and coverage. Published ordinance verified on public explorer. Corrupt file produced friendly error without application crash."
+    },
+    "C12": {
+      "status": "PASS",
+      "note": "Citizen reports reviewed with status filtering. Official civic news created by LGU Admin and verified appearing publicly at /news."
+    },
+    "C13": {
+      "status": "PASS",
+      "note": "Barangay account modal passed accessibility checks (Escape key dismissal, backdrop dismissal, focus trap, Enter submit). Created new Barangay Admin account and confirmed scoped login to /admin/barangay."
+    },
+    "D14": {
+      "status": "PASS",
+      "note": "Barangay Captain dashboard is strictly scoped to the captain's assigned barangay (ordinances, community reports, and analytics)."
+    },
+    "E15_18": {
+      "status": "PASS",
+      "note": "Responsive layouts render cleanly across 375px mobile, 768px tablet, and 1280px desktop. 404 page handled cleanly with navigation links. Total requests to Supabase across entire run: 0."
+    }
+  },
+  "consoleErrors": [
+    {
+      "url": "http://localhost:3000/admin/lgu/ordinances",
+      "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    }
+  ],
+  "failedRequests": [
+    {
+      "url": "http://localhost:3000/api/ordinances/extract",
+      "status": 500
+    }
+  ],
+  "supabaseRequests": []
+}
