@@ -6,7 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Prisma ORM](https://img.shields.io/badge/Prisma_7-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![Supabase](https://img.shields.io/badge/Supabase_PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![SQLite](https://img.shields.io/badge/SQLite_3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Google Gemini AI](https://img.shields.io/badge/Google_Gemini_3.5_Flash_Lite-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg?style=for-the-badge)](https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal/blob/main/LICENSE)
 
@@ -65,19 +65,21 @@ Designed to bridge the gap between local ordinance enforcement, government offic
 
 ```mermaid
 graph TD
-    Client["Citizen / Admin Browser"] -->|"HTTPS / Next.js App Router"| Next["Next.js 16 Web Server"]
+    Client["Citizen / Admin Browser"] -->|"HTTP / Next.js App Router"| Next["Next.js 16 Web Server"]
     
     Next -->|"Server Components & Actions"| UI["Responsive UI Components"]
-    UI -->|"Radix UI / Custom Modals"| Modals["Interactive UI & Modals"]
+    UI -->|"Accessible Modals"| Modals["Interactive UI & Modals"]
     
     Next -->|"POST /api/chat"| ChatAPI["Gemini Chat Stream"]
     Next -->|"POST /api/ordinances/extract"| ExtractAPI["Multimodal OCR Parser"]
-    Next -->|"POST /api/upload"| UploadAPI["Supabase Storage Upload"]
+    Next -->|"POST /api/upload"| UploadAPI["Local File Upload"]
+    Next -->|"GET /api/files/*"| StaticServe["Local File Server (Range/Stream)"]
     
-    ChatAPI -->|"Google GenAI SDK"| Gemini["Google Gemini 3.5 Flash Lite API"]
+    ChatAPI -->|"Google GenAI SDK"| Gemini["Google Gemini 3.5 Flash Lite API (Only External Call)"]
     ExtractAPI -->|"Multimodal Vision"| Gemini
-    Next -->|"Prisma 7 ORM"| Postgres["Supabase PostgreSQL"]
-    UploadAPI -->|"Signed / Public Buckets"| Storage["Supabase Storage PDFs"]
+    Next -->|"Prisma 7 + better-sqlite3"| SQLite["Local SQLite (prisma/dev.db)"]
+    UploadAPI -->|"Local Disk"| Storage["public/uploads/ Directory"]
+    StaticServe -->|"Local Disk"| Storage
 ```
 
 ---
@@ -118,9 +120,12 @@ cabanatuan-city-ordinance-portal/
 | **Framework** | [Next.js 16 (App Router + Turbopack)](https://nextjs.org/) | React 19 Server Components, Server Actions, API Routes |
 | **Language** | [TypeScript 5](https://www.typescriptlang.org/) | End-to-end type safety across client and server |
 | **Styling** | [Tailwind CSS v4 + CVA](https://tailwindcss.com/) | Design tokens, responsive layouts, theme-aware styling |
-| **ORM & Database** | [Prisma 7.9 + Supabase PostgreSQL](https://prisma.io/) | Relational database schema, connection pooling, migrations |
-| **File Storage** | [Supabase Storage](https://supabase.com/storage) | Cloud PDF ordinance document hosting |
-| **AI & LLM** | [Google Gemini 3.5 Flash Lite (`@google/genai`)](https://ai.google.dev/) | Bilingual ordinance chat streaming, multimodal OCR PDF parser |
+| **Framework** | [Next.js 16 (App Router + Turbopack)](https://nextjs.org/) | React 19 Server Components, Server Actions, API Routes |
+| **Language** | [TypeScript 5](https://www.typescriptlang.org/) | End-to-end type safety across client and server |
+| **Styling** | [Tailwind CSS v4 + CVA](https://tailwindcss.com/) | Design tokens, responsive layouts, theme-aware styling |
+| **ORM & Database** | [Prisma 7.9 + better-sqlite3](https://prisma.io/) | 100% local SQLite database (`prisma/dev.db`) with WAL mode |
+| **File Storage** | Local Disk Storage (`/public/uploads/`) | Zero-config local document storage via `/api/files/` |
+| **AI & LLM** | [Google Gemini 3.5 Flash Lite (`@google/genai`)](https://ai.google.dev/) | Bilingual ordinance chat streaming, multimodal OCR PDF parser (Only External Call) |
 | **UI Components** | Radix UI / Base UI / Sonner | Accessible modals, toast notifications |
 | **Charts & Stats** | [Recharts 3 + NumberFlow](https://recharts.org/) | Executive analytics dashboards and animated statistics |
 | **State Management** | [Zustand 5](https://github.com/pmndrs/zustand) | Client-side draft persistence and chat history |
@@ -132,8 +137,7 @@ cabanatuan-city-ordinance-portal/
 ### Prerequisites
 - **Node.js** `>= 20.0.0`
 - **npm**, **pnpm**, or **bun**
-- A [Supabase](https://supabase.com/) project (PostgreSQL Database + Storage Bucket named `ordinances`)
-- A [Google Gemini API Key](https://aistudio.google.com/)
+- A [Google Gemini API Key](https://aistudio.google.com/) (the ONLY external service requirement)
 
 ### 1. Clone the Repository
 ```bash
@@ -147,33 +151,25 @@ npm install
 ```
 
 ### 3. Configure Environment Variables
-Create a `.env.local` file in the root directory:
+Create a `.env` file in the root directory (or copy from `.env.example`):
 
 ```env
-# Database Connections (Supabase PostgreSQL)
-DATABASE_URL="postgresql://postgres.[YOUR_PROJECT]:[YOUR_PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://postgres.[YOUR_PROJECT]:[YOUR_PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
-
-# Supabase API & Storage
-NEXT_PUBLIC_SUPABASE_URL="https://[YOUR_PROJECT].supabase.co"
-NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
-SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
-
-# Google Gemini AI (Default Model: gemini-3.5-flash-lite)
-GEMINI_API_KEY="your-gemini-api-key"
-GEMINI_MODEL="gemini-3.5-flash-lite"
+# Database (Local SQLite)
+DATABASE_URL="file:./prisma/dev.db"
 
 # Authentication
 JWT_SECRET="super-secret-jwt-key-32-characters-min"
+
+# Google Gemini AI (Only External Call)
+GEMINI_API_KEY="your-gemini-api-key"
+GEMINI_MODEL="gemini-3.5-flash-lite"
 ```
 
-### 4. Push Database Schema & Seed Data
-Generate Prisma client, push schema to Supabase, and seed realistic ordinances and user accounts:
+### 4. One-Command Database Setup & Seeding
+Initialize the local SQLite database schema and seed realistic ordinances, barangays, reports, and accounts:
 
 ```bash
-npx prisma generate
-npx prisma db push
-npm run db:seed
+npm run db:setup
 ```
 
 > **Seeded Test Credentials:**
@@ -181,19 +177,23 @@ npm run db:seed
 > - **Barangay Captain:** `kapitan@cabanatuan.gov.ph` / `kapitan123`
 > - **Citizen:** `juan@cabanatuan.gov.ph` / `citizen123`
 
-### 5. Start the Development Server
+### 5. Launch One-Command Production Demo
+Build and launch the optimized production server on port 3000 for fast, responsive presentation:
+
 ```bash
-npm run dev
+npm run demo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the portal.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 > **Windows Shortcut (`manage.bat`):**  
 > On Windows, you can double-click **`manage.bat`** in the project root to open an interactive menu for managing servers, or run direct CLI commands in Command Prompt/PowerShell:  
+> - `manage.bat setup` (One-command generate, push, and seed local SQLite)
+> - `manage.bat demo` (Build and launch optimized production server on port 3000)
 > - `manage.bat dev` (Start development server on port 3000)  
-> - `manage.bat prod` (Build & launch optimized production server)  
 > - `manage.bat studio` (Open Prisma Studio database manager on port 5555)  
-> - `manage.bat stop` (Kill any active portal servers)  
+> - `manage.bat reset-db` (Cleanly delete and re-seed the local SQLite database)
+> - `manage.bat stop` (Kill any active portal servers on :3000 and :5555)  
 
 ---
 

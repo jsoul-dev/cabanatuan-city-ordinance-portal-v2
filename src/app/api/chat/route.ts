@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
  * and lightweight Prisma keyword search for grounded RAG answers.
  */
 export async function POST(request: Request) {
+  const startTime = performance.now();
   try {
     const { messages, sessionId, userId } = await request.json();
 
@@ -173,6 +174,10 @@ PANGKALAHATANG MGA PATAKARAN:
 
     const replyText =
       response.text || "Paumanhin, hindi ako nakabuo ng sagot sa ngayon.";
+
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`⏱️ [/api/chat] Responded in ${(performance.now() - startTime).toFixed(1)}ms`);
+    }
 
     return NextResponse.json({ reply: replyText });
   } catch (error) {

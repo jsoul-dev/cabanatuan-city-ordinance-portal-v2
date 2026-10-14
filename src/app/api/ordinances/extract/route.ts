@@ -145,6 +145,7 @@ MAHALAGANG PATAKARAN:
 7. KUNG SCANNED DOCUMENT: Gamitin ang OCR upang basahin ang lahat, kahit ang mga sulat-kamay.`;
 
 export async function POST(request: Request) {
+  const startTime = performance.now();
   try {
     const body = await request.json();
     const { text, base64Image, mimeType, files } = body;
@@ -251,6 +252,10 @@ export async function POST(request: Request) {
     extracted.enforcement = formatEnforcementAgencies(extracted.enforcement);
 
     const { valid, warnings } = validateExtractionResult(extracted);
+
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`⏱️ [/api/ordinances/extract] Extraction completed in ${(performance.now() - startTime).toFixed(1)}ms`);
+    }
 
     return NextResponse.json({
       success: true,
