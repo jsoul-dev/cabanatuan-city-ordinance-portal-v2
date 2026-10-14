@@ -45,7 +45,7 @@ export default async function NewsPage() {
               Mga Balita at Anunsyo
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-base">
-              Subaybayan ang mga bagong ordinansa, public consultation, at
+              Subaybayan ang mga bagong ordinansa, mga public hearing at anunsyo, at
               mahahalagang pahayag mula sa LGU ng Cabanatuan at mga barangay.
             </p>
           </div>

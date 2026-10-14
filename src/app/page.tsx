@@ -5,7 +5,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { CivicMonolithCanvas } from "@/components/3d/civic-monolith-canvas";
 import {
-  LegislativeAiSimulator,
+  OrdinanceAiSimulator,
   BarangayDistrictShowcase,
 } from "@/components/home/landing-interactive-sections";
 import {
@@ -13,7 +13,6 @@ import {
   AiBotSparkleIcon,
   CommunityReportIcon,
   SearchIcon,
-  ScaleIcon,
   ShieldCheckIcon,
   CivicHallIcon,
   ArrowRightIcon,
@@ -75,7 +74,7 @@ export default async function LandingPage() {
 
               {/* Responsive Display Typography */}
               <h1 className="text-4xl font-extrabold tracking-tight text-[var(--text-ink)] sm:text-5xl lg:text-6xl lg:leading-[1.12]">
-                Batas ng Lungsod,{" "}
+                Mga Ordinansa ng Lungsod,{" "}
                 <span className="bg-gradient-to-r from-emerald-600 via-emerald-800 to-amber-700 dark:from-emerald-400 dark:via-emerald-200 dark:to-amber-300 bg-clip-text text-transparent">
                   Malinaw at Bukas sa Bawat Mamamayan.
                 </span>
@@ -83,7 +82,7 @@ export default async function LandingPage() {
 
               {/* Authoritative Civic Description */}
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-body)] sm:text-lg">
-                Ang opisyal na digital legislative registry at AI assistant ng
+                Ang opisyal na digital ordinance registry at AI assistant ng
                 Lungsod ng Cabanatuan. Madaling maghanap ng ordinansa, alamin ang
                 mga multa at parusa, at direktang mag-ulat sa inyong barangay nang
                 may bilis at transparency.
@@ -212,7 +211,7 @@ export default async function LandingPage() {
         <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="mb-12">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 uppercase mb-2">
-              <ScaleIcon size={13} />
+              <CivicHallIcon size={13} />
               <span>PANGUNAHING SERBISYO NG PORTAL</span>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-ink)] sm:text-4xl">
@@ -220,12 +219,12 @@ export default async function LandingPage() {
             </h2>
             <p className="mt-2 text-sm text-[var(--text-body)] max-w-2xl">
               Idinisenyo para sa mamamayan ng Cabanatuan upang maihatid ang mga
-              batas ng lungsod nang walang alinlangan at walang kumplikasyon.
+              ordinansa ng lungsod nang walang alinlangan at walang kumplikasyon.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-            {/* Dominant Feature Card (7 Columns): Smart Legislative Explorer */}
+            {/* Dominant Feature Card (7 Columns): Smart Ordinance Explorer */}
             <div className="flex flex-col justify-between rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-card)] p-8 shadow-xl lg:col-span-7">
               <div>
                 <div className="flex items-center justify-between border-b border-[var(--border-hairline)] pb-5">
@@ -287,7 +286,7 @@ export default async function LandingPage() {
               </div>
             </div>
 
-            {/* Secondary Feature Card (5 Columns): AI Citizen Legal Advisor */}
+            {/* Secondary Feature Card (5 Columns): AI Citizen Ordinance Information Assistant */}
             <div className="flex flex-col justify-between rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-card)] p-8 shadow-xl lg:col-span-5">
               <div>
                 <div className="flex items-center justify-between border-b border-[var(--border-hairline)] pb-5">
@@ -309,7 +308,7 @@ export default async function LandingPage() {
                 <p className="mt-5 text-sm leading-relaxed text-[var(--text-body)]">
                   May tanong tungkol sa curfew, multa sa videoke, o business
                   permit? Tanungin ang AI sa Tagalog o English. Hindi ito
-                  nag-iimbento ng sagot kundi direktang sumisipi sa lokal na batas.
+                  nag-iimbento ng sagot kundi direktang sumisipi sa mga opisyal na ordinansa ng lungsod.
                 </p>
 
                 <div className="mt-6 rounded-2xl border border-emerald-600/20 bg-emerald-50/50 dark:bg-emerald-950/20 p-4 space-y-2">
@@ -373,7 +372,7 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        {/* ─── 4. INTERACTIVE LEGISLATIVE AI SIMULATOR ─── */}
+        {/* ─── 4. INTERACTIVE ORDINANCE AI SIMULATOR ─── */}
         <section className="border-t border-[var(--border-hairline)] bg-[var(--bg-canvas)] py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-10 text-center max-w-2xl mx-auto">
@@ -390,7 +389,7 @@ export default async function LandingPage() {
               </p>
             </div>
 
-            <LegislativeAiSimulator />
+            <OrdinanceAiSimulator />
           </div>
         </section>
 
@@ -415,7 +414,7 @@ export default async function LandingPage() {
             </div>
 
             <h2 className="text-3xl font-extrabold text-[var(--text-ink)] sm:text-4xl">
-              Handa nang mag-explore ng mga Batas ng Lungsod?
+              Handa nang mag-explore ng mga Ordinansa ng Lungsod?
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-[var(--text-body)] sm:text-base">
               Lahat ng resolusyon mula sa Sangguniang Panlungsod at mga Barangay
@@ -440,7 +439,7 @@ export default async function LandingPage() {
                   className="inline-flex items-center gap-2 rounded-xl border border-emerald-600/30 bg-emerald-50/80 px-6 py-3.5 text-sm font-bold text-emerald-800 hover:bg-emerald-100 active:scale-[0.98] transition-all dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
                 >
                   <AiBotSparkleIcon size={16} />
-                  <span>Kumonsulta sa AI Assistant</span>
+                  <span>Magtanong sa AI Assistant</span>
                 </button>
               </Link>
             </div>

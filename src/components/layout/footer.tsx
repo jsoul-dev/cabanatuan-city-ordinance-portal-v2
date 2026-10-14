@@ -61,7 +61,7 @@ export function Footer() {
             <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-500">
               Lungsod ng Cabanatuan, Nueva Ecija
               <br />
-              Official Digital Ordinance Portal & AI Citizen Assistant
+              Official Digital Ordinance Portal & AI Ordinance Information Assistant
             </p>
             <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-2.5 py-1 font-mono text-[10px] text-emerald-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-emerald-400 dark:shadow-none">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
@@ -98,10 +98,13 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 border-t border-neutral-200 dark:border-white/10 pt-6 text-center">
+        <div className="mt-12 border-t border-neutral-200 dark:border-white/10 pt-6 text-center space-y-1">
           <p className="text-xs text-neutral-500">
             © {new Date().getFullYear()} Pamahalaang Lungsod ng Cabanatuan. All
             rights reserved.
+          </p>
+          <p className="text-[11px] text-neutral-400 dark:text-neutral-500 max-w-2xl mx-auto">
+            Ang portal na ito ay opisyal na imbakan at tagapamahala ng impormasyon ukol sa mga ordinansa ng Lungsod ng Cabanatuan. Hindi ito nagbibigay ng legal advice o serbisyong legal.
           </p>
         </div>
       </div>

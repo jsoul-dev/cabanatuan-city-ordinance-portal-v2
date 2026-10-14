@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import {
   AiBotSparkleIcon,
-  ScaleIcon,
+  ShieldCheckIcon,
   FlameIcon,
   CarIcon,
   Volume2Icon,
@@ -35,7 +35,7 @@ const SIMULATION_PROMPTS: SimulationPrompt[] = [
     answer:
       "Ayon sa City Ordinance No. 2018-042, mahigpit na ipinagbabawal ang paggala ng mga menor de edad (edad 17 pababa) sa lahat ng pampublikong lansangan at lugar mula 10:00 PM hanggang 4:00 AM maliban kung may kasamang magulang o may lehitimong emergency.",
     penalty: "1st Offense: Warning at Referral sa Barangay CSWD • 2nd: ₱1,000 multa at 8 oras community service ng magulang.",
-    icon: ScaleIcon,
+    icon: ShieldCheckIcon,
   },
   {
     id: "solid-waste",
@@ -72,7 +72,7 @@ const SIMULATION_PROMPTS: SimulationPrompt[] = [
   },
 ];
 
-export function LegislativeAiSimulator() {
+export function OrdinanceAiSimulator() {
   const [activePrompt, setActivePrompt] = useState<SimulationPrompt>(
     SIMULATION_PROMPTS[0]
   );
@@ -88,7 +88,7 @@ export function LegislativeAiSimulator() {
           </div>
           <div>
             <h3 className="text-base font-bold text-[var(--text-ink)]">
-              AI Legislative Simulator
+              AI Ordinance Simulator
             </h3>
             <p className="text-xs text-[var(--text-mute)]">
               Subukan ang mga karaniwang katanungan ng mga mamamayan ng Cabanatuan
@@ -182,6 +182,9 @@ export function LegislativeAiSimulator() {
     </div>
   );
 }
+
+// Backwards-compatible alias
+export const LegislativeAiSimulator = OrdinanceAiSimulator;
 
 // 89 Barangays Districts Showcase
 const DISTRICTS = [

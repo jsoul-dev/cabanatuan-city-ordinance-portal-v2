@@ -78,7 +78,7 @@ export function CivicMonolithCanvas({
     scene.add(worldGroup);
 
     // 1. CENTRAL CIVIC MONOLITH (Codex Prism)
-    // Hexagonal civic monolith representing Cabanatuan Legislative Assembly
+    // Hexagonal civic monolith representing Cabanatuan Sangguniang Panlungsod (City Council)
     const monolithGeom = new THREE.CylinderGeometry(0.9, 1.15, 2.2, 6, 2, false);
     const monolithMat = new THREE.MeshPhysicalMaterial({
       color: coreColor,
@@ -113,7 +113,7 @@ export function CivicMonolithCanvas({
     const beaconMesh = new THREE.Mesh(beaconGeom, beaconMat);
     monolithMesh.add(beaconMesh);
 
-    // 2. ORBITAL RINGS (3 tilted legislative coordinate rings)
+    // 2. ORBITAL RINGS (3 tilted civic ordinance coordinate rings)
     const ringGroup = new THREE.Group();
     worldGroup.add(ringGroup);
 
