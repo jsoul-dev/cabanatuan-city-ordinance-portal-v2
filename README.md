@@ -18,6 +18,12 @@ The **Cabanatuan City Ordinance Portal** is a production-grade, AI-powered ordin
 
 Designed to bridge the gap between local ordinance enforcement, government officials, and citizens, the portal democratizes public access to city resolutions, municipal ordinances, and barangay regulations through **full-text search**, an **AI-powered bilingual ordinance information assistant ("Cabanatuan Ordinance AI")**, and **automated multimodal OCR document parsing** for LGU and Barangay administrators.
 
+> [!IMPORTANT]
+> **System Purpose & Scope Notice:**  
+> The **Cabanatuan City Ordinance Portal** is strictly an **ordinance information and management portal**.  
+> - **In Scope:** Storing, organizing, searching, browsing, summarizing, and reporting on municipal and barangay ordinance records.  
+> - **Out of Scope:** It does **NOT** provide legal advice, legal counsel, legal opinions, or legal representation. It is **NOT** a legal platform, law portal, law database, or legal authority. It does not determine legal rights or act as an attorney.
+
 ---
 
 ## Key Features

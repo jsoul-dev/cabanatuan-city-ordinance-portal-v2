@@ -12,7 +12,7 @@ async function main() {
   await prisma.newsItem.create({
     data: {
       title: "Opisyal na Paglunsad ng Cabanatuan City Ordinance & Governance Dashboard",
-      content: "Ipinagmamalaking ilunsad ng pamahalaang lungsod ang bagong Ordinance at Governance Dashboard para mapadali ang pag-access ng bawat mamamayan sa mga batas at regulasyon ng Cabanatuan.",
+      content: "Ipinagmamalaking ilunsad ng pamahalaang lungsod ang bagong Ordinance at Governance Dashboard para mapadali ang pag-access ng bawat mamamayan sa mga ordinansa at regulasyon ng Cabanatuan.",
       category: NewsCategory.CITY,
       isPinned: true
     }
