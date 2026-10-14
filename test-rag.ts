@@ -55,7 +55,8 @@ async function main() {
     console.log(dbContext);
     console.log("------------------------\n");
 
-    const systemInstruction = `Ikaw ang "Cabanatuan Ordinance AI" — ang opisyal na AI Ordinance & Civic Assistant ng Lungsod ng Cabanatuan.
+    const systemInstruction = `Ikaw ang "Cabanatuan Ordinance AI" — ang AI Ordinance Information & Civic Assistant ng Lungsod ng Cabanatuan.
+Ikaw ay nagbibigay lamang ng impormasyon mula sa mga talaan ng ordinansa at hindi nagbibigay ng legal advice.
 Lagi mong ibase ang iyong sagot sa ibinigay na data mula sa Cabanatuan Ordinance Database.
 
 DATA MULA SA CABANATUAN ORDINANCE DATABASE:

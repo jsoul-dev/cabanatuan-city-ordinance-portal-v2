@@ -8,7 +8,7 @@ import {
   OrdinancesScrollIcon,
   Trash2Icon,
   CheckIcon,
-  ScaleIcon,
+  ShieldCheckIcon,
   CarIcon,
   ClipboardCheckIcon,
   BroomIcon,
@@ -30,7 +30,7 @@ interface Message {
 
 const QUICK_ACTIONS = [
   {
-    icon: ScaleIcon,
+    icon: ShieldCheckIcon,
     label: "Curfew rules for minors",
     query: "Ano ang ordinansa at curfew hours para sa mga menor de edad sa Cabanatuan?",
   },
@@ -167,15 +167,20 @@ export function ChatbotClient() {
                   Cabanatuan Ordinance Pilot
                 </h2>
                 <p className="font-mono text-[10px] font-bold tracking-widest text-emerald-700 dark:text-emerald-400 uppercase">
-                  DIGITAL ORDINANCE ASSISTANT
+                  ORDINANCE INFORMATION ASSISTANT
                 </p>
               </div>
             </div>
 
             {/* Intro Description */}
             <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
-              Ang ating AI assistant ay nakadisenyo para tulungan ang mga mamamayan na maunawaan ang mga city at barangay ordinances sa Cabanatuan sa malinaw na Tagalog o English.
+              Ang ating AI assistant ay nakadisenyo para tulungan ang mga mamamayan na maghanap at maunawaan ang impormasyon sa mga city at barangay ordinances sa Cabanatuan sa malinaw na Tagalog o English.
             </p>
+
+            {/* Non-Legal Informational Disclaimer */}
+            <div className="mt-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-[11px] leading-relaxed text-amber-900 dark:text-amber-200">
+              <span className="font-bold">Paalala:</span> Ang system na ito ay nagbibigay lamang ng impormasyon mula sa mga talaan ng ordinansa. Hindi ito nagbibigay ng legal advice o serbisyong legal.
+            </div>
 
             {/* Feature Badges */}
             <div className="mt-5 space-y-3">
@@ -253,7 +258,7 @@ export function ChatbotClient() {
             <div className="flex items-center gap-2.5">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-mono text-xs font-bold text-neutral-900 dark:text-white">
-                Ordinance Assistant
+                Ordinance Information Assistant
               </span>
               <span className="hidden sm:inline-block text-neutral-300 dark:text-neutral-700">|</span>
               <span className="hidden sm:inline-block font-mono text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
@@ -374,7 +379,7 @@ export function ChatbotClient() {
             </form>
 
             <div className="mt-3 text-center font-mono text-[9px] text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
-              POWERED BY THE CITY ORDINANCE ARCHIVE & AI LANGUAGE MODEL
+              IMBAKAN NG MGA ORDINANSA • PARA SA IMPORMASYON LAMANG • HINDI LEGAL ADVICE
             </div>
           </div>
         </div>
