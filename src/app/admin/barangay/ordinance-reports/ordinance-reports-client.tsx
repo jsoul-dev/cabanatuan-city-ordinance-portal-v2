@@ -8,15 +8,24 @@ import { fetchOrdinancesForReport } from "./actions";
 import type { OrdinanceReportRow, ReportFilters } from "@/lib/ordinance-report-queries";
 import type { PdfReportData, PdfReportSection } from "@/lib/generate-report-pdf";
 
+import {
+  FileTextIcon,
+  CalendarDaysIcon,
+  UsersIcon,
+  TagIcon,
+  BarChart3Icon,
+  ClockIcon,
+} from "@/components/dashboard/icons";
+
 // ─── Report Type Definitions ────────────────────────────────────────────────
 
 const REPORT_TYPES = [
-  { id: "all", label: "List of All Ordinances", icon: "📋" },
-  { id: "by-month", label: "Ordinances by Month", icon: "📅" },
-  { id: "by-filed-by", label: "Ordinances by Filed By", icon: "👤" },
-  { id: "by-category", label: "Ordinances by Category", icon: "🏷️" },
-  { id: "by-status", label: "Ordinances by Status", icon: "📊" },
-  { id: "by-year", label: "Ordinances by Year", icon: "📆" },
+  { id: "all", label: "List of All Ordinances", icon: FileTextIcon },
+  { id: "by-month", label: "Ordinances by Month", icon: CalendarDaysIcon },
+  { id: "by-filed-by", label: "Ordinances by Filed By", icon: UsersIcon },
+  { id: "by-category", label: "Ordinances by Category", icon: TagIcon },
+  { id: "by-status", label: "Ordinances by Status", icon: BarChart3Icon },
+  { id: "by-year", label: "Ordinances by Year", icon: ClockIcon },
 ] as const;
 
 type ReportTypeId = (typeof REPORT_TYPES)[number]["id"];
@@ -175,7 +184,9 @@ export function BarangayOrdinanceReportsClient({
                     }}
                     className="sr-only"
                   />
-                  <span aria-hidden="true">{rt.icon}</span>
+                  <span aria-hidden="true" className="shrink-0 flex items-center">
+                    <rt.icon size={15} />
+                  </span>
                   <span>{rt.label}</span>
                 </label>
               ))}

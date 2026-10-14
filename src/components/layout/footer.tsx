@@ -65,7 +65,7 @@ export function Footer() {
             </p>
             <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-2.5 py-1 font-mono text-[10px] text-emerald-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-emerald-400 dark:shadow-none">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
-              <span>OFFICIAL PORTAL • 75 BARANGAYS</span>
+              <span>OFFICIAL PORTAL • 89 BARANGAYS</span>
             </div>
           </div>
 

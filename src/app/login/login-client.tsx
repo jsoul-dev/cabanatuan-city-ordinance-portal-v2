@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LoginForm } from "./login-form";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { PhoneIcon, ClockIcon, MailIcon } from "@/components/dashboard/icons";
 
 /**
  * Client Wrapper for Login Page — integrated with global next-themes,
@@ -323,7 +324,9 @@ export function LoginClient() {
             {/* Contact Details List */}
             <div className="mt-4 space-y-3 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-xs dark:border-white/10 dark:bg-white/5">
               <div className="flex items-start gap-3">
-                <span className="text-base">📞</span>
+                <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
+                  <PhoneIcon size={16} />
+                </div>
                 <div>
                   <div className="font-semibold text-neutral-900 dark:text-white">
                     City Mayor&apos;s Office — Admin
@@ -338,7 +341,9 @@ export function LoginClient() {
               </div>
 
               <div className="flex items-start gap-3 border-t border-neutral-200 pt-3 dark:border-white/10">
-                <span className="text-base">🕒</span>
+                <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
+                  <ClockIcon size={16} />
+                </div>
                 <div>
                   <div className="font-semibold text-neutral-900 dark:text-white">
                     Office Hours
@@ -350,7 +355,9 @@ export function LoginClient() {
               </div>
 
               <div className="flex items-start gap-3 border-t border-neutral-200 pt-3 dark:border-white/10">
-                <span className="text-base">✉️</span>
+                <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
+                  <MailIcon size={16} />
+                </div>
                 <div>
                   <div className="font-semibold text-neutral-900 dark:text-white">
                     Official Email

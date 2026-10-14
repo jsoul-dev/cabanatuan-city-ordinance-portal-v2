@@ -2,6 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
+import {
+  FileTextIcon,
+  CheckCircle2Icon,
+  AiBotSparkleIcon,
+  XIcon,
+  OrdinancesScrollIcon,
+} from "./icons";
 
 interface ExtractedData {
   title: string;
@@ -200,7 +207,9 @@ export function AiOrdinanceExtractorModal({
               <div className="h-20 w-20 rounded-full border-4 border-emerald-500/20" />
               <div className="absolute h-20 w-20 rounded-full border-4 border-transparent border-t-emerald-500 animate-spin" />
               <div className="absolute h-14 w-14 rounded-full border-4 border-transparent border-t-emerald-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.5s" }} />
-              <span className="absolute text-2xl">📄</span>
+              <div className="absolute flex items-center justify-center text-emerald-500">
+                <FileTextIcon size={24} />
+              </div>
             </div>
 
             {/* Step text */}
@@ -234,8 +243,8 @@ export function AiOrdinanceExtractorModal({
 
         <div className="flex items-center justify-between border-b border-[var(--border-hairline)] pb-4">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-lg">
-              ⚡
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+              <AiBotSparkleIcon size={20} />
             </span>
             <div>
               <h2
@@ -254,9 +263,9 @@ export function AiOrdinanceExtractorModal({
             onClick={onClose}
             disabled={loading}
             aria-label="Isara"
-            className="text-[var(--text-mute)] hover:text-[var(--text-ink)] p-1 rounded-md disabled:opacity-50"
+            className="text-[var(--text-mute)] hover:text-[var(--text-ink)] p-1.5 rounded-[var(--radius-sm)] hover:bg-[var(--bg-canvas)] transition-colors disabled:opacity-50"
           >
-            ✕
+            <XIcon size={18} />
           </button>
         </div>
 
@@ -281,8 +290,9 @@ export function AiOrdinanceExtractorModal({
               {selectedFiles.length > 0 && (
                 <div className="mt-3 space-y-1.5 text-left border-t border-[var(--border-hairline)] pt-3">
                   <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-between">
-                    <span>
-                      ✅ {selectedFiles.length} {selectedFiles.length === 1 ? "pahina/file" : "na pahina/file"} ang napili (Handa na para sa AI OCR Scan)
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2Icon size={14} className="text-emerald-500 shrink-0" />
+                      <span>{selectedFiles.length} {selectedFiles.length === 1 ? "pahina/file" : "na pahina/file"} ang napili (Handa na para sa AI OCR Scan)</span>
                     </span>
                     <button
                       type="button"
@@ -299,7 +309,11 @@ export function AiOrdinanceExtractorModal({
                         className="flex items-center justify-between rounded bg-[var(--bg-card)] border border-[var(--border-hairline)] px-2.5 py-1 text-xs"
                       >
                         <div className="flex items-center gap-2 truncate">
-                          <span>{file.mimeType.includes("pdf") ? "📑" : "📄"}</span>
+                          {file.mimeType.includes("pdf") ? (
+                            <OrdinancesScrollIcon size={16} className="text-emerald-500 shrink-0" />
+                          ) : (
+                            <FileTextIcon size={16} className="text-[var(--text-mute)] shrink-0" />
+                          )}
                           <span className="truncate font-medium text-[var(--text-ink)]">
                             {file.name}
                           </span>
@@ -310,10 +324,11 @@ export function AiOrdinanceExtractorModal({
                         <button
                           type="button"
                           onClick={() => handleRemoveFile(idx)}
-                          className="text-red-500 hover:text-red-700 font-bold ml-2 p-0.5"
+                          className="text-red-500 hover:text-red-700 font-bold ml-2 p-1 rounded hover:bg-red-500/10 transition-colors"
                           title="Alisin ang pahina"
+                          aria-label={`Alisin ang file na ${file.name}`}
                         >
-                          ✕
+                          <XIcon size={14} />
                         </button>
                       </div>
                     ))}
@@ -354,7 +369,8 @@ export function AiOrdinanceExtractorModal({
             disabled={loading}
             className="min-h-[40px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-emerald-600 px-5 py-2 text-sm font-bold text-white shadow-sm ring-2 ring-emerald-500 ring-offset-2 ring-offset-[var(--bg-card)] focus:outline-none focus:ring-4 focus:ring-emerald-500 hover:bg-emerald-700 transition-colors disabled:opacity-50"
           >
-            ⚡ Suriin at I-extract (AI)
+            <AiBotSparkleIcon size={16} />
+            <span>Suriin at I-extract (AI)</span>
           </button>
         </div>
       </div>

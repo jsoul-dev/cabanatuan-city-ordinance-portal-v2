@@ -4,6 +4,16 @@ import { useState, useTransition, useRef } from "react";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { toast } from "sonner";
 import { submitOrdinance } from "../actions";
+import {
+  FileTextIcon,
+  HourglassIcon,
+  CheckCircle2Icon,
+  FileEditIcon,
+  XCircleIcon,
+  AiBotSparkleIcon,
+  OrdinancesScrollIcon,
+  InboxEmptyIcon,
+} from "@/components/dashboard/icons";
 
 interface Ordinance {
   id: string;
@@ -26,12 +36,12 @@ interface Props {
 
 type OrdinanceStatus = "ALL" | "DRAFT" | "PENDING" | "APPROVED" | "REJECTED";
 
-const STATUS_TABS: { value: OrdinanceStatus; label: string; icon: string }[] = [
-  { value: "ALL",      label: "Lahat",    icon: "📋" },
-  { value: "PENDING",  label: "Pending",  icon: "⏳" },
-  { value: "APPROVED", label: "Approved", icon: "✅" },
-  { value: "DRAFT",    label: "Draft",    icon: "✏️" },
-  { value: "REJECTED", label: "Rejected", icon: "❌" },
+const STATUS_TABS = [
+  { value: "ALL" as OrdinanceStatus,      label: "Lahat",    icon: FileTextIcon },
+  { value: "PENDING" as OrdinanceStatus,  label: "Pending",  icon: HourglassIcon },
+  { value: "APPROVED" as OrdinanceStatus, label: "Approved", icon: CheckCircle2Icon },
+  { value: "DRAFT" as OrdinanceStatus,    label: "Draft",    icon: FileEditIcon },
+  { value: "REJECTED" as OrdinanceStatus, label: "Rejected", icon: XCircleIcon },
 ];
 
 const ORDINANCE_CATEGORIES = [
@@ -266,7 +276,7 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                   <div className="h-20 w-20 rounded-full border-4 border-emerald-500/20" />
                   <div className="absolute h-20 w-20 rounded-full border-4 border-transparent border-t-emerald-500 animate-spin" />
                   <div className="absolute h-14 w-14 rounded-full border-4 border-transparent border-t-emerald-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.5s" }} />
-                  <span className="absolute text-2xl">📄</span>
+                  <FileTextIcon size={24} className="text-emerald-500 animate-pulse" />
                 </div>
                 <div className="text-center space-y-2 max-w-xs">
                   <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400 animate-pulse">Ine-extract ng AI…</p>
@@ -286,7 +296,10 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
               {/* Header */}
               <div className="sticky top-0 z-10 bg-[var(--bg-card)] border-b border-[var(--border-hairline)] p-5 flex items-center justify-between">
                 <div>
-                  <h2 id="submit-ordinance-title" className="text-base font-bold text-[var(--text-ink)]">📜 Irehistro ang Bagong Ordinansa</h2>
+                  <h2 id="submit-ordinance-title" className="text-base font-bold text-[var(--text-ink)] flex items-center gap-2">
+                    <OrdinancesScrollIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
+                    <span>Irehistro ang Bagong Ordinansa</span>
+                  </h2>
                   <p className="text-xs text-[var(--text-mute)] mt-0.5">Awtomatikong kukunin ang mga detalye gamit ang AI.</p>
                 </div>
                 <button type="button" onClick={handleCloseModal} aria-label="Isara" className="text-[var(--text-mute)] hover:text-[var(--text-ink)] p-1 rounded-md text-lg">✕</button>
@@ -296,7 +309,9 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                 {/* ── AI Auto-Extract Section ── */}
                 <div className="rounded-[var(--radius-md)] border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-3">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-sm">⚡</span>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                      <AiBotSparkleIcon size={16} />
+                    </span>
                     <div>
                       <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Auto-extract gamit ang AI</p>
                       <p className="text-[11px] text-[var(--text-mute)]">Mag-upload ng dokumento o mag-paste ng teksto.</p>
@@ -308,14 +323,19 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                     <div className="rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-card)] p-3 space-y-2">
                       <p className="text-xs font-semibold text-[var(--text-ink)]">Upload PDF / Dokumento</p>
                       <label className="inline-flex items-center gap-1.5 cursor-pointer rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-3 py-1.5 text-xs font-medium text-[var(--text-ink)] hover:bg-[var(--border-hairline)] transition-colors">
-                        📂 Browse Files
+                        <FileTextIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
+                        <span>Browse Files</span>
                         <input type="file" multiple accept="image/*,.pdf" onChange={handleFileChange} className="sr-only" />
                       </label>
                       {selectedFiles.length > 0 && (
                         <div className="space-y-1 mt-1">
                           {selectedFiles.map((file, idx) => (
                             <div key={idx} className="flex items-center justify-between rounded bg-[var(--bg-canvas)] px-2 py-1 text-[11px]">
-                              <span className="truncate text-[var(--text-ink)]">{file.mimeType.includes("pdf") ? "📑" : "📄"} {file.name} <span className="text-[var(--text-mute)]">({formatFileSize(file.size)})</span></span>
+                              <span className="truncate text-[var(--text-ink)] flex items-center gap-1">
+                                <FileTextIcon size={12} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                                <span>{file.name}</span>
+                                <span className="text-[var(--text-mute)]">({formatFileSize(file.size)})</span>
+                              </span>
                               <button type="button" onClick={() => setSelectedFiles((prev) => prev.filter((_, i) => i !== idx))} className="text-red-500 hover:text-red-700 font-bold ml-1 p-0.5 text-xs">✕</button>
                             </div>
                           ))}
@@ -337,25 +357,33 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                   <button type="button" onClick={handleExtract} disabled={extracting || (!extractText.trim() && selectedFiles.length === 0)}
                     className="w-full min-h-[40px] inline-flex items-center justify-center gap-2 rounded-[var(--radius-sm)] bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    ⚡ I-Extract gamit ang AI
+                    <AiBotSparkleIcon size={16} />
+                    <span>I-Extract gamit ang AI</span>
                   </button>
                 </div>
 
                 {/* ── Official File Status ── */}
                 <div className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-4 py-3">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-lg">📎</span>
+                    <FileTextIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
                     <div>
                       <p className="text-xs font-semibold text-[var(--text-ink)]">Opisyal na Dokumento</p>
-                      <p className="text-[11px] text-[var(--text-mute)]">
-                        {formState.pdfUrl ? "✅ Naka-attach na ang opisyal na dokumento." : "Walang naka-attach na opisyal na dokumento."}
+                      <p className="text-[11px] text-[var(--text-mute)] flex items-center gap-1">
+                        {formState.pdfUrl ? (
+                          <>
+                            <CheckCircle2Icon size={13} className="text-emerald-600 dark:text-emerald-400 inline" />
+                            <span>Naka-attach na ang opisyal na dokumento.</span>
+                          </>
+                        ) : (
+                          "Walang naka-attach na opisyal na dokumento."
+                        )}
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {formError && (
-                  <p className="text-xs text-red-600 bg-red-50 dark:bg-red-950/40 p-2.5 rounded border border-red-200 dark:border-red-800" role="alert">❌ {formError}</p>
+                  <p className="text-xs text-red-600 bg-red-50 dark:bg-red-950/40 p-2.5 rounded border border-red-200 dark:border-red-800" role="alert">{formError}</p>
                 )}
 
                 <input type="hidden" name="pdfUrl" value={formState.pdfUrl} />
@@ -447,7 +475,8 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                 </button>
                 <button type="submit" disabled={isPending}
                   className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors disabled:opacity-50">
-                  {isPending ? "Isinusumite…" : "📜 Isumite para sa Pagsusuri"}
+                  <OrdinancesScrollIcon size={16} />
+                  <span>{isPending ? "Isinusumite…" : "Isumite para sa Pagsusuri"}</span>
                 </button>
               </div>
             </form>
@@ -460,10 +489,12 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
         <div role="tablist" aria-label="I-filter ayon sa status" className="flex flex-wrap gap-1 p-1 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-hairline)]">
           {STATUS_TABS.map((tab) => {
             const count = tab.value === "ALL" ? ordinances.length : ordinances.filter((o) => o.status === tab.value).length;
+            const Icon = tab.icon;
             return (
               <button key={tab.value} role="tab" aria-selected={statusFilter === tab.value} onClick={() => setStatusFilter(tab.value)}
                 className={`flex items-center gap-1.5 min-h-[36px] rounded-[var(--radius-sm)] px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] ${statusFilter === tab.value ? "bg-[var(--bg-card)] text-[var(--text-ink)] shadow-sm" : "text-[var(--text-mute)] hover:text-[var(--text-ink)]"}`}>
-                <span aria-hidden="true">{tab.icon}</span>{tab.label}
+                <Icon size={14} className="shrink-0" />
+                <span>{tab.label}</span>
                 <span className="ml-0.5 rounded-full bg-[var(--border-hairline)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--text-mute)]">{count}</span>
               </button>
             );
@@ -480,7 +511,9 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
       <div className="card-elevated overflow-hidden">
         {filtered.length === 0 ? (
           <div className="py-16 text-center">
-            <p className="text-4xl mb-3" aria-hidden="true">📭</p>
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-400 dark:bg-white/5 dark:text-neutral-500">
+              <InboxEmptyIcon size={24} />
+            </div>
             <p className="text-sm font-semibold text-[var(--text-ink)]">{ordinances.length === 0 ? "Wala pang ordinansa ang inyong barangay." : "Walang nahanap na ordinansa."}</p>
             {ordinances.length === 0 && canSubmit && (
               <button type="button" onClick={handleOpenModal} className="mt-4 min-h-[44px] rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors">Magsumite ng Unang Ordinansa</button>

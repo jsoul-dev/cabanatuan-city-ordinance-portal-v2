@@ -6,6 +6,20 @@ import { toast } from "sonner";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
 import { approveOrdinance, rejectOrdinance, deleteOrdinance, createCityOrdinance } from "../actions";
+import {
+  FileTextIcon,
+  HourglassIcon,
+  CheckCircle2Icon,
+  FileEditIcon,
+  XCircleIcon,
+  AiBotSparkleIcon,
+  OrdinancesScrollIcon,
+  InboxEmptyIcon,
+  EyeIcon,
+  Trash2Icon,
+  SearchIcon,
+  CheckIcon,
+} from "@/components/dashboard/icons";
 
 type OrdinanceStatus = "ALL" | "DRAFT" | "PENDING" | "APPROVED" | "REJECTED";
 
@@ -34,12 +48,12 @@ interface Props {
   defaultReviewId?: string;
 }
 
-const STATUS_TABS: { value: OrdinanceStatus; label: string; icon: string }[] = [
-  { value: "ALL",      label: "Lahat",     icon: "📋" },
-  { value: "PENDING",  label: "Pending",   icon: "⏳" },
-  { value: "APPROVED", label: "Approved",  icon: "✅" },
-  { value: "DRAFT",    label: "Draft",     icon: "✏️" },
-  { value: "REJECTED", label: "Rejected",  icon: "❌" },
+const STATUS_TABS = [
+  { value: "ALL" as OrdinanceStatus,      label: "Lahat",     icon: FileTextIcon },
+  { value: "PENDING" as OrdinanceStatus,  label: "Pending",   icon: HourglassIcon },
+  { value: "APPROVED" as OrdinanceStatus, label: "Approved",  icon: CheckCircle2Icon },
+  { value: "DRAFT" as OrdinanceStatus,    label: "Draft",     icon: FileEditIcon },
+  { value: "REJECTED" as OrdinanceStatus, label: "Rejected",  icon: XCircleIcon },
 ];
 
 interface SelectedFileItem {
@@ -340,7 +354,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                   <div className="h-20 w-20 rounded-full border-4 border-emerald-500/20" />
                   <div className="absolute h-20 w-20 rounded-full border-4 border-transparent border-t-emerald-500 animate-spin" />
                   <div className="absolute h-14 w-14 rounded-full border-4 border-transparent border-t-emerald-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.5s" }} />
-                  <span className="absolute text-2xl">📄</span>
+                  <FileTextIcon size={24} className="text-emerald-500 animate-pulse" />
                 </div>
                 <div className="text-center space-y-2 max-w-xs">
                   <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400 animate-pulse">Ine-extract ng AI…</p>
@@ -360,7 +374,10 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
               {/* Header */}
               <div className="sticky top-0 z-10 bg-[var(--bg-card)] border-b border-[var(--border-hairline)] p-5 flex items-center justify-between">
                 <div>
-                  <h2 id="lgu-submit-ordinance-title" className="text-base font-bold text-[var(--text-ink)]">📜 Irehistro ang Bagong City Ordinance</h2>
+                  <h2 id="lgu-submit-ordinance-title" className="text-base font-bold text-[var(--text-ink)] flex items-center gap-2">
+                    <OrdinancesScrollIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
+                    <span>Irehistro ang Bagong City Ordinance</span>
+                  </h2>
                   <p className="text-xs text-[var(--text-mute)] mt-0.5">Awtomatikong kukunin ang mga detalye gamit ang AI.</p>
                 </div>
                 <button type="button" onClick={handleCloseModal} aria-label="Isara" className="text-[var(--text-mute)] hover:text-[var(--text-ink)] p-1 rounded-md text-lg">✕</button>
@@ -370,7 +387,9 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                 {/* ── AI Auto-Extract Section ── */}
                 <div className="rounded-[var(--radius-md)] border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-3">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-sm">⚡</span>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                      <AiBotSparkleIcon size={16} />
+                    </span>
                     <div>
                       <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Auto-extract gamit ang AI</p>
                       <p className="text-[11px] text-[var(--text-mute)]">Mag-upload ng dokumento o mag-paste ng teksto.</p>
@@ -382,14 +401,19 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                     <div className="rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-card)] p-3 space-y-2">
                       <p className="text-xs font-semibold text-[var(--text-ink)]">Upload PDF / Dokumento</p>
                       <label className="inline-flex items-center gap-1.5 cursor-pointer rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-3 py-1.5 text-xs font-medium text-[var(--text-ink)] hover:bg-[var(--border-hairline)] transition-colors">
-                        📂 Browse Files
+                        <FileTextIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
+                        <span>Browse Files</span>
                         <input type="file" multiple accept="image/*,.pdf" onChange={handleFileChange} className="sr-only" />
                       </label>
                       {selectedFiles.length > 0 && (
                         <div className="space-y-1 mt-1">
                           {selectedFiles.map((file, idx) => (
                             <div key={idx} className="flex items-center justify-between rounded bg-[var(--bg-canvas)] px-2 py-1 text-[11px]">
-                              <span className="truncate text-[var(--text-ink)]">{file.mimeType.includes("pdf") ? "📑" : "📄"} {file.name} <span className="text-[var(--text-mute)]">({formatFileSize(file.size)})</span></span>
+                              <span className="truncate text-[var(--text-ink)] flex items-center gap-1">
+                                <FileTextIcon size={12} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                                <span>{file.name}</span>
+                                <span className="text-[var(--text-mute)]">({formatFileSize(file.size)})</span>
+                              </span>
                               <button type="button" onClick={() => setSelectedFiles((prev) => prev.filter((_, i) => i !== idx))} className="text-red-500 hover:text-red-700 font-bold ml-1 p-0.5 text-xs">✕</button>
                             </div>
                           ))}
@@ -411,25 +435,33 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                   <button type="button" onClick={handleExtract} disabled={extracting || (!extractText.trim() && selectedFiles.length === 0)}
                     className="w-full min-h-[40px] inline-flex items-center justify-center gap-2 rounded-[var(--radius-sm)] bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    ⚡ I-Extract gamit ang AI
+                    <AiBotSparkleIcon size={16} />
+                    <span>I-Extract gamit ang AI</span>
                   </button>
                 </div>
 
                 {/* ── Official File Status ── */}
                 <div className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-4 py-3">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-lg">📎</span>
+                    <FileTextIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
                     <div>
                       <p className="text-xs font-semibold text-[var(--text-ink)]">Opisyal na Dokumento</p>
-                      <p className="text-[11px] text-[var(--text-mute)]">
-                        {formState.pdfUrl ? "✅ Naka-attach na ang opisyal na dokumento." : "Walang naka-attach na opisyal na dokumento."}
+                      <p className="text-[11px] text-[var(--text-mute)] flex items-center gap-1">
+                        {formState.pdfUrl ? (
+                          <>
+                            <CheckCircle2Icon size={13} className="text-emerald-600 dark:text-emerald-400 inline" />
+                            <span>Naka-attach na ang opisyal na dokumento.</span>
+                          </>
+                        ) : (
+                          "Walang naka-attach na opisyal na dokumento."
+                        )}
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {formError && (
-                  <p className="text-xs text-red-600 bg-red-50 dark:bg-red-950/40 p-2.5 rounded border border-red-200 dark:border-red-800" role="alert">❌ {formError}</p>
+                  <p className="text-xs text-red-600 bg-red-50 dark:bg-red-950/40 p-2.5 rounded border border-red-200 dark:border-red-800" role="alert">{formError}</p>
                 )}
 
                 <input type="hidden" name="pdfUrl" value={formState.pdfUrl} />
@@ -531,7 +563,8 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                 </button>
                 <button type="submit" disabled={isPending}
                   className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors disabled:opacity-50">
-                  {isPending ? "Isinusumite…" : "📜 I-save ang City Ordinance"}
+                  <OrdinancesScrollIcon size={16} />
+                  <span>{isPending ? "Isinusumite…" : "I-save ang City Ordinance"}</span>
                 </button>
               </div>
             </form>
@@ -549,6 +582,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         >
           {STATUS_TABS.map((tab) => {
             const count = tab.value === "ALL" ? ordinances.length : ordinances.filter((o) => o.status === tab.value).length;
+            const TabIcon = tab.icon;
             return (
               <button
                 key={tab.value}
@@ -561,8 +595,8 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                     : "text-[var(--text-mute)] hover:text-[var(--text-ink)]"
                 }`}
               >
-                <span aria-hidden="true">{tab.icon}</span>
-                {tab.label}
+                <TabIcon size={13} className="shrink-0" />
+                <span>{tab.label}</span>
                 <span className="ml-0.5 rounded-full bg-[var(--border-hairline)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--text-mute)]">
                   {count}
                 </span>
@@ -589,7 +623,9 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
       <div className="card-elevated overflow-hidden">
         {filtered.length === 0 ? (
           <div className="py-16 text-center">
-            <p className="text-4xl mb-3" aria-hidden="true">🔍</p>
+            <div className="mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-[var(--bg-canvas)] border border-[var(--border-hairline)] text-[var(--text-mute)] mb-3">
+              <InboxEmptyIcon size={24} />
+            </div>
             <p className="text-sm font-semibold text-[var(--text-ink)]">Walang nahanap na ordinansa.</p>
           </div>
         ) : (
@@ -633,7 +669,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                           className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border-hairline)] text-xs text-[var(--text-body)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] px-2"
                           aria-label={`Tingnan ang ordinansa: ${ord.title}`}
                         >
-                          👁️
+                          <EyeIcon size={15} />
                         </Link>
                         {ord.status === "PENDING" && (
                           <>
@@ -641,19 +677,21 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                               type="button"
                               disabled={isPending}
                               onClick={(e) => openDialog("approve", ord.id, ord.title, e.currentTarget)}
-                              className="min-h-[36px] rounded-[var(--radius-sm)] bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:opacity-50"
+                              className="min-h-[36px] inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:opacity-50"
                               aria-label={`Aprubahan ang ordinansa: ${ord.title}`}
                             >
-                              ✅ Aprubahan
+                              <CheckIcon size={13} />
+                              <span>Aprubahan</span>
                             </button>
                             <button
                               type="button"
                               disabled={isPending}
                               onClick={(e) => openDialog("reject", ord.id, ord.title, e.currentTarget)}
-                              className="min-h-[36px] rounded-[var(--radius-sm)] bg-red-500/10 px-2.5 py-1.5 text-xs font-semibold text-red-700 dark:text-red-400 hover:bg-red-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
+                              className="min-h-[36px] inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-red-500/10 px-2.5 py-1.5 text-xs font-semibold text-red-700 dark:text-red-400 hover:bg-red-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
                               aria-label={`Tanggihan ang ordinansa: ${ord.title}`}
                             >
-                              ❌ Tanggihan
+                              <XCircleIcon size={13} />
+                              <span>Tanggihan</span>
                             </button>
                           </>
                         )}
@@ -664,7 +702,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                           className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-mute)] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
                           aria-label={`Tanggalin ang ordinansa: ${ord.title}`}
                         >
-                          🗑️
+                          <Trash2Icon size={15} />
                         </button>
                       </div>
                     </td>
@@ -681,7 +719,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         open={dialogState.type === "approve"}
         title="Aprubahan ang Ordinansa"
         description={`Sigurado ka bang iaapruba ang ordinansang ito?\n"${dialogState.title}"`}
-        confirmLabel="✅ Aprubahan"
+        confirmLabel="Aprubahan"
         cancelLabel="Bumalik"
         variant="default"
         onConfirm={handleConfirm}
@@ -692,7 +730,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         open={dialogState.type === "reject"}
         title="Tanggihan ang Ordinansa"
         description={`"${dialogState.title}"`}
-        confirmLabel="❌ Tanggihan"
+        confirmLabel="Tanggihan"
         cancelLabel="Bumalik"
         variant="danger"
         onConfirm={handleConfirm}
@@ -707,7 +745,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         open={dialogState.type === "delete"}
         title="Tanggalin ang Ordinansa?"
         description={`Permanenteng matatanggal ang ordinansang ito. Hindi ito maibabalik.\n"${dialogState.title}"`}
-        confirmLabel="🗑️ Tanggalin"
+        confirmLabel="Tanggalin"
         cancelLabel="Huwag"
         variant="danger"
         onConfirm={handleConfirm}

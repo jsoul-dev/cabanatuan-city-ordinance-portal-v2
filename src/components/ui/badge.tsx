@@ -1,6 +1,17 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { clsx } from "clsx";
 import type { HTMLAttributes } from "react";
+import {
+  FileEditIcon,
+  HourglassIcon,
+  CheckCircle2Icon,
+  XCircleIcon,
+  PlusIcon,
+  RefreshCwIcon,
+  BanIcon,
+  CivicHallIcon,
+  BarangayHouseIcon,
+} from "@/components/dashboard/icons";
 
 /**
  * Badge component — status indicators for ordinance workflow.
@@ -46,17 +57,17 @@ const badgeVariants = cva(
 );
 
 // Status icons for semantic redundancy (A11Y: icon + text + color)
-const statusIcons: Record<string, string> = {
-  draft: "📝",
-  pending: "⏳",
-  approved: "✅",
-  rejected: "❌",
-  new: "🆕",
-  "in-progress": "🔄",
-  resolved: "✅",
-  dismissed: "⛔",
-  city: "🏛️",
-  barangay: "🏘️",
+const statusIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  draft: FileEditIcon,
+  pending: HourglassIcon,
+  approved: CheckCircle2Icon,
+  rejected: XCircleIcon,
+  new: PlusIcon,
+  "in-progress": RefreshCwIcon,
+  resolved: CheckCircle2Icon,
+  dismissed: BanIcon,
+  city: CivicHallIcon,
+  barangay: BarangayHouseIcon,
 };
 
 export interface BadgeProps
@@ -73,13 +84,13 @@ function Badge({
   children,
   ...props
 }: BadgeProps) {
-  const icon = variant ? statusIcons[variant] : null;
+  const IconComponent = variant ? statusIcons[variant] : null;
 
   return (
     <span className={clsx(badgeVariants({ variant }), className)} {...props}>
-      {!hideIcon && icon && (
-        <span aria-hidden="true" className="text-[10px]">
-          {icon}
+      {!hideIcon && IconComponent && (
+        <span aria-hidden="true" className="shrink-0 flex items-center">
+          <IconComponent size={11} className="stroke-[2.2]" />
         </span>
       )}
       {children}

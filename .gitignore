@@ -45,8 +45,8 @@ next-env.d.ts
 .gemini/
 .dumps/
 .ordinances/
+graphify-out/
 AGENTS.md
 CLAUDE.md
 TEST_ACCOUNTS.md
 *test_accounts*.md
-graphify-out/

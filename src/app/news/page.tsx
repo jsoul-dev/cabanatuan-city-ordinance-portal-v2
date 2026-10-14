@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { NewspaperIcon } from "@/components/dashboard/icons";
 
 export const metadata: Metadata = {
   title: "Mga Balita at Anunsyo | Cabanatuan City Ordinance Portal",
@@ -52,9 +53,9 @@ export default async function NewsPage() {
           {/* News Feed */}
           {newsList.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-neutral-300 bg-white p-12 text-center shadow-sm dark:border-white/10 dark:bg-[#0a0f0d]/90 dark:shadow-none backdrop-blur-xl">
-              <p className="text-3xl mb-2" aria-hidden="true">
-                📰
-              </p>
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <NewspaperIcon size={24} />
+              </div>
               <h3 className="text-base font-semibold text-neutral-900 dark:text-white">
                 Walang nakatalang anunsyo
               </h3>

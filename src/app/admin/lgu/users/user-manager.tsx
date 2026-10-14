@@ -4,6 +4,7 @@ import { useState, useTransition, useRef } from "react";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
 import { toast } from "sonner";
+import { PlusIcon, Trash2Icon } from "@/components/dashboard/icons";
 import { createUser, deleteUser } from "../actions";
 
 type UserRole = "LGU_ADMIN" | "BARANGAY_ADMIN";
@@ -87,9 +88,10 @@ export function UserManager({ initialUsers, barangays }: Props) {
           onClick={() => setShowForm((v) => !v)}
           aria-expanded={showForm}
           aria-controls="add-user-form"
-          className="min-h-[44px] rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+          className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
         >
-          + Magdagdag ng Opisyal
+          <PlusIcon size={16} />
+          <span>Magdagdag ng Opisyal</span>
         </button>
       </div>
 
@@ -221,7 +223,7 @@ export function UserManager({ initialUsers, barangays }: Props) {
                       className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-mute)] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
                       aria-label={`Tanggalin si ${u.name}`}
                     >
-                      🗑️
+                      <Trash2Icon size={15} />
                     </button>
                   </td>
                 </tr>
@@ -235,7 +237,7 @@ export function UserManager({ initialUsers, barangays }: Props) {
         open={!!deleteId}
         title="Tanggalin ang Opisyal?"
         description={`Permanenteng matatanggal ang account ni "${deleteId?.name}". Hindi ito maibabalik.`}
-        confirmLabel="🗑️ Tanggalin"
+        confirmLabel="Tanggalin"
         cancelLabel="Huwag"
         variant="danger"
         onConfirm={handleDelete}

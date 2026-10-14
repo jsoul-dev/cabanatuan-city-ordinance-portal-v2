@@ -46,7 +46,7 @@ async function main() {
         matchedOrdinances
           .map(
             (ord) =>
-              `- Res. No. ${ord.resolutionNumber} (${ord.type === "CITY" ? "City Ordinance" : `Brgy. ${ord.barangay?.name}`}): ${ord.title}\n  Buod/Description: ${ord.description || ""}\n  Nilalaman/Articles: ${ord.articles?.slice(0, 400) || ord.content?.slice(0, 300)}...\n  Penalties: ${ord.penalties?.slice(0, 300) || "Wala"}`
+              `- Res. No. ${ord.resolutionNumber} (${ord.type === "CITY" ? "City Ordinance" : `Brgy. ${ord.barangay?.name}`}): ${ord.title}\n  Buod/Description: ${ord.description || ""}\n  Nilalaman/Articles: ${ord.articles?.slice(0, 400) || (ord as any).content?.slice(0, 300)}...\n  Penalties: ${ord.penalties?.slice(0, 300) || "Wala"}`
           )
           .join("\n\n");
     }

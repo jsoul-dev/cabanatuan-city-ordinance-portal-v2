@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { login, type LoginResult } from "@/lib/auth-actions";
+import { CivicHallIcon, ShieldCheckIcon } from "@/components/dashboard/icons";
 
 interface LoginFormProps {
   theme?: "dark" | "light";
@@ -155,7 +156,7 @@ export function LoginForm({ theme, onForgotClick }: LoginFormProps) {
             onClick={() => handleQuickFill("lgu.admin.cabanatuan@gmail.com")}
             className="flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-left text-xs text-neutral-700 transition-all hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-900 dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-emerald-500/50 dark:hover:bg-emerald-500/10 dark:hover:text-white"
           >
-            <span className="text-emerald-500 font-bold shrink-0">🏛️</span>
+            <CivicHallIcon size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-neutral-900 dark:text-white truncate">
                 LGU Super Admin
@@ -171,7 +172,7 @@ export function LoginForm({ theme, onForgotClick }: LoginFormProps) {
             onClick={() => handleQuickFill("captain.camptinio@gmail.com")}
             className="flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-left text-xs text-neutral-700 transition-all hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-900 dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-emerald-500/50 dark:hover:bg-emerald-500/10 dark:hover:text-white"
           >
-            <span className="text-emerald-500 font-bold shrink-0">🛡️</span>
+            <ShieldCheckIcon size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
             <div className="min-w-0 flex-1">
               <div className="font-semibold text-neutral-900 dark:text-white truncate">
                 Barangay Admin

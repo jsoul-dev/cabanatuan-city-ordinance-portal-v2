@@ -8,6 +8,11 @@ import {
   OrdinancesScrollIcon,
   Trash2Icon,
   CheckIcon,
+  ScaleIcon,
+  CarIcon,
+  ClipboardCheckIcon,
+  BroomIcon,
+  MessageSquareIcon,
 } from "@/components/dashboard/icons";
 import {
   loadChatHistory,
@@ -25,22 +30,22 @@ interface Message {
 
 const QUICK_ACTIONS = [
   {
-    icon: "⚖️",
+    icon: ScaleIcon,
     label: "Curfew rules for minors",
     query: "Ano ang ordinansa at curfew hours para sa mga menor de edad sa Cabanatuan?",
   },
   {
-    icon: "🚗",
+    icon: CarIcon,
     label: "Traffic & illegal parking",
     query: "Ano ang parusa at regulasyon sa illegal parking at trapiko sa lungsod?",
   },
   {
-    icon: "📋",
+    icon: ClipboardCheckIcon,
     label: "Business permit requirements",
     query: "Ano-ano ang mga kailangan para mag-apply ng business permit?",
   },
   {
-    icon: "🧹",
+    icon: BroomIcon,
     label: "Waste management schedule",
     query: "Ano ang parusa sa hindi tamang pagtatapon o pagsusunog ng basura?",
   },
@@ -190,7 +195,7 @@ export function ChatbotClient() {
 
               <div className="flex items-start gap-2.5 rounded-xl border border-neutral-200/80 bg-white/80 p-3 shadow-xs dark:border-white/5 dark:bg-white/5">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                  <span className="text-xs">💬</span>
+                  <MessageSquareIcon size={13} />
                 </div>
                 <div>
                   <div className="text-xs font-bold text-neutral-900 dark:text-white">
@@ -209,18 +214,21 @@ export function ChatbotClient() {
                 QUICK ACTIONS
               </div>
               <div className="space-y-2">
-                {QUICK_ACTIONS.map((action, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => handleSendMessage(action.query)}
-                    disabled={isLoading}
-                    className="flex w-full items-center gap-2.5 rounded-xl border border-neutral-200/70 bg-white px-3.5 py-2.5 text-left text-xs font-medium text-neutral-700 transition-all hover:border-emerald-500/50 hover:bg-emerald-50/50 hover:text-emerald-900 dark:border-white/5 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-emerald-500/30 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-200 disabled:opacity-50"
-                  >
-                    <span className="text-sm">{action.icon}</span>
-                    <span className="truncate">{action.label}</span>
-                  </button>
-                ))}
+                {QUICK_ACTIONS.map((action, idx) => {
+                  const Icon = action.icon;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSendMessage(action.query)}
+                      disabled={isLoading}
+                      className="flex w-full items-center gap-2.5 rounded-xl border border-neutral-200/70 bg-white px-3.5 py-2.5 text-left text-xs font-medium text-neutral-700 transition-all hover:border-emerald-500/50 hover:bg-emerald-50/50 hover:text-emerald-900 dark:border-white/5 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-emerald-500/30 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-200 disabled:opacity-50"
+                    >
+                      <Icon size={15} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+                      <span className="truncate">{action.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
