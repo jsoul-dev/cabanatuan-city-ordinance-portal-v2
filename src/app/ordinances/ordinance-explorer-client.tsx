@@ -19,9 +19,10 @@ import { clsx } from "clsx";
 import { cleanOrdinanceTitle, formatOrdinanceYear, formatResolutionNumber, formatResolutionDisplay, formatCoverage } from "@/lib/ordinance-utils";
 import { OrdinancePdfButton } from "./[slug]/ordinance-pdf-button";
 
-type OrdinanceWithBarangay = Omit<Ordinance, "pdfUrl"> & {
+type OrdinanceWithBarangay = Omit<Ordinance, "pdfUrl" | "tags"> & {
   barangay: Barangay | null;
   pdfUrl?: string | null;
+  tags: string[];
 };
 
 interface OrdinanceExplorerClientProps {

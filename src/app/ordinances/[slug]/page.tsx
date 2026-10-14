@@ -76,6 +76,7 @@ export default async function OrdinanceDetailPage({
   }
 
   const cleanTitle = cleanOrdinanceTitle(ord.title);
+  const tags: string[] = Array.isArray(ord.tags) ? (ord.tags as string[]) : [];
   const ordYear = formatOrdinanceYear(
     ord.year,
     ord.dateEnacted,
@@ -208,8 +209,8 @@ export default async function OrdinanceDetailPage({
                   BARANGAY ORDINANCE
                 </span>
               )}
-              {ord.tags &&
-                ord.tags.map((tag, idx) => (
+              {tags.length > 0 &&
+                tags.map((tag, idx) => (
                   <span
                     key={idx}
                     className="inline-flex items-center rounded-md bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-neutral-700 dark:text-neutral-200"

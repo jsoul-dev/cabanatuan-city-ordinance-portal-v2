@@ -24,7 +24,7 @@ export default async function LguOrdinancesPage({
         </p>
       </div>
       <LguOrdinanceManager
-        initialOrdinances={ordinances}
+        initialOrdinances={ordinances as any}
         defaultReviewId={params.review}
       />
     </div>

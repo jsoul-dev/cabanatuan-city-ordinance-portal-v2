@@ -38,6 +38,16 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 
+# Local SQLite database
+prisma/*.db
+prisma/*.db-journal
+*.db
+*.db-journal
+
+# Local uploads
+public/uploads/*
+!public/uploads/.gitkeep
+
 # Custom project excludes (Agent rules, skills, internal docs, and unrelated markdown)
 *.pdf
 .agents/
@@ -45,7 +55,6 @@ next-env.d.ts
 .gemini/
 .dumps/
 .ordinances/
-graphify-out/
 AGENTS.md
 CLAUDE.md
 TEST_ACCOUNTS.md

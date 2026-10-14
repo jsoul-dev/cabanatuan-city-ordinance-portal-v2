@@ -1,13 +1,13 @@
 // Cabanatuan City Ordinance Hub — Prisma Schema
-// PostgreSQL on Supabase (Project: odszkhqvbhjbijqztchi)
-// Prisma 7: Connection URLs moved to prisma.config.ts
+// Local SQLite configuration
+// Prisma 7: Connection URLs configured in prisma.config.ts
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
 }
 
 // ─── Enums ──────────────────────────────────────────────────────────────────
@@ -96,19 +96,19 @@ model Ordinance {
   type             OrdinanceType   @default(BARANGAY)
   status           OrdinanceStatus @default(DRAFT)
 
-  description  String? @db.Text
-  content      String? @db.Text
+  description  String?
+  content      String?
   category     String? @default("General")
-  penalties    String? @db.Text
-  signatories  String? @db.Text
+  penalties    String?
+  signatories  String?
   pdfUrl       String? @map("pdf_url")
 
   dateEnacted  DateTime? @map("date_enacted")
   year         Int?
-  tags         String[]  @default([])
+  tags         Json      @default("[]")
   coverage     String?
-  articles     String?   @db.Text
-  enforcement  String?   @db.Text
+  articles     String?
+  enforcement  String?
 
   barangayId String?   @map("barangay_id")
   barangay   Barangay? @relation(fields: [barangayId], references: [id], onDelete: SetNull)
@@ -126,6 +126,11 @@ model Ordinance {
 
   @@index([status])
   @@index([type])
+  @@index([category])
+  @@index([year])
+  @@index([dateEnacted])
+  @@index([status, category])
+  @@index([status, year])
   @@index([barangayId])
   @@index([submittedById])
   @@map("ordinances")
@@ -134,7 +139,7 @@ model Ordinance {
 model Report {
   id          String       @id @default(cuid())
   type        ReportType
-  description String       @db.Text
+  description String
   photoUrl    String?      @map("photo_url")
 
   contactName  String? @map("contact_name")
@@ -152,13 +157,14 @@ model Report {
   @@index([status])
   @@index([barangayId])
   @@index([type])
+  @@index([submittedAt])
   @@map("reports")
 }
 
 model NewsItem {
   id       String       @id @default(cuid())
   title    String
-  content  String       @db.Text
+  content  String
   category NewsCategory @default(CITY)
   isPinned Boolean      @default(false) @map("is_pinned")
 

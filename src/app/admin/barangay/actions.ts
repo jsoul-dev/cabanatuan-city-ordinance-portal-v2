@@ -120,7 +120,7 @@ export async function resubmitBarangayOrdinance(
   const enforcement = (formData.get("enforcement") as string)?.trim() || ordinance.enforcement;
   const signatories = (formData.get("signatories") as string)?.trim() || ordinance.signatories;
   const tagsStr = (formData.get("tags") as string)?.trim();
-  const tags = tagsStr !== undefined ? tagsStr.split(",").map((t) => t.trim()).filter(Boolean) : ordinance.tags;
+  const tags = tagsStr !== undefined ? tagsStr.split(",").map((t) => t.trim()).filter(Boolean) : (ordinance.tags as any);
   const dateEnactedStr = (formData.get("dateEnacted") as string)?.trim();
   const dateEnacted = dateEnactedStr ? new Date(dateEnactedStr) : ordinance.dateEnacted;
   const yearStr = (formData.get("year") as string)?.trim();

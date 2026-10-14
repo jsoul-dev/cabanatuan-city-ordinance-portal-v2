@@ -10,9 +10,9 @@ export async function GET() {
         status: "APPROVED",
         OR: keywords.map((kw: string) => ({
           OR: [
-            { title: { contains: kw, mode: "insensitive" } },
-            { content: { contains: kw, mode: "insensitive" } },
-            { resolutionNumber: { contains: kw, mode: "insensitive" } },
+            { title: { contains: kw } },
+            { content: { contains: kw } },
+            { resolutionNumber: { contains: kw } },
           ],
         })),
       },

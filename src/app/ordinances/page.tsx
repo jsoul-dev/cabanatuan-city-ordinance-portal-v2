@@ -34,9 +34,10 @@ export default async function OrdinancesPage() {
     }),
   ]);
 
-  const ordinances = rawOrdinances[0].map(ord => ({
+  const ordinances = rawOrdinances[0].map((ord) => ({
     ...ord,
-    pdfUrl: ord.pdfUrl ? "has-pdf" : null
+    pdfUrl: ord.pdfUrl ? "has-pdf" : null,
+    tags: Array.isArray(ord.tags) ? (ord.tags as string[]) : [],
   }));
   const barangays = rawOrdinances[1];
 

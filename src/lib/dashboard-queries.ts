@@ -51,8 +51,8 @@ export async function getLguAllOrdinances(filters?: { status?: string; search?: 
       ...(filters?.status && filters.status !== "ALL" ? { status: filters.status as never } : {}),
       ...(filters?.search ? {
         OR: [
-          { title: { contains: filters.search, mode: "insensitive" } },
-          { resolutionNumber: { contains: filters.search, mode: "insensitive" } },
+          { title: { contains: filters.search } },
+          { resolutionNumber: { contains: filters.search } },
         ],
       } : {}),
     },
