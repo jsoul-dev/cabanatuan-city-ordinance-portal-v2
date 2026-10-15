@@ -1,0 +1,110 @@
+1
+00:00:01,370 --> 00:00:08,990
+[BARANGAY] Barangay Admin Authentication
+Signing in to Barangay Camp Tinio administrative portal
+
+2
+00:00:08,990 --> 00:00:21,640
+[BARANGAY] Barangay Governance Dashboard
+Localized metrics, Camp Tinio ordinances, and resident community reports
+
+3
+00:00:21,640 --> 00:00:41,350
+[BARANGAY] Barangay Legislative Management
+Reviewing local ordinances, statuses, and legislative proposals
+
+4
+00:00:41,350 --> 00:00:58,729
+[BARANGAY] Barangay Incident Reports Desk
+Triage and processing of citizen reports submitted to Barangay Camp Tinio
+
+5
+00:00:58,729 --> 00:01:03,259
+[BARANGAY] Barangay Session Sign Out
+Signing out to transition to the City Hall LGU Super Admin flow
+
+6
+00:01:03,259 --> 00:01:11,530
+[LGU_ADMIN] LGU Super Admin Authentication
+Logging in to the City Hall Executive Administration Portal
+
+7
+00:01:11,530 --> 00:01:27,209
+[LGU_ADMIN] Executive Dashboard Overview
+City-wide metrics across all 89 barangays, ordinances, and pending reviews
+
+8
+00:01:27,209 --> 00:01:38,500
+[LGU_ADMIN] City Ordinance Repository
+Filtering, searching, and managing city and barangay ordinances
+
+9
+00:01:38,500 --> 00:01:52,280
+[LGU_ADMIN] Legislative Review & Approval
+Reviewing and formally approving a pending barangay ordinance submission
+
+10
+00:01:52,280 --> 00:02:01,000
+[LGU_ADMIN] Official Accounts Administration
+Managing registered barangay captains and administrative personnel
+
+11
+00:02:01,000 --> 00:02:09,560
+[LGU_ADMIN] Barangay Directory & Coverage
+Monitoring Cabanatuan City's 89 administrative barangays
+
+12
+00:02:09,560 --> 00:02:22,030
+[LGU_ADMIN] City-Wide Community Reports Desk
+Monitoring citizen incident reports submitted across all barangays
+
+13
+00:02:22,030 --> 00:02:28,580
+[LGU_ADMIN] Legislative Report Generation
+Exporting official PDF documentation with Cabanatuan City seal
+
+14
+00:02:28,580 --> 00:02:38,110
+[LGU_ADMIN] Civic Governance Analytics
+Interactive data charts, category distribution, and compliance trends
+
+15
+00:02:38,110 --> 00:02:45,889
+[LGU_ADMIN] Administrative Session Sign Out
+Safely signing out to transition to the open Citizen Public Flow
+
+16
+00:02:45,889 --> 00:02:59,430
+[CITIZEN] Public Portal & 3D Ordinance Archive
+Direct public access to Cabanatuan City's 3D digital ordinance collection without login
+
+17
+00:02:59,430 --> 00:03:10,949
+[CITIZEN] Ordinance Repository & Categorical Search
+Filtering local ordinances by category tags (#Basura, #Trapiko) and keywords
+
+18
+00:03:10,949 --> 00:03:28,750
+[CITIZEN] Ordinance Detail View & Official PDF Viewer
+Examining ordinance provisions, sanctions, and rendered official PDF document
+
+19
+00:03:28,750 --> 00:03:51,370
+[CITIZEN] AI Civic Assistant (Gemini Powered)
+Inquiring on local city ordinances with grounded provisions and citations
+
+20
+00:03:51,370 --> 00:04:20,269
+[CITIZEN] Civic Incident Reporting
+Submitting an official community violation report directly to Barangay Hall
+
+21
+00:04:20,269 --> 00:04:29,069
+[CITIZEN] Submission Feedback & Validation
+Immediate verification alert confirming report delivery to Barangay Hall
+
+22
+00:04:29,069 --> 00:04:38,100
+[DEFENSE] Capstone Walkthrough Conclusion
+Successfully concluding the official Cabanatuan City Ordinance Portal walkthrough
+

@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     "Mag-report ng mga non-urgent na isyu sa iyong barangay sa Cabanatuan City (basura, ingay, ilaw, daan, atbp).",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ReportPage() {
   const barangays = await prisma.barangay.findMany({
     where: {

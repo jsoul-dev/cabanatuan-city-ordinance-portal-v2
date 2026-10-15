@@ -60,3 +60,5 @@ CLAUDE.md
 TEST_ACCOUNTS.md
 *test_accounts*.md
 graphify-out/
+/demo/output/
+/demo/temp-recordings/

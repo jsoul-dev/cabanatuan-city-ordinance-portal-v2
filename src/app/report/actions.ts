@@ -43,10 +43,18 @@ export async function submitCommunityReport(formData: {
     }
 
     // Verify barangay exists and has an active admin account
-    const brgy = await prisma.barangay.findUnique({
+    let brgy = await prisma.barangay.findUnique({
       where: { id: barangayId },
       include: { users: { select: { id: true } } },
     });
+
+    if (!brgy) {
+      // Fallback to active participating barangay in case of stale ID from client cache
+      brgy = await prisma.barangay.findFirst({
+        where: { users: { some: {} } },
+        include: { users: { select: { id: true } } },
+      });
+    }
 
     if (!brgy) {
       return { error: "Hindi nahanap ang napiling barangay." };

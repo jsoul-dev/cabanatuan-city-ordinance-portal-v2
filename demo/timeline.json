@@ -1,0 +1,200 @@
+[
+  {
+    "stepNumber": 1,
+    "flow": "BARANGAY",
+    "title": "Barangay Admin Authentication",
+    "description": "Signing in to Barangay Camp Tinio administrative portal",
+    "startSeconds": 1.37,
+    "endSeconds": 8.99,
+    "durationSeconds": 7.62
+  },
+  {
+    "stepNumber": 2,
+    "flow": "BARANGAY",
+    "title": "Barangay Governance Dashboard",
+    "description": "Localized metrics, Camp Tinio ordinances, and resident community reports",
+    "startSeconds": 8.99,
+    "endSeconds": 21.64,
+    "durationSeconds": 12.65
+  },
+  {
+    "stepNumber": 3,
+    "flow": "BARANGAY",
+    "title": "Barangay Legislative Management",
+    "description": "Reviewing local ordinances, statuses, and legislative proposals",
+    "startSeconds": 21.64,
+    "endSeconds": 41.35,
+    "durationSeconds": 19.71
+  },
+  {
+    "stepNumber": 4,
+    "flow": "BARANGAY",
+    "title": "Barangay Incident Reports Desk",
+    "description": "Triage and processing of citizen reports submitted to Barangay Camp Tinio",
+    "startSeconds": 41.35,
+    "endSeconds": 58.73,
+    "durationSeconds": 17.38
+  },
+  {
+    "stepNumber": 5,
+    "flow": "BARANGAY",
+    "title": "Barangay Session Sign Out",
+    "description": "Signing out to transition to the City Hall LGU Super Admin flow",
+    "startSeconds": 58.73,
+    "endSeconds": 63.26,
+    "durationSeconds": 4.53
+  },
+  {
+    "stepNumber": 6,
+    "flow": "LGU_ADMIN",
+    "title": "LGU Super Admin Authentication",
+    "description": "Logging in to the City Hall Executive Administration Portal",
+    "startSeconds": 63.26,
+    "endSeconds": 71.53,
+    "durationSeconds": 8.27
+  },
+  {
+    "stepNumber": 7,
+    "flow": "LGU_ADMIN",
+    "title": "Executive Dashboard Overview",
+    "description": "City-wide metrics across all 89 barangays, ordinances, and pending reviews",
+    "startSeconds": 71.53,
+    "endSeconds": 87.21,
+    "durationSeconds": 15.68
+  },
+  {
+    "stepNumber": 8,
+    "flow": "LGU_ADMIN",
+    "title": "City Ordinance Repository",
+    "description": "Filtering, searching, and managing city and barangay ordinances",
+    "startSeconds": 87.21,
+    "endSeconds": 98.5,
+    "durationSeconds": 11.29
+  },
+  {
+    "stepNumber": 9,
+    "flow": "LGU_ADMIN",
+    "title": "Legislative Review & Approval",
+    "description": "Reviewing and formally approving a pending barangay ordinance submission",
+    "startSeconds": 98.5,
+    "endSeconds": 112.28,
+    "durationSeconds": 13.78
+  },
+  {
+    "stepNumber": 10,
+    "flow": "LGU_ADMIN",
+    "title": "Official Accounts Administration",
+    "description": "Managing registered barangay captains and administrative personnel",
+    "startSeconds": 112.28,
+    "endSeconds": 121,
+    "durationSeconds": 8.72
+  },
+  {
+    "stepNumber": 11,
+    "flow": "LGU_ADMIN",
+    "title": "Barangay Directory & Coverage",
+    "description": "Monitoring Cabanatuan City's 89 administrative barangays",
+    "startSeconds": 121,
+    "endSeconds": 129.56,
+    "durationSeconds": 8.56
+  },
+  {
+    "stepNumber": 12,
+    "flow": "LGU_ADMIN",
+    "title": "City-Wide Community Reports Desk",
+    "description": "Monitoring citizen incident reports submitted across all barangays",
+    "startSeconds": 129.56,
+    "endSeconds": 142.03,
+    "durationSeconds": 12.47
+  },
+  {
+    "stepNumber": 13,
+    "flow": "LGU_ADMIN",
+    "title": "Legislative Report Generation",
+    "description": "Exporting official PDF documentation with Cabanatuan City seal",
+    "startSeconds": 142.03,
+    "endSeconds": 148.58,
+    "durationSeconds": 6.55
+  },
+  {
+    "stepNumber": 14,
+    "flow": "LGU_ADMIN",
+    "title": "Civic Governance Analytics",
+    "description": "Interactive data charts, category distribution, and compliance trends",
+    "startSeconds": 148.58,
+    "endSeconds": 158.11,
+    "durationSeconds": 9.53
+  },
+  {
+    "stepNumber": 15,
+    "flow": "LGU_ADMIN",
+    "title": "Administrative Session Sign Out",
+    "description": "Safely signing out to transition to the open Citizen Public Flow",
+    "startSeconds": 158.11,
+    "endSeconds": 165.89,
+    "durationSeconds": 7.78
+  },
+  {
+    "stepNumber": 16,
+    "flow": "CITIZEN",
+    "title": "Public Portal & 3D Ordinance Archive",
+    "description": "Direct public access to Cabanatuan City's 3D digital ordinance collection without login",
+    "startSeconds": 165.89,
+    "endSeconds": 179.43,
+    "durationSeconds": 13.54
+  },
+  {
+    "stepNumber": 17,
+    "flow": "CITIZEN",
+    "title": "Ordinance Repository & Categorical Search",
+    "description": "Filtering local ordinances by category tags (#Basura, #Trapiko) and keywords",
+    "startSeconds": 179.43,
+    "endSeconds": 190.95,
+    "durationSeconds": 11.52
+  },
+  {
+    "stepNumber": 18,
+    "flow": "CITIZEN",
+    "title": "Ordinance Detail View & Official PDF Viewer",
+    "description": "Examining ordinance provisions, sanctions, and rendered official PDF document",
+    "startSeconds": 190.95,
+    "endSeconds": 208.75,
+    "durationSeconds": 17.8
+  },
+  {
+    "stepNumber": 19,
+    "flow": "CITIZEN",
+    "title": "AI Civic Assistant (Gemini Powered)",
+    "description": "Inquiring on local city ordinances with grounded provisions and citations",
+    "startSeconds": 208.75,
+    "endSeconds": 231.37,
+    "durationSeconds": 22.62
+  },
+  {
+    "stepNumber": 20,
+    "flow": "CITIZEN",
+    "title": "Civic Incident Reporting",
+    "description": "Submitting an official community violation report directly to Barangay Hall",
+    "startSeconds": 231.37,
+    "endSeconds": 260.27,
+    "durationSeconds": 28.9
+  },
+  {
+    "stepNumber": 21,
+    "flow": "CITIZEN",
+    "title": "Submission Feedback & Validation",
+    "description": "Immediate verification alert confirming report delivery to Barangay Hall",
+    "startSeconds": 260.27,
+    "endSeconds": 269.07,
+    "durationSeconds": 8.8
+  },
+  {
+    "stepNumber": 22,
+    "flow": "DEFENSE",
+    "title": "Capstone Walkthrough Conclusion",
+    "description": "Successfully concluding the official Cabanatuan City Ordinance Portal walkthrough",
+    "startSeconds": 269.07,
+    "endSeconds": 278.1,
+    "durationSeconds": 9.03
+  }
+]
