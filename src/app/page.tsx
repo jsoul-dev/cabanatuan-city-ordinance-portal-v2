@@ -3,7 +3,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CivicMonolithCanvas } from "@/components/3d/civic-monolith-canvas";
+import { OrdinanceArchiveCanvas } from "@/components/3d/ordinance-archive-canvas";
 import {
   OrdinanceAiSimulator,
   BarangayDistrictShowcase,
@@ -27,14 +27,33 @@ import {
  * Redesigned Cabanatuan City Ordinance Portal Landing Page
  * Guided by modern-website-ui (dynamic 100dvh, Golden Ratio 1.618 split, Apple tactile motion),
  * antislop (authentic Cabanatuan emerald and gold identity, zero generic AI slop),
- * and interactive Three.js 3D Civic Monolith visualization.
+ * and interactive Three.js 3D Ordinance Archive visualization.
  */
 export default async function LandingPage() {
-  const [ordinanceCount, barangayCount, reportCount] = await Promise.all([
-    prisma.ordinance.count({ where: { status: "APPROVED" } }),
-    prisma.barangay.count(),
-    prisma.report.count({ where: { status: "RESOLVED" } }),
-  ]);
+  const [ordinanceCount, barangayCount, reportCount, approvedOrdinances] =
+    await Promise.all([
+      prisma.ordinance.count({ where: { status: "APPROVED" } }),
+      prisma.barangay.count(),
+      prisma.report.count({ where: { status: "RESOLVED" } }),
+      prisma.ordinance.findMany({
+        where: { status: "APPROVED" },
+        take: 48,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          slug: true,
+          resolutionNumber: true,
+          ordinanceLabel: true,
+          title: true,
+        },
+      }),
+    ]);
+
+  const archiveOrdinances = approvedOrdinances.map((o) => ({
+    id: o.ordinanceLabel || `Ordinance No. ${o.resolutionNumber}`,
+    title: o.title,
+    href: `/ordinances/${o.slug}`,
+  }));
 
   // Cabanatuan officially comprises 89 barangays
   const verifiedBarangayCount = 89;
@@ -145,12 +164,15 @@ export default async function LandingPage() {
               </div>
             </div>
 
-            {/* Right Column (38.2% Interactive 3D Three.js Civic Monolith) */}
+            {/* Right Column (38.2% Interactive 3D Three.js Ordinance Archive Tower) */}
             <div className="relative flex flex-col items-center justify-center lg:col-span-5">
               <div className="relative w-full rounded-3xl border border-[var(--border-hairline)] bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-canvas)] p-3 shadow-2xl backdrop-blur-xl">
                 {/* 3D Canvas */}
                 <div className="h-[420px] sm:h-[460px] w-full overflow-hidden rounded-2xl">
-                  <CivicMonolithCanvas interactive={true} />
+                  <OrdinanceArchiveCanvas
+                    interactive={true}
+                    ordinances={archiveOrdinances}
+                  />
                 </div>
 
                 {/* Floating Top Header on 3D Container */}
@@ -164,7 +186,7 @@ export default async function LandingPage() {
                       className="object-contain"
                     />
                     <span className="font-mono text-[11px] font-bold text-[var(--text-ink)]">
-                      Cabanatuan Civic Codex 3D
+                      Cabanatuan Ordinance Archive 3D
                     </span>
                   </div>
                 </div>

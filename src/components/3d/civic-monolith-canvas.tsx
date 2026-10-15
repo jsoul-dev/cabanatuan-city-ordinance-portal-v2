@@ -3,422 +3,695 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
-interface CivicMonolithCanvasProps {
-  className?: string;
-  interactive?: boolean;
+export interface OrdinanceItem {
+  id: string; // e.g. "Ordinance No. 2024-017"
+  title: string;
+  href?: string;
 }
 
-export function CivicMonolithCanvas({
+export interface OrdinanceArchiveCanvasProps {
+  className?: string;
+  interactive?: boolean;
+  /** Real ordinances to label the pages with. Falls back to sample labels. */
+  ordinances?: OrdinanceItem[];
+  /** Fires when a page is clicked / tapped. */
+  onSelect?: (item: OrdinanceItem, index: number) => void;
+}
+
+// ---------------------------------------------------------------------------
+// Layout constants
+// ---------------------------------------------------------------------------
+const VARIANTS = 4; // number of distinct page textures
+const DEFAULT_PAGES = 48;
+const MAX_PAGES = 60;
+const PAGE_W = 0.8;
+const PAGE_H = 1.13;
+const RADIUS = 2.1;
+const STEP = 0.5; // radians between consecutive pages (~12.5 pages per turn)
+const TOWER_HEIGHT = 5.0;
+const CAMERA_Y = 2.4;
+
+// ---------------------------------------------------------------------------
+// Procedural textures (no image assets needed)
+// ---------------------------------------------------------------------------
+function mulberry32(seed: number) {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** A stylised legal page: gold header rule, title, paragraphs, seal, signature. */
+function makePageTexture(variant: number, anisotropy: number) {
+  const LW = 256; // logical size
+  const LH = 362;
+  const k = 1.5; // render scale
+  const canvas = document.createElement("canvas");
+  canvas.width = LW * k;
+  canvas.height = LH * k;
+  const g = canvas.getContext("2d")!;
+  g.scale(k, k);
+  const rand = mulberry32(variant * 977 + 13);
+
+  // Paper
+  g.fillStyle = "#f7f3e8";
+  g.fillRect(0, 0, LW, LH);
+
+  // Outer border (keeps the page readable on light backgrounds)
+  g.strokeStyle = "rgba(5,150,105,0.6)";
+  g.lineWidth = 3;
+  g.strokeRect(1.5, 1.5, LW - 3, LH - 3);
+
+  // Gold top rule
+  g.fillStyle = "#d97706";
+  g.fillRect(0, 0, LW, 10);
+
+  // Heading
+  g.textAlign = "center";
+  g.fillStyle = "#1f2937";
+  g.font = "bold 16px Georgia, 'Times New Roman', serif";
+  g.fillText("ORDINANCE", LW / 2, 42);
+  g.fillStyle = "#6b7280";
+  g.font = "9px Georgia, 'Times New Roman', serif";
+  g.fillText("Sangguniang Panlungsod ng Cabanatuan", LW / 2, 57);
+
+  // Divider
+  g.fillStyle = "rgba(217,119,6,0.7)";
+  g.fillRect(LW / 2 - 28, 68, 56, 1.5);
+
+  // Body: paragraphs of "text" bars
+  let y = 86;
+  while (y < LH - 96) {
+    const lines = 3 + Math.floor(rand() * 4);
+    for (let i = 0; i < lines && y < LH - 96; i++) {
+      const last = i === lines - 1;
+      const w = (LW - 48) * (last ? 0.3 + rand() * 0.4 : 0.93 + rand() * 0.07);
+      g.fillStyle = "rgba(31,41,55,0.5)";
+      g.fillRect(24, y, w, 3);
+      y += 11;
+    }
+    y += 9;
+  }
+
+  // Seal
+  const sx = 52;
+  const sy = LH - 50;
+  g.strokeStyle = "#d97706";
+  g.lineWidth = 2;
+  g.beginPath();
+  g.arc(sx, sy, 19, 0, Math.PI * 2);
+  g.stroke();
+  g.lineWidth = 1;
+  g.beginPath();
+  g.arc(sx, sy, 13, 0, Math.PI * 2);
+  g.stroke();
+  g.fillStyle = "rgba(217,119,6,0.35)";
+  g.beginPath();
+  g.arc(sx, sy, 6, 0, Math.PI * 2);
+  g.fill();
+
+  // Signature line
+  g.strokeStyle = "rgba(31,41,55,0.55)";
+  g.lineWidth = 1;
+  g.beginPath();
+  g.moveTo(130, LH - 44);
+  g.lineTo(LW - 26, LH - 44);
+  g.stroke();
+  g.strokeStyle = "rgba(5,150,105,0.8)";
+  g.lineWidth = 1.5;
+  g.beginPath();
+  g.moveTo(142, LH - 50);
+  g.bezierCurveTo(150, LH - 66, 158, LH - 40, 168, LH - 54);
+  g.bezierCurveTo(176, LH - 64, 184, LH - 42, 196, LH - 52);
+  g.stroke();
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = anisotropy;
+  return tex;
+}
+
+function makeGlowTexture() {
+  const size = 128;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const g = canvas.getContext("2d")!;
+  const grad = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  grad.addColorStop(0, "rgba(255,255,255,1)");
+  grad.addColorStop(0.35, "rgba(255,255,255,0.35)");
+  grad.addColorStop(1, "rgba(255,255,255,0)");
+  g.fillStyle = grad;
+  g.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(canvas);
+}
+
+function placeholderItem(i: number): OrdinanceItem {
+  const year = 2025 - Math.floor(i / 12);
+  const num = String(((i * 37) % 90) + 10).padStart(3, "0");
+  return { id: `Ordinance No. ${year}-${num}`, title: "Sample entry" };
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+export function OrdinanceArchiveCanvas({
   className = "",
   interactive = true,
-}: CivicMonolithCanvasProps) {
+  ordinances,
+  onSelect,
+}: OrdinanceArchiveCanvasProps) {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const tipIdRef = useRef<HTMLDivElement>(null);
+  const tipTitleRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [activeNodeCount] = useState(89);
   const { resolvedTheme } = useTheme();
+
+  // Latest props/theme without re-building the scene
+  const darkRef = useRef(false);
+  darkRef.current = resolvedTheme === "dark";
+  const ordinancesRef = useRef(ordinances);
+  ordinancesRef.current = ordinances;
+  const onSelectRef = useRef(onSelect);
+  onSelectRef.current = onSelect;
+  const applyThemeRef = useRef<((dark: boolean) => void) | null>(null);
+
+  const pageCount = Math.max(
+    6,
+    Math.min(ordinances?.length ?? DEFAULT_PAGES, MAX_PAGES)
+  );
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Theme changes only recolour; they don't rebuild the scene
+  useEffect(() => {
+    applyThemeRef.current?.(resolvedTheme === "dark");
+  }, [resolvedTheme]);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !mounted) return;
 
-    // Check prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const width = container.clientWidth || 400;
-    const height = container.clientHeight || 400;
+    let vw = container.clientWidth || 400;
+    let vh = container.clientHeight || 400;
 
-    // SCENE SETUP
+    // ---- Renderer / camera -------------------------------------------------
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 7.2);
+    const camera = new THREE.PerspectiveCamera(40, vw / vh, 0.1, 100);
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setSize(vw, vh, false);
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.display = "block";
     container.appendChild(renderer.domElement);
 
-    // Theme palette
-    const isDark = resolvedTheme === "dark";
-    const emeraldColor = isDark ? 0x10b981 : 0x059669;
-    const goldColor = isDark ? 0xf59e0b : 0xd97706;
-    const ambientColor = isDark ? 0x052e16 : 0xdcfce7;
-    const coreColor = isDark ? 0x064e3b : 0x047857;
+    const fitCamera = () => {
+      const aspect = vw / vh;
+      camera.aspect = aspect;
+      const halfTan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      // Keep ~3.2 units either side of the axis in view on narrow containers
+      const z = Math.max(11, 3.2 / (halfTan * aspect));
+      camera.position.z = z;
+      camera.updateProjectionMatrix();
+    };
 
-    // LIGHTING
-    const ambientLight = new THREE.AmbientLight(ambientColor, isDark ? 1.4 : 1.8);
-    scene.add(ambientLight);
+    // ---- Tower of pages ----------------------------------------------------
+    const helix = new THREE.Group();
+    scene.add(helix);
 
-    const mainLight = new THREE.DirectionalLight(goldColor, isDark ? 2.5 : 2.0);
-    mainLight.position.set(5, 7, 5);
-    scene.add(mainLight);
+    const pitch = Math.min(0.14, TOWER_HEIGHT / (pageCount - 1));
+    const halfTower = ((pageCount - 1) / 2) * pitch;
 
-    const emeraldLight = new THREE.PointLight(emeraldColor, isDark ? 4.0 : 3.0, 10);
-    emeraldLight.position.set(0, 0, 0);
-    scene.add(emeraldLight);
-
-    const rimLight = new THREE.DirectionalLight(0xffffff, isDark ? 1.0 : 0.8);
-    rimLight.position.set(-5, -5, -3);
-    scene.add(rimLight);
-
-    // ROOT OBJECT FOR ROTATION & PARALLAX
-    const worldGroup = new THREE.Group();
-    scene.add(worldGroup);
-
-    // 1. CENTRAL CIVIC MONOLITH (Codex Prism)
-    // Hexagonal civic monolith representing Cabanatuan Sangguniang Panlungsod (City Council)
-    const monolithGeom = new THREE.CylinderGeometry(0.9, 1.15, 2.2, 6, 2, false);
-    const monolithMat = new THREE.MeshPhysicalMaterial({
-      color: coreColor,
-      metalness: 0.85,
-      roughness: 0.25,
-      transmission: isDark ? 0.45 : 0.2,
-      thickness: 1.2,
-      transparent: true,
-      opacity: isDark ? 0.75 : 0.85,
-      wireframe: false,
-    });
-    const monolithMesh = new THREE.Mesh(monolithGeom, monolithMat);
-    worldGroup.add(monolithMesh);
-
-    // Monolith Wireframe Bevel Edges
-    const edgesGeom = new THREE.EdgesGeometry(monolithGeom);
-    const edgesMat = new THREE.LineBasicMaterial({
-      color: goldColor,
-      linewidth: 2,
-      transparent: true,
-      opacity: isDark ? 0.9 : 0.7,
-    });
-    const edgesMesh = new THREE.LineSegments(edgesGeom, edgesMat);
-    monolithMesh.add(edgesMesh);
-
-    // Inner glowing civic beacon crystal
-    const beaconGeom = new THREE.OctahedronGeometry(0.55, 0);
-    const beaconMat = new THREE.MeshBasicMaterial({
-      color: emeraldColor,
-      wireframe: true,
-    });
-    const beaconMesh = new THREE.Mesh(beaconGeom, beaconMat);
-    monolithMesh.add(beaconMesh);
-
-    // 2. ORBITAL RINGS (3 tilted civic ordinance coordinate rings)
-    const ringGroup = new THREE.Group();
-    worldGroup.add(ringGroup);
-
-    const rings: THREE.LineLoop[] = [];
-    const ringConfigs = [
-      { radius: 2.2, tiltX: 0.4, tiltZ: 0.2, color: emeraldColor, opacity: 0.35 },
-      { radius: 2.8, tiltX: -0.5, tiltZ: -0.3, color: goldColor, opacity: 0.25 },
-      { radius: 3.3, tiltX: 0.8, tiltZ: -0.1, color: emeraldColor, opacity: 0.2 },
-    ];
-
-    ringConfigs.forEach((cfg) => {
-      const ringGeom = new THREE.BufferGeometry();
-      const segments = 64;
-      const positions = new Float32Array(segments * 3);
-      for (let i = 0; i < segments; i++) {
-        const theta = (i / segments) * Math.PI * 2;
-        positions[i * 3] = Math.cos(theta) * cfg.radius;
-        positions[i * 3 + 1] = 0;
-        positions[i * 3 + 2] = Math.sin(theta) * cfg.radius;
-      }
-      ringGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      const ringMat = new THREE.LineBasicMaterial({
-        color: cfg.color,
-        transparent: true,
-        opacity: cfg.opacity,
-      });
-      const ring = new THREE.LineLoop(ringGeom, ringMat);
-      ring.rotation.x = cfg.tiltX;
-      ring.rotation.z = cfg.tiltZ;
-      ringGroup.add(ring);
-      rings.push(ring);
-    });
-
-    // 3. THE 89 BARANGAYS CONSTELLATION NODES
-    // Exactly 89 nodes representing Cabanatuan's 89 official barangays
-    const nodeCount = 89;
-    const nodeGeom = new THREE.SphereGeometry(0.045, 8, 8);
-    const nodeMat = new THREE.MeshBasicMaterial({
-      color: goldColor,
-    });
-    const instancedNodes = new THREE.InstancedMesh(nodeGeom, nodeMat, nodeCount);
-
-    // Distribute 89 barangay nodes on the 3 orbital manifolds
-    const dummy = new THREE.Object3D();
-    const nodePositions: THREE.Vector3[] = [];
-
-    for (let i = 0; i < nodeCount; i++) {
-      const ringIndex = i % 3;
-      const cfg = ringConfigs[ringIndex];
-      const angle = (i / nodeCount) * Math.PI * 2 * 3 + (i * 0.17);
-      const rad = cfg.radius + (Math.sin(i * 1.8) * 0.18);
-
-      // Local coordinate on ring plane
-      const localPos = new THREE.Vector3(
-        Math.cos(angle) * rad,
-        Math.sin(i * 3.7) * 0.25,
-        Math.sin(angle) * rad
-      );
-
-      // Apply ring tilt
-      const euler = new THREE.Euler(cfg.tiltX, 0, cfg.tiltZ);
-      localPos.applyEuler(euler);
-
-      nodePositions.push(localPos);
-
-      dummy.position.copy(localPos);
-      const scale = 0.8 + Math.random() * 0.6;
-      dummy.scale.set(scale, scale, scale);
-      dummy.updateMatrix();
-      instancedNodes.setMatrixAt(i, dummy.matrix);
-    }
-    instancedNodes.instanceMatrix.needsUpdate = true;
-    ringGroup.add(instancedNodes);
-
-    // 4. INTERCONNECTING CIVIC BEAMS / ARCS
-    // Beams linking select barangay nodes to the central monolith
-    const lineIndices = [4, 12, 22, 33, 45, 57, 68, 79];
-    const beamCoords: number[] = [];
-
-    lineIndices.forEach((idx) => {
-      const pos = nodePositions[idx % nodePositions.length];
-      if (pos) {
-        beamCoords.push(0, (idx % 2 === 0 ? 0.4 : -0.4), 0);
-        beamCoords.push(pos.x, pos.y, pos.z);
-      }
-    });
-
-    const beamGeom = new THREE.BufferGeometry();
-    beamGeom.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(beamCoords, 3)
+    const pageGeom = new THREE.PlaneGeometry(PAGE_W, PAGE_H);
+    const maxAniso = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+    const pageTextures = Array.from({ length: VARIANTS }, (_, v) =>
+      makePageTexture(v, maxAniso)
     );
-    const beamMat = new THREE.LineBasicMaterial({
-      color: emeraldColor,
-      transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+    const pageMats = pageTextures.map(
+      (map) =>
+        new THREE.MeshBasicMaterial({
+          map,
+          side: THREE.DoubleSide,
+          toneMapped: false,
+        })
+    );
+    const meshes = pageMats.map((mat, v) => {
+      const count = Math.ceil((pageCount - v) / VARIANTS);
+      const mesh = new THREE.InstancedMesh(pageGeom, mat, count);
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      mesh.setColorAt(0, new THREE.Color(1, 1, 1)); // allocates instanceColor
+      mesh.frustumCulled = false;
+      helix.add(mesh);
+      return mesh;
     });
-    const beamLines = new THREE.LineSegments(beamGeom, beamMat);
-    ringGroup.add(beamLines);
 
-    // 5. AMBIENT CIVIC DUST PARTICLES
-    const dustCount = 120;
-    const dustGeom = new THREE.BufferGeometry();
-    const dustPositions = new Float32Array(dustCount * 3);
+    // ---- Light inside the tower (shows through the gaps) -------------------
+    const glowTex = makeGlowTexture();
+    const coreMat = new THREE.SpriteMaterial({
+      map: glowTex,
+      transparent: true,
+      depthWrite: false,
+    });
+    const core = new THREE.Sprite(coreMat);
+    core.scale.set(3, 3, 1);
+    scene.add(core);
+
+    const beamMat = new THREE.SpriteMaterial({
+      map: glowTex,
+      transparent: true,
+      depthWrite: false,
+    });
+    const beam = new THREE.Sprite(beamMat);
+    beam.scale.set(1.1, halfTower * 2 + 3, 1);
+    scene.add(beam);
+
+    // ---- Scanner ring that "indexes" the pages as it travels ---------------
+    const scanGeom = new THREE.TorusGeometry(RADIUS + 0.5, 0.012, 6, 96);
+    const scanMat = new THREE.MeshBasicMaterial({
+      transparent: true,
+      toneMapped: false,
+    });
+    const scanRing = new THREE.Mesh(scanGeom, scanMat);
+    scanRing.rotation.x = Math.PI / 2;
+    helix.add(scanRing);
+    scanRing.visible = !reduced;
+
+    // ---- Drifting dust -----------------------------------------------------
+    const dustCount = 140;
+    const dustSpan = halfTower * 2 + 2;
+    const dustPos = new Float32Array(dustCount * 3);
+    const dustSpeed = new Float32Array(dustCount);
+    const dustAngle = new Float32Array(dustCount);
+    const dustRad = new Float32Array(dustCount);
     for (let i = 0; i < dustCount; i++) {
-      dustPositions[i * 3] = (Math.random() - 0.5) * 8;
-      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 8;
-      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+      dustAngle[i] = Math.random() * Math.PI * 2;
+      dustRad[i] = 1.2 + Math.sqrt(Math.random()) * 3.2;
+      dustPos[i * 3] = Math.cos(dustAngle[i]) * dustRad[i];
+      dustPos[i * 3 + 1] = (Math.random() - 0.5) * dustSpan;
+      dustPos[i * 3 + 2] = Math.sin(dustAngle[i]) * dustRad[i];
+      dustSpeed[i] = 0.05 + Math.random() * 0.15;
     }
-    dustGeom.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
+    const dustGeom = new THREE.BufferGeometry();
+    dustGeom.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
     const dustMat = new THREE.PointsMaterial({
-      color: isDark ? 0x34d399 : 0x059669,
-      size: 0.035,
+      size: 0.04,
       transparent: true,
-      opacity: isDark ? 0.5 : 0.35,
+      depthWrite: false,
     });
-    const dustPoints = new THREE.Points(dustGeom, dustMat);
-    scene.add(dustPoints);
+    const dust = new THREE.Points(dustGeom, dustMat);
+    dust.frustumCulled = false;
+    scene.add(dust);
 
-    // INTERACTION & POINTER HANDLING
-    let isDragging = false;
-    let prevPointerX = 0;
-    let prevPointerY = 0;
-    let targetRotY = 0;
-    let targetRotX = 0;
-    let currentRotY = 0;
-    let currentRotX = 0;
-    let parallaxX = 0;
-    let parallaxY = 0;
+    // ---- Theme -------------------------------------------------------------
+    const baseTint = new THREE.Color();
+    const hoverCol = new THREE.Color(0xfcd34d);
+    const scanCol = new THREE.Color();
+    let fade = 0.5;
+
+    const applyTheme = (dark: boolean) => {
+      const emerald = dark ? 0x10b981 : 0x059669;
+      const gold = dark ? 0xf59e0b : 0xd97706;
+      const blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
+
+      baseTint.set(dark ? 0xbfd8cd : 0xffffff);
+      scanCol.set(dark ? 0x6ee7b7 : 0x34d399);
+      fade = dark ? 0.55 : 0.18;
+
+      coreMat.color.set(emerald);
+      coreMat.opacity = dark ? 0.55 : 0.2;
+      coreMat.blending = blending;
+      coreMat.needsUpdate = true;
+
+      beamMat.color.set(emerald);
+      beamMat.opacity = dark ? 0.35 : 0.14;
+      beamMat.blending = blending;
+      beamMat.needsUpdate = true;
+
+      scanMat.color.set(gold);
+      scanMat.opacity = dark ? 0.9 : 0.8;
+
+      dustMat.color.set(gold);
+      dustMat.opacity = dark ? 0.7 : 0.5;
+      dustMat.blending = blending;
+      dustMat.needsUpdate = true;
+    };
+    applyThemeRef.current = applyTheme;
+    applyTheme(darkRef.current);
+
+    // ---- Per-page layout ---------------------------------------------------
+    const dummy = new THREE.Object3D();
+    dummy.rotation.order = "YXZ";
+    const tmpColor = new THREE.Color();
+    const hover = new Float32Array(pageCount);
+    let hovered = -1;
+
+    const layout = (t: number, dt: number, scanY: number) => {
+      const ease = 1 - Math.exp(-dt * 10);
+      for (let i = 0; i < pageCount; i++) {
+        hover[i] += ((i === hovered ? 1 : 0) - hover[i]) * ease;
+        const hv = hover[i];
+        const a = i * STEP;
+        const r = RADIUS + Math.sin(i * 0.9) * 0.08 + hv * 0.35;
+        const bob = reduced ? 0 : Math.sin(t * 0.8 + i * 0.7) * 0.025;
+        const y = (i - (pageCount - 1) / 2) * pitch + bob;
+
+        dummy.position.set(Math.cos(a) * r, y, Math.sin(a) * r);
+        dummy.rotation.set(Math.sin(i * 1.3) * 0.05, Math.PI / 2 - a, 0);
+        const s = 1 + hv * 0.14;
+        dummy.scale.set(s, s, s);
+        dummy.updateMatrix();
+
+        const mesh = meshes[i % VARIANTS];
+        const k = Math.floor(i / VARIANTS);
+        mesh.setMatrixAt(k, dummy.matrix);
+
+        // Fade the top and bottom of the tower, glow near the scanner ring
+        const tt = (i / (pageCount - 1)) * 2 - 1;
+        const f = 1 - fade * Math.pow(Math.abs(tt), 1.5);
+        const scanGlow = reduced ? 0 : Math.max(0, 1 - Math.abs(y - scanY) / 0.45);
+        tmpColor.copy(baseTint).multiplyScalar(f);
+        if (scanGlow > 0) tmpColor.lerp(scanCol, scanGlow * 0.6);
+        if (hv > 0.001) tmpColor.lerp(hoverCol, hv * 0.7);
+        mesh.setColorAt(k, tmpColor);
+      }
+      for (const m of meshes) {
+        m.instanceMatrix.needsUpdate = true;
+        if (m.instanceColor) m.instanceColor.needsUpdate = true;
+      }
+    };
+
+    // ---- Hover / drag / click ---------------------------------------------
+    const raycaster = new THREE.Raycaster();
+    const ndc = new THREE.Vector2();
+    const tmpV = new THREE.Vector3();
+    let inside = false;
+    let dragging = false;
+    let moved = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let lastT = 0;
+    let rotY = 0;
+    let vel = 0;
+    let tilt = 0;
+    let tiltTarget = 0;
+    let camOffX = 0;
+    let camOffY = 0;
+    const autoSpin = reduced ? 0 : 0.18;
+
+    const labelFor = (i: number) => ordinancesRef.current?.[i] ?? placeholderItem(i);
+
+    const pick = (): number => {
+      raycaster.setFromCamera(ndc, camera);
+      const hit = raycaster.intersectObjects(meshes, false)[0];
+      if (!hit || hit.instanceId === undefined) return -1;
+      const m = meshes.indexOf(hit.object as any);
+      const idx = hit.instanceId * VARIANTS + m;
+      return idx < pageCount ? idx : -1;
+    };
+
+    const setHovered = (next: number) => {
+      if (next === hovered) return;
+      hovered = next;
+      container.style.cursor = next >= 0 ? "pointer" : "";
+      const tip = tooltipRef.current;
+      if (!tip) return;
+      if (next < 0) {
+        tip.style.display = "none";
+        return;
+      }
+      const item = labelFor(next);
+      if (tipIdRef.current) tipIdRef.current.textContent = item.id;
+      if (tipTitleRef.current) tipTitleRef.current.textContent = item.title;
+      tip.style.display = "block";
+    };
+
+    const updateNdc = (e: PointerEvent) => {
+      const rect = container.getBoundingClientRect();
+      ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      ndc.y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    };
 
     const onPointerDown = (e: PointerEvent) => {
-      if (!interactive) return;
-      isDragging = true;
-      prevPointerX = e.clientX;
-      prevPointerY = e.clientY;
-      if (container.setPointerCapture) {
-        container.setPointerCapture(e.pointerId);
-      }
+      dragging = true;
+      inside = true;
+      moved = 0;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+      updateNdc(e);
+      container.setPointerCapture?.(e.pointerId);
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (isDragging && interactive) {
-        const deltaX = e.clientX - prevPointerX;
-        const deltaY = e.clientY - prevPointerY;
-        targetRotY += deltaX * 0.008;
-        targetRotX += deltaY * 0.008;
-        // Limit pitch rotation
-        targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
-        prevPointerX = e.clientX;
-        prevPointerY = e.clientY;
-      } else {
-        // Parallax offset
-        const rect = container.getBoundingClientRect();
-        const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-        const normY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-        parallaxX = normX * 0.25;
-        parallaxY = normY * 0.2;
-      }
+      inside = true;
+      updateNdc(e);
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      moved += Math.abs(dx) + Math.abs(dy);
+      rotY += dx * 0.008;
+      tiltTarget = THREE.MathUtils.clamp(tiltTarget + dy * 0.004, -0.35, 0.35);
+      const dtMs = Math.max(e.timeStamp - lastT, 1);
+      const v = THREE.MathUtils.clamp((dx * 0.008) / (dtMs / 1000), -8, 8);
+      vel = THREE.MathUtils.lerp(vel, v, 0.4);
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
     };
 
     const onPointerUp = (e: PointerEvent) => {
-      isDragging = false;
-      if (container.releasePointerCapture) {
-        try {
-          container.releasePointerCapture(e.pointerId);
-        } catch {
-          // ignore
+      const wasClick = dragging && moved < 6;
+      dragging = false;
+      try {
+        container.releasePointerCapture?.(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+      if (wasClick) {
+        updateNdc(e);
+        const idx = pick();
+        if (idx >= 0) {
+          const item = labelFor(idx);
+          if (onSelectRef.current) {
+            onSelectRef.current(item, idx);
+          } else if (item.href) {
+            router.push(item.href);
+          } else if (item.id && !item.id.includes("Sample") && item.title !== "Sample entry") {
+            router.push(`/ordinances/${item.id}`);
+          }
         }
       }
     };
 
-    container.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
+    const onPointerCancel = () => {
+      dragging = false;
+    };
 
-    // RESIZE OBSERVER
+    const onPointerLeave = () => {
+      inside = false;
+      setHovered(-1);
+    };
+
+    if (interactive) {
+      container.addEventListener("pointerdown", onPointerDown);
+      container.addEventListener("pointermove", onPointerMove);
+      container.addEventListener("pointerup", onPointerUp);
+      container.addEventListener("pointercancel", onPointerCancel);
+      container.addEventListener("pointerleave", onPointerLeave);
+    }
+
+    // ---- Resize / visibility ----------------------------------------------
     const resizeObserver = new ResizeObserver((entries) => {
-      if (!entries || entries.length === 0) return;
-      const entry = entries[0];
-      const newWidth = entry.contentRect.width;
-      const newHeight = entry.contentRect.height;
-      if (newWidth > 0 && newHeight > 0) {
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(newWidth, newHeight);
-      }
+      const rect = entries[0]?.contentRect;
+      if (!rect || rect.width <= 0 || rect.height <= 0) return;
+      vw = rect.width;
+      vh = rect.height;
+      renderer.setSize(vw, vh, false);
+      fitCamera();
     });
     resizeObserver.observe(container);
+    fitCamera();
 
-    // INTERSECTION OBSERVER FOR GPU CONSERVATION
-    let isVisible = true;
+    let visible = true;
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          isVisible = e.isIntersecting;
-        });
+        for (const e of entries) visible = e.isIntersecting;
       },
       { threshold: 0.05 }
     );
     intersectionObserver.observe(container);
 
-    // ANIMATION LOOP
-    let animationFrameId: number;
-    const startTime = performance.now();
+    // ---- Loop --------------------------------------------------------------
+    let raf = 0;
+    let last = performance.now();
+    let t = 0;
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(animate);
+      const now = performance.now();
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      if (!visible) return;
+      t += dt;
 
-      if (!isVisible) return;
+      // Spin with inertia that settles back to the idle speed
+      if (!dragging) {
+        vel += (autoSpin - vel) * (1 - Math.exp(-dt * 1.2));
+        rotY += vel * dt;
+        tiltTarget *= Math.exp(-dt * 0.8);
+      }
+      tilt += (tiltTarget - tilt) * (1 - Math.exp(-dt * 6));
+      helix.rotation.y = rotY;
+      helix.rotation.x = tilt;
 
-      const elapsedTime = (performance.now() - startTime) / 1000;
+      // Gentle camera parallax toward the pointer
+      const wantX = inside && !dragging ? ndc.x * 0.5 : 0;
+      const wantY = inside && !dragging ? ndc.y * 0.3 : 0;
+      const pe = 1 - Math.exp(-dt * 3);
+      camOffX += (wantX - camOffX) * pe;
+      camOffY += (wantY - camOffY) * pe;
+      camera.position.x = camOffX;
+      camera.position.y = CAMERA_Y + camOffY;
+      camera.lookAt(0, -0.3, 0);
 
-      // Gentle continuous rotation
-      if (!prefersReducedMotion) {
-        targetRotY += 0.0025;
-        monolithMesh.rotation.y = elapsedTime * 0.35;
-        beaconMesh.rotation.y = -elapsedTime * 0.8;
-        beaconMesh.rotation.x = elapsedTime * 0.5;
+      // Scanner ring sweeps up and down the tower
+      const scanY = Math.sin(t * 0.45) * halfTower;
+      scanRing.position.y = scanY;
 
-        // Inner beacon pulse
-        const pulse = 1.0 + Math.sin(elapsedTime * 3) * 0.12;
-        beaconMesh.scale.set(pulse, pulse, pulse);
-        emeraldLight.intensity = (isDark ? 3.5 : 2.5) + Math.sin(elapsedTime * 2.5) * 1.0;
+      // Hover
+      if (interactive && inside && !dragging) setHovered(pick());
+      else if (dragging) setHovered(-1);
 
-        // Counter-orbit rings
-        ringGroup.rotation.y = -elapsedTime * 0.15;
-        dustPoints.rotation.y = elapsedTime * 0.03;
+      layout(t, dt, scanY);
+
+      // Tooltip follows the hovered page
+      const tip = tooltipRef.current;
+      if (tip && hovered >= 0) {
+        const a = hovered * STEP;
+        const r = RADIUS + 0.35;
+        const y = (hovered - (pageCount - 1) / 2) * pitch + PAGE_H * 0.62;
+        tmpV.set(Math.cos(a) * r, y, Math.sin(a) * r);
+        helix.localToWorld(tmpV);
+        tmpV.project(camera);
+        const sx = (tmpV.x * 0.5 + 0.5) * vw;
+        const sy = (-tmpV.y * 0.5 + 0.5) * vh;
+        tip.style.transform = `translate(${sx}px, ${sy}px) translate(-50%, -100%)`;
       }
 
-      // Smooth dampening towards target rotation
-      currentRotX += (targetRotX + parallaxY - currentRotX) * 0.05;
-      currentRotY += (targetRotY + parallaxX - currentRotY) * 0.05;
-
-      worldGroup.rotation.x = currentRotX;
-      worldGroup.rotation.y = currentRotY;
+      // Dust
+      if (!reduced) {
+        const half = dustSpan / 2;
+        for (let i = 0; i < dustCount; i++) {
+          let py = dustPos[i * 3 + 1] + dustSpeed[i] * dt;
+          if (py > half) py = -half;
+          dustPos[i * 3 + 1] = py;
+          const a = dustAngle[i] + t * 0.03;
+          dustPos[i * 3] = Math.cos(a) * dustRad[i];
+          dustPos[i * 3 + 2] = Math.sin(a) * dustRad[i];
+        }
+        dustGeom.attributes.position.needsUpdate = true;
+      }
 
       renderer.render(scene, camera);
     };
-
     animate();
 
-    // CLEANUP
+    // ---- Cleanup -----------------------------------------------------------
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      container.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
+      cancelAnimationFrame(raf);
+      applyThemeRef.current = null;
+      container.style.cursor = "";
+      if (interactive) {
+        container.removeEventListener("pointerdown", onPointerDown);
+        container.removeEventListener("pointermove", onPointerMove);
+        container.removeEventListener("pointerup", onPointerUp);
+        container.removeEventListener("pointercancel", onPointerCancel);
+        container.removeEventListener("pointerleave", onPointerLeave);
+      }
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
 
-      // Dispose Geometries & Materials
-      monolithGeom.dispose();
-      monolithMat.dispose();
-      edgesGeom.dispose();
-      edgesMat.dispose();
-      beaconGeom.dispose();
-      beaconMat.dispose();
-      rings.forEach((r) => {
-        r.geometry.dispose();
-        (r.material as THREE.Material).dispose();
-      });
-      nodeGeom.dispose();
-      nodeMat.dispose();
-      instancedNodes.dispose();
-      beamGeom.dispose();
+      meshes.forEach((m) => m.dispose());
+      pageGeom.dispose();
+      pageMats.forEach((m) => m.dispose());
+      pageTextures.forEach((tx) => tx.dispose());
+      glowTex.dispose();
+      coreMat.dispose();
       beamMat.dispose();
+      scanGeom.dispose();
+      scanMat.dispose();
       dustGeom.dispose();
       dustMat.dispose();
 
       renderer.dispose();
-      if (renderer.domElement && container.contains(renderer.domElement)) {
+      renderer.forceContextLoss();
+      if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);
       }
     };
-  }, [mounted, resolvedTheme, interactive]);
+  }, [mounted, interactive, pageCount, router]);
 
   return (
     <div
-      className={`relative w-full h-full min-h-[380px] select-none touch-none ${className}`}
-      aria-label="Interactive 3D Cabanatuan Civic Monolith with 89 Barangay Constellation"
-      role="region"
+      className={`relative h-full min-h-[380px] w-full select-none ${className}`}
+      role="img"
+      aria-label="Interactive 3D tower of floating ordinance documents for Cabanatuan City"
     >
-      {/* 3D WebGL Canvas Container */}
+      {/* WebGL canvas. pan-y keeps vertical page scrolling working on touch. */}
       <div
         ref={containerRef}
-        className="w-full h-full cursor-grab active:cursor-grabbing outline-none"
+        className={`h-full w-full outline-none ${
+          interactive ? "cursor-grab active:cursor-grabbing" : ""
+        }`}
+        style={{ touchAction: "pan-y" }}
       />
 
-      {/* Floating Civic Status Pill */}
-      <div className="pointer-events-none absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-card)]/80 px-3 py-1.5 backdrop-blur-md text-[11px] font-mono text-[var(--text-body)] shadow-sm">
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-        </span>
-        <span className="font-semibold text-[var(--text-ink)]">
-          {activeNodeCount} Barangays Active
-        </span>
-        <span className="text-[var(--text-mute)]">•</span>
-        <span className="text-[var(--text-mute)]">Cabanatuan Civic Mesh</span>
+      {/* Hover label that tracks the page under the pointer */}
+      <div
+        ref={tooltipRef}
+        aria-hidden="true"
+        style={{ display: "none" }}
+        className="pointer-events-none absolute left-0 top-0 z-20 max-w-[220px] rounded-lg border border-[var(--border-hairline)] bg-[var(--bg-card)]/90 px-3 py-2 shadow-sm backdrop-blur-md"
+      >
+        <div
+          ref={tipIdRef}
+          className="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400"
+        />
+        <div ref={tipTitleRef} className="mt-0.5 text-xs text-[var(--text-ink)]" />
       </div>
 
-      {/* Interactive Helper Hint */}
-      <div className="pointer-events-none absolute top-4 right-4 z-10 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-canvas)]/70 px-2.5 py-1 text-[10px] font-medium text-[var(--text-mute)] backdrop-blur-sm">
-        <span>I-drag upang ikutin 3D</span>
+      {/* Status pill */}
+      <div className="pointer-events-none absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-card)]/80 px-3 py-1.5 text-[11px] text-[var(--text-body)] shadow-sm backdrop-blur-md">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        </span>
+        <span className="font-semibold text-[var(--text-ink)]">
+          {ordinances ? `${ordinances.length} ordinances indexed` : "Ordinance archive"}
+        </span>
       </div>
+
+      {interactive && (
+        <div className="pointer-events-none absolute right-4 top-4 z-10 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-canvas)]/70 px-2.5 py-1 text-[10px] font-medium text-[var(--text-mute)] backdrop-blur-sm">
+          I-drag para paikutin
+        </div>
+      )}
     </div>
   );
 }
+
+export const CivicMonolithCanvas = OrdinanceArchiveCanvas;
+export default OrdinanceArchiveCanvas;

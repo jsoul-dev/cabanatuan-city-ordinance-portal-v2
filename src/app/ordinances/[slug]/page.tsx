@@ -28,8 +28,10 @@ export async function generateMetadata({
   params,
 }: OrdinanceDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const ord = await prisma.ordinance.findUnique({
-    where: { slug },
+  const ord = await prisma.ordinance.findFirst({
+    where: {
+      OR: [{ slug }, { id: slug }, { resolutionNumber: slug }],
+    },
   });
 
   if (!ord) {
@@ -56,14 +58,21 @@ export default async function OrdinanceDetailPage({
 }: OrdinanceDetailPageProps) {
   const { slug } = await params;
 
+  const ordMatcher = {
+    OR: [{ slug }, { id: slug }, { resolutionNumber: slug }],
+  };
+
   const pdfCheck = await prisma.ordinance.findFirst({
-    where: { slug, pdfUrl: { not: null } },
+    where: {
+      ...ordMatcher,
+      pdfUrl: { not: null },
+    },
     select: { id: true },
   });
   const hasPdf = !!pdfCheck;
 
-  const ord = await prisma.ordinance.findUnique({
-    where: { slug },
+  const ord = await prisma.ordinance.findFirst({
+    where: ordMatcher,
     omit: { pdfUrl: true },
     include: {
       barangay: true,
