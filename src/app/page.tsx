@@ -186,7 +186,7 @@ export default async function LandingPage() {
                       className="object-contain"
                     />
                     <span className="font-mono text-[11px] font-bold text-[var(--text-ink)]">
-                      Cabanatuan Ordinance Archive 3D
+                      Cabanatuan Ordinance Archive
                     </span>
                   </div>
                 </div>
