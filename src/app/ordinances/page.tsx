@@ -75,7 +75,7 @@ export default async function OrdinancesPage({
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-base">
               Hanapin ang mga ordinansa, resolusyon, at patakarang nagpapairal sa
-              kaayusan at kaunlaran ng ating lungsod at 75 barangay nito.
+              kaayusan at kaunlaran ng ating lungsod at 89 barangay nito.
             </p>
           </div>
 

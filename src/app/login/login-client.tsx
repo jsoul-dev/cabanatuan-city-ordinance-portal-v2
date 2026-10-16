@@ -121,7 +121,7 @@ export function LoginClient() {
                 <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
                   ✓
                 </span>
-                <span>75 Barangay Linked</span>
+                <span>89 Barangay Linked</span>
               </div>
               <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
                 <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
