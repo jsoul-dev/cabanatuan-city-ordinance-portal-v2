@@ -51,11 +51,10 @@ export function LoginClient() {
         aria-hidden="true"
       />
 
-      {/* Main Grid: 2-Column Split Layout on Desktop */}
-      <div className="relative z-10 grid min-h-screen lg:grid-cols-12">
-        {/* Left Column: Hero Branding & Tagline */}
-        <div className="flex flex-col justify-between p-8 sm:p-12 lg:col-span-7 lg:p-16">
-          {/* Top Brand Bar with Theme Toggle */}
+      {/* Main Container Shell: Bounded Max-Width and Centered Layout */}
+      <div className="relative z-10 flex min-h-[100dvh] flex-col justify-between">
+        {/* Top Header: Spans container width */}
+        <header className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4">
           <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
@@ -94,180 +93,185 @@ export function LoginClient() {
               </Link>
             </div>
           </div>
+        </header>
 
-          {/* Center Hero Content */}
-          <div className="my-12 max-w-xl lg:my-0">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-100 px-3 py-1 font-mono text-xs font-semibold tracking-widest text-emerald-800 uppercase dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full animate-pulse bg-emerald-600 dark:bg-emerald-400" />
-              <span>Mag-login sa Portal</span>
-            </div>
-
-            <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl lg:leading-[1.1] dark:text-white">
-              Ordinansa ng Lungsod. <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-emerald-600 to-neutral-900 dark:from-emerald-400 dark:via-emerald-200 dark:to-white">
-                Malinaw para sa lahat.
-              </span>
-            </h1>
-
-            <p className="mt-6 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-400">
-              Ang opisyal na digital ordinance hub at AI citizen ordinance assistant
-              ng Lungsod ng Cabanatuan. Mag-login upang mamahala ng mga barangay
-              ordinance, ulat ng mamamayan, at mga talaan ng lungsod.
-            </p>
-
-            {/* Civic Highlight Badges */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
-                <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
-                  ✓
-                </span>
-                <span>89 Barangay Linked</span>
+        {/* Center Stage: Hero Content & Login Card side-by-side with balanced gap */}
+        <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 flex items-center justify-center">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+            {/* Left Column: Hero Branding & Tagline */}
+            <div className="flex flex-col justify-center lg:col-span-7 max-w-xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-100 px-3 py-1 font-mono text-xs font-semibold tracking-widest text-emerald-800 uppercase dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full animate-pulse bg-emerald-600 dark:bg-emerald-400" />
+                <span>Mag-login sa Portal</span>
               </div>
-              <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
-                <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
-                  ✓
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl lg:text-5xl xl:text-6xl lg:leading-[1.1] dark:text-white">
+                Ordinansa ng Lungsod. <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-emerald-600 to-neutral-900 dark:from-emerald-400 dark:via-emerald-200 dark:to-white">
+                  Malinaw para sa lahat.
                 </span>
-                <span>AI Ordinance Assistant</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
-                <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
-                  ✓
-                </span>
-                <span>Official & Verified</span>
-              </div>
-            </div>
-          </div>
+              </h1>
 
-          {/* Bottom Footer Info */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200 pt-6 text-xs text-neutral-500 dark:border-white/10 dark:text-neutral-500">
-            <div>
-              &copy; {new Date().getFullYear()}{" "}
-              <span className="font-medium text-neutral-700 dark:text-neutral-400">
-                Pamahalaang Lungsod ng Cabanatuan
-              </span>
-            </div>
+              <p className="mt-5 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-400">
+                Ang opisyal na digital ordinance hub at AI citizen ordinance assistant
+                ng Lungsod ng Cabanatuan. Mag-login upang mamahala ng mga barangay
+                ordinance, ulat ng mamamayan, at mga talaan ng lungsod.
+              </p>
 
-            <div className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-1.5 font-bold text-emerald-700 dark:font-medium dark:text-emerald-400">
-                <span className="h-2 w-2 rounded-full animate-ping bg-emerald-600 dark:bg-emerald-500" />
-                <span>System Operational</span>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Floating Dark/Light Glassmorphic Card (winauth.net style) */}
-        <div className="flex items-center justify-center p-6 sm:p-12 lg:col-span-5 lg:border-l lg:border-neutral-200 lg:bg-neutral-100/50 dark:lg:border-white/10 dark:lg:bg-black/20">
-          <div className="w-full max-w-md rounded-2xl border border-neutral-200/80 bg-white/95 p-8 sm:p-10 shadow-2xl shadow-neutral-300/60 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#0a0f0d]/90 dark:shadow-emerald-950/50">
-            {authMode === "login" ? (
-              <>
-                {/* Login Card Header */}
-                <div className="mb-8">
-                  <div className="mb-2 font-mono text-xs font-bold tracking-widest uppercase text-emerald-700 dark:text-emerald-400">
-                    SIGN IN
-                  </div>
-                  <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl dark:text-white">
-                    Welcome back
-                  </h2>
-                  <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
-                    Manage your ordinances, citizen reports, and LGU records.
-                  </p>
-                </div>
-
-                {/* Login Form component with Quick-Fill buttons */}
-                <LoginForm
-                  onForgotClick={() => {
-                    setAuthMode("recovery");
-                    setResetSent(false);
-                  }}
-                />
-
-                <div className="mt-6 text-center">
-                  <span className="text-xs text-neutral-600 dark:text-neutral-500">
-                    Don&apos;t have an account?{" "}
+              {/* Civic Highlight Badges */}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
+                  <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
+                    ✓
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => setShowAccessModal(true)}
-                    className="text-xs font-semibold underline underline-offset-4 transition-colors text-neutral-900 hover:text-emerald-700 dark:text-white dark:hover:text-emerald-400"
-                  >
-                    Request LGU Access
-                  </button>
+                  <span>89 Barangay Linked</span>
                 </div>
-              </>
-            ) : (
-              <>
-                {/* Recovery Card Header */}
-                <div className="mb-6">
-                  <div className="mb-2 font-mono text-xs font-bold tracking-widest uppercase text-emerald-600 dark:text-emerald-400">
-                    RECOVERY
-                  </div>
-                  <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl dark:text-white">
-                    Reset your password
-                  </h2>
-                  <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
-                    Enter your email and we&apos;ll send a secure reset link.
-                  </p>
+                <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
+                  <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
+                    ✓
+                  </span>
+                  <span>AI Ordinance Assistant</span>
                 </div>
+                <div className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
+                  <span className="text-emerald-600 font-bold dark:text-emerald-400 dark:font-normal">
+                    ✓
+                  </span>
+                  <span>Official & Verified</span>
+                </div>
+              </div>
+            </div>
 
-                {/* Recovery Form */}
-                {resetSent ? (
-                  <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs font-medium text-emerald-700 dark:text-emerald-400">
-                    ✓ Ang secure password reset link ay naipadala na sa{" "}
-                    <span className="font-bold">{recoveryEmail || "iyong email"}</span>. Paki-check ang iyong inbox.
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setResetSent(true);
-                    }}
-                    className="flex flex-col gap-4"
-                  >
-                    <div className="flex flex-col gap-1.5">
-                      <label
-                        htmlFor="recovery-email"
-                        className="text-xs font-semibold text-neutral-700 dark:text-neutral-300"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="recovery-email"
-                        type="email"
-                        value={recoveryEmail}
-                        onChange={(e) => setRecoveryEmail(e.target.value)}
-                        placeholder="name@example.com"
-                        required
-                        className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 shadow-sm outline-none transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/10 dark:bg-[#121815]/90 dark:text-white dark:placeholder-neutral-500"
-                      />
+            {/* Right Column: Floating Login Card */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <div className="w-full max-w-md rounded-2xl border border-neutral-200/80 bg-white/95 p-8 sm:p-10 shadow-2xl shadow-neutral-300/60 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#0a0f0d]/90 dark:shadow-emerald-950/50">
+                {authMode === "login" ? (
+                  <>
+                    {/* Login Card Header */}
+                    <div className="mb-8">
+                      <div className="mb-2 font-mono text-xs font-bold tracking-widest uppercase text-emerald-700 dark:text-emerald-400">
+                        SIGN IN
+                      </div>
+                      <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl dark:text-white">
+                        Welcome back
+                      </h2>
+                      <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
+                        Manage your ordinances, citizen reports, and LGU records.
+                      </p>
                     </div>
 
-                    <button
-                      type="submit"
-                      className="mt-2 flex w-full items-center justify-center rounded-xl bg-[#0a0f0d] px-4 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-neutral-800 active:scale-[0.99] dark:bg-white dark:text-black dark:hover:bg-neutral-200"
-                    >
-                      Send Reset Link
-                    </button>
-                  </form>
-                )}
+                    {/* Login Form component with Quick-Fill buttons */}
+                    <LoginForm
+                      onForgotClick={() => {
+                        setAuthMode("recovery");
+                        setResetSent(false);
+                      }}
+                    />
 
-                <div className="mt-8 border-t border-neutral-200 pt-5 text-center text-xs text-neutral-600 dark:border-white/10 dark:text-neutral-400">
-                  Remember your password?{" "}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAuthMode("login");
-                      setResetSent(false);
-                    }}
-                    className="font-bold text-neutral-900 hover:underline dark:text-white"
-                  >
-                    Sign in
-                  </button>
-                </div>
-              </>
-            )}
+                    <div className="mt-6 text-center">
+                      <span className="text-xs text-neutral-600 dark:text-neutral-500">
+                        Don&apos;t have an account?{" "}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setShowAccessModal(true)}
+                        className="text-xs font-semibold underline underline-offset-4 transition-colors text-neutral-900 hover:text-emerald-700 dark:text-white dark:hover:text-emerald-400"
+                      >
+                        Request LGU Access
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Recovery Card Header */}
+                    <div className="mb-6">
+                      <div className="mb-2 font-mono text-xs font-bold tracking-widest uppercase text-emerald-600 dark:text-emerald-400">
+                        RECOVERY
+                      </div>
+                      <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl dark:text-white">
+                        Reset your password
+                      </h2>
+                      <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
+                        Enter your email and we&apos;ll send a secure reset link.
+                      </p>
+                    </div>
+
+                    {/* Recovery Form */}
+                    {resetSent ? (
+                      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs font-medium text-emerald-700 dark:text-emerald-400">
+                        ✓ Ang secure password reset link ay naipadala na sa{" "}
+                        <span className="font-bold">{recoveryEmail || "iyong email"}</span>. Paki-check ang iyong inbox.
+                      </div>
+                    ) : (
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          setResetSent(true);
+                        }}
+                        className="flex flex-col gap-4"
+                      >
+                        <div className="flex flex-col gap-1.5">
+                          <label
+                            htmlFor="recovery-email"
+                            className="text-xs font-semibold text-neutral-700 dark:text-neutral-300"
+                          >
+                            Email
+                          </label>
+                          <input
+                            id="recovery-email"
+                            type="email"
+                            value={recoveryEmail}
+                            onChange={(e) => setRecoveryEmail(e.target.value)}
+                            placeholder="name@example.com"
+                            required
+                            className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 shadow-sm outline-none transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/10 dark:bg-[#121815]/90 dark:text-white dark:placeholder-neutral-500"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="mt-2 flex w-full items-center justify-center rounded-xl bg-[#0a0f0d] px-4 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:bg-neutral-800 active:scale-[0.99] dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+                        >
+                          Send Reset Link
+                        </button>
+                      </form>
+                    )}
+
+                    <div className="mt-8 border-t border-neutral-200 pt-5 text-center text-xs text-neutral-600 dark:border-white/10 dark:text-neutral-400">
+                      Remember your password?{" "}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthMode("login");
+                          setResetSent(false);
+                        }}
+                        className="font-bold text-neutral-900 hover:underline dark:text-white"
+                      >
+                        Sign in
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
+
+        {/* Bottom Footer Info: Spans container width */}
+        <footer className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 border-t border-neutral-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs text-neutral-500 dark:text-neutral-500">
+          <div>
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="font-medium text-neutral-700 dark:text-neutral-400">
+              Pamahalaang Lungsod ng Cabanatuan
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 font-bold text-emerald-700 dark:font-medium dark:text-emerald-400">
+              <span className="h-2 w-2 rounded-full animate-ping bg-emerald-600 dark:bg-emerald-500" />
+              <span>System Operational</span>
+            </span>
+          </div>
+        </footer>
       </div>
 
       {/* LGU Access Contact Modal */}
