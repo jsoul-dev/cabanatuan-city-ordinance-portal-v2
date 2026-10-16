@@ -1,19 +1,22 @@
 # 🏛️ Cabanatuan City Ordinance Portal
-## Official System Demonstration & Walkthrough Recording Script
+## Official System Demonstration & Walkthrough Recording Script (English / AI Voice Edition)
 **BSIT Capstone Project Final Defense**
+
+> **AI Voice Note:** This narration script is formatted specifically for Text-to-Speech (TTS) engines (e.g., ElevenLabs, Azure Speech, Murf AI, or Clipchamp). Sentences are structured with natural pauses, clean punctuation, and zero inline emojis or bracketed code within the speech blocks to guarantee smooth, professional pronunciation.
 
 ---
 
-### 📋 Overview & Compliance Matrix
+### 📋 Overview & Defense Guide Compliance Matrix
 
-This script is tailored specifically to the requirements set forth in the **BSIT Capstone Project Final Defense Guide** (`BSIT_Capstone_Final_Defense_Guide.pdf`, Section II & III). It adheres strictly to the recommended sequence: **Administrator Flows first (LGU Super Admin & Barangay Admin), followed by the End-User / Citizen Flow**, with a total target runtime of **11 to 13 minutes** (strictly within the **10–15 minute limit**).
+This script adheres strictly to the **BSIT Capstone Project Final Defense Guide** (`BSIT_Capstone_Final_Defense_Guide.pdf`, Section II & III). It follows the required sequential structure: **Administrator Flows first (City Hall LGU Super Admin & Barangay Administrator), followed by the End-User / Citizen Flow**, with a total target duration of **11 to 13 minutes** (well within the **10–15 minute limit**).
 
 | Defense Guide Requirement | Guide Item # | Walkthrough Section & Timestamp | System Feature Covered |
 | :--- | :---: | :--- | :--- |
-| **Admin Login** | Item 15 | Part 1, Step 1.1 (`01:00`) | Multi-role JWT login via `/login` |
-| **Admin Dashboard Overview** | Item 16 | Part 1, Step 1.2 (`01:25`) | Executive LGU Dashboard with city-wide counters & Recharts |
+| **Admin Login** | Item 15 | Part 1, Step 1.1 (`01:00`) | Multi-role JWT authentication via `/login` |
+| **Admin Dashboard Overview** | Item 16 | Part 1, Step 1.2 (`01:25`) | Executive LGU Dashboard with city-wide metrics & Recharts |
 | **Manage System Records** | Item 17 | Part 1, Step 1.3 (`02:10`) | City Ordinance Repository, filtering, and tab triage |
 | **Review & Process Requests** | Item 18 | Part 1, Step 1.4 (`03:00`) | Reviewing & approving pending Barangay submissions |
+| **Update Record Status** | Item 19 | Part 1, Step 1.4 (`03:30`) | Status update from Pending to Approved with audit logs |
 | **AI Document Extraction** | *Core Innovation* | Part 1, Step 1.5 (`03:45`) | Multimodal Gemini OCR parser (`/api/ordinances/extract`) |
 | **Manage User Accounts** | Item 17 | Part 1, Step 1.6 (`05:00`) | Barangay official registry & new admin account creation |
 | **City-Wide Monitoring & News** | Item 21 | Part 1, Step 1.7 (`05:40`) | Community reports monitoring & civic news broadcast |
@@ -33,14 +36,14 @@ This script is tailored specifically to the requirements set forth in the **BSIT
 
 ## 🎬 Pre-Recording Preparation Checklist
 
-Before hitting the record button, ensure your local environment is configured and pristine:
+Before recording the screen:
 
 1. **Database Reset & Fresh Seed:**
    Open PowerShell in `c:\.JC\Antigravity-Projects\Capstone Project v2\app` and run:
    ```powershell
    npm run db:setup
    ```
-   *(This ensures clean counters: 56 ordinances, 14 registered barangays, pre-populated pending records, and fresh accounts).*
+   *(This ensures clean counters: 56 ordinances, 14 registered barangays, pre-populated pending items, and fresh accounts).*
 
 2. **Launch Fast Production Demo:**
    ```powershell
@@ -52,35 +55,34 @@ Before hitting the record button, ensure your local environment is configured an
    Ensure `test-fixtures/ordinance-sample-text.pdf` (or `test-fixtures/ordinance-page-1.png`) is accessible in a convenient folder on your Desktop for the AI upload demo.
 
 4. **Recording Setup:**
-   - **Resolution:** 1080p (1920 × 1080) at 100% browser zoom (press `Ctrl + 0`).
-   - **Browser State:** Clean browser window with bookmarks bar hidden (`Ctrl + Shift + B`), no extraneous tabs.
-   - **Audio:** High-quality microphone, quiet room, no echo.
-   - **Attire / Camera:** Corporate attire if webcam is included (or use consistent virtual background as required by the guide).
+   - **Resolution:** 1080p (1920 × 1080) at 100% browser zoom (`Ctrl + 0`).
+   - **Browser State:** Clean browser window with bookmarks bar hidden (`Ctrl + Shift + B`), no extra tabs.
+   - **Voice Track:** Load the verbatim narration blocks below directly into your AI voice generator (e.g., ElevenLabs "Adam", "Antoni", or "Rachel"), export the audio tracks, and synchronize with your screen capture.
 
 ---
 
-# 🎙️ Complete Walkthrough Script & Narration
+# 🎙️ Complete Walkthrough Script & Narration (English)
 
 ---
 
-## ⏱️ Video Opening & System Brief Overview (`00:00 – 01:00`)
+## ⏱️ Video Opening & System Overview (`00:00 – 01:00`)
 **Guide Reference: Section I (Overview) & Section II**
 
 ### On-Screen Action:
 - Display the clean Homepage (`http://localhost:3000`) with the Cabanatuan City seal, civic header, and navigation bar.
-- Optional: Start with a brief Title Card slide showing:
+- Optional: Display a clean Title Slide for 5 seconds showing:
   - **Project Title:** A Web-Based AI-Assisted Ordinance Information System for Cabanatuan City
   - **Proponents:** Chris Karl M. Lacanilao, John Carlo DG. Lemence, Manny N. Agulto, Reyven B. Calara
   - **Degree:** Bachelor of Science in Information Technology (BSIT)
 
-### 🗣️ Verbatim Narration:
-> "Magandang araw po sa ating kagalang-galang na Capstone Defense Panel, sa aming tagapayo, at sa mga panauhin.
+### 🗣️ Verbatim Voice Narration (AI Voice):
+> "A pleasant day to the members of the Capstone Defense Panel, to our capstone adviser, and to our faculty committee.
 > 
-> Ako po si **[Pangalan ng Presenter]**, at ikinagagalak naming ipakita ang opisyal na recorded system demonstration ng aming capstone project na pinamagatang: **'A Web-Based AI-Assisted Ordinance Information System for Cabanatuan City'**.
+> On behalf of our research team, we are pleased to present the official recorded system walkthrough of our capstone project entitled: 'A Web-Based AI-Assisted Ordinance Information System for Cabanatuan City'.
 > 
-> Binuo ang sistemang ito upang tugunan ang matagal nang suliranin ng manu-mano at pira-pirasong pamamahala ng mga ordinansa sa Lungsod ng Cabanatuan at sa 89 na mga barangay nito. Layunin ng portal na gawing sentralisado, transparent, at madaling ma-access ng bawat mamamayan ang mga resolusyon at regulasyon sa pamamagitan ng **full-text search**, **automated multimodal AI document parsing**, at isang **bilingual AI Civic Assistant** na pinapagana ng Google Gemini gamit ang Retrieval-Augmented Generation (RAG).
+> This platform was engineered to resolve the long-standing challenges of manual, fragmented, and paper-based ordinance management across the City of Cabanatuan and its eighty-nine administrative barangays. The system provides a centralized digital repository, full-text ordinance exploration, automated multimodal artificial intelligence document extraction, and a bilingual AI Civic Assistant powered by Google Gemini using Retrieval-Augmented Generation.
 > 
-> Alinsunod sa Capstone Final Defense Guide, hahatiin natin ang demonstrasyon sa dalawang pangunahing bahagi: una, ang **Administrator Flows** para sa City Hall LGU Super Admin at Barangay Captain; at pangalawa, ang **End-User / Citizen Flow** para sa pangkalahatang publiko."
+> Following the official Capstone Final Defense Guide, this demonstration is organized into two primary segments: first, the Administrator Flows for both City Hall and Barangay administrators; and second, the End-User Citizen Flow for the general public."
 
 ---
 
@@ -94,38 +96,38 @@ Before hitting the record button, ensure your local environment is configured an
 - **Credentials:** `admin@cabanatuan.gov.ph` / `admin123`
 
 #### On-Screen Action:
-1. Click the **"Mag-log In"** button on the top right of the navbar.
+1. Click the **"Mag-log In"** button on the top right navigation bar.
 2. Enter the LGU Super Admin credentials:
    - Email: `admin@cabanatuan.gov.ph`
    - Password: `admin123`
 3. Click the **"Pumasok sa Portal"** button.
 4. Show the smooth transition and instant redirection to `/admin/lgu`.
 
-#### 🗣️ Verbatim Narration:
-> "Sisimulan natin ang demonstrasyon sa **LGU Super Admin Flow**. Dito sa authentication page, magla-log in tayo gamit ang opisyal na demonstration credentials ng LGU Super Admin ng Cabanatuan City Hall.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We begin the demonstration with the City Government LGU Super Admin Flow. On the authentication page, we sign in using the official demonstration credentials for the City Hall Administrator.
 > 
-> Gumagamit ang aming sistema ng secure na JSON Web Token at HTTP-only session cookies kalakip ang matibay na Role-Based Access Control o RBAC, upang matiyak na tanging awtorisadong kawani lamang ng LGU ang makakapasok sa executive administration portal."
+> The platform utilizes secure JSON Web Tokens and HTTP-only session cookies paired with strict Role-Based Access Control, ensuring that only authorized city personnel can access the executive administration portal."
 
 ---
 
-### Step 1.2: Executive Dashboard & Governance Overview [Item 16] (`01:25 – 02:10`)
+### Step 1.2: Executive Dashboard Overview [Item 16] (`01:25 – 02:10`)
 - **URL:** `http://localhost:3000/admin/lgu`
 
 #### On-Screen Action:
-1. Hover and showcase the live metric cards at the top of the dashboard:
-   - **Kabuuang Ordinansa:** `56`
-   - **Naaprubahan:** `43`
-   - **Nakabinbin (Pending):** `6`
-   - **Draft:** `6`
-   - **Mga Rehistradong Barangay:** `14`
-2. Scroll slightly to show the quick summary charts and recent legislative activity feed.
+1. Hover over and showcase the live metric cards at the top of the dashboard:
+   - **Total Ordinances:** `56`
+   - **Approved Ordinances:** `43`
+   - **Pending Submissions:** `6`
+   - **Draft Ordinances:** `6`
+   - **Registered Barangays:** `14`
+2. Scroll slightly to display the recent legislative activity stream and status distributions.
 
-#### 🗣️ Verbatim Narration:
-> "Matagumpay tayong nakapasok sa **Executive Governance Dashboard** ng LGU. Malinaw na ibinubuod dito ang pinakamahahalagang datos ng pamahalaang lungsod sa real time.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We are now inside the Executive Governance Dashboard. This view provides city administrators with a real-time summary of legislative data across Cabanatuan City.
 > 
-> Makikita sa itaas ang mga interactive metric cards: mayroon tayong 56 na kabuuang ordinansa sa database kung saan 43 ang ganap nang naaprubahan, 6 ang nakabinbing panukala na nangangailangan ng aksyon, 6 ang nasa draft status, at 14 na rehistradong barangay sa portal.
+> At the top, live metric cards display our key performance indicators: fifty-six total ordinances registered in the database, forty-three enacted and approved, six pending barangay proposals awaiting executive action, six legislative drafts, and fourteen actively registered barangays.
 > 
-> Ang mga datos na ito ay direktang kumokonekta sa aming optimized local SQLite database na may sub-30 millisecond query response time, na nagbibigay sa punong lungsod at Sangguniang Panlungsod ng agarang visibility sa estado ng lehislatura."
+> These metrics query directly from our optimized local database with sub-thirty-millisecond response times, providing immediate legislative oversight to the City Mayor and the Sangguniang Panlungsod."
 
 ---
 
@@ -133,19 +135,19 @@ Before hitting the record button, ensure your local environment is configured an
 - **URL:** `http://localhost:3000/admin/lgu/ordinances`
 
 #### On-Screen Action:
-1. Click **"Mga Ordinansa"** on the left administrative sidebar.
-2. Demonstrate table tab filtering:
+1. Click **"Mga Ordinansa"** on the left navigation sidebar.
+2. Demonstrate accessible tab filtering:
    - Click the **"Lahat (56)"** tab.
    - Click the **"Nakabinbin / Pending (6)"** tab.
    - Click the **"Naaprubahan / Approved (43)"** tab.
-3. In the table search input, type `"Trapiko"` or `"Basura"` to show instant client-side table filtering.
+3. In the search input, type `"Trapiko"` or `"Basura"` to demonstrate instant client-side table filtering.
 
-#### 🗣️ Verbatim Narration:
-> "Pumunta naman tayo sa **City Ordinance Repository** kung saan pinamamahalaan ng LGU ang lahat ng opisyal na talaan ng lungsod at mga barangay.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Next, we navigate to the City Ordinance Repository, where the local government manages all official records.
 > 
-> Binuo ang repository na ito na may accessible tab filters upang madaling mapaghiwalay ang mga ordinansa ayon sa status: Lahat, Nakabinbin, Naaprubahan, Draft, at Tinanggihan. 
+> The repository is equipped with accessible status tabs allowing administrators to filter records instantly: All, Pending, Approved, Draft, and Rejected.
 > 
-> Mayroon din itong instant search bar kung saan sa pag-type pa lamang ng salitang tulad ng 'Trapiko' o 'Basura', agad na sinasala ng talaan ang mga kaukulang rekord nang walang pagkaantala."
+> It also features an instant search filter. Typing terms such as 'Traffic' or 'Waste Management' instantly refines the records list without any server latency."
 
 ---
 
@@ -153,20 +155,20 @@ Before hitting the record button, ensure your local environment is configured an
 - **URL:** `http://localhost:3000/admin/lgu/ordinances` (Tab: Nakabinbin)
 
 #### On-Screen Action:
-1. Select the **"Nakabinbin"** tab.
-2. Locate a pending ordinance submitted by a barangay (e.g., *Panukalang Ordinansa Blg. 2026-004 mula sa Barangay Camp Tinio ukol sa Basura*).
-3. Click the **"Suriin / Review"** or **"Aksyon"** button.
-4. An accessible confirmation dialog appears (`role="dialog"`).
-5. Add an administrative note: `"Naaprubahan alinsunod sa pagsusuri ng Sangguniang Panlungsod."`
+1. Click the **"Nakabinbin"** tab.
+2. Select a pending ordinance proposal submitted by a barangay (e.g., *Panukalang Ordinansa Blg. 2026-004 from Barangay Camp Tinio*).
+3. Click the **"Suriin / Review"** action button.
+4. An accessible confirmation dialog modal appears (`role="dialog"`).
+5. Enter review remarks: `"Reviewed and approved pursuant to City Council session."`
 6. Click **"Aprubahan / Approve"**.
-7. Show the instant toast notification confirming approval, and watch the status badge change from yellow `Nakabinbin` to green `Naaprubahan`.
+7. Show the toast notification confirming approval, and watch the status badge immediately transition from yellow `Nakabinbin` to green `Naaprubahan`.
 
-#### 🗣️ Verbatim Narration:
-> "Isa sa mga kritikal na tungkulin ng LGU Administrator alinsunod sa Item 18 at 19 ng defense guide ay ang pagsusuri at pag-apruba ng mga transaksyon mula sa mga barangay.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "In accordance with Items eighteen and nineteen of the defense guide, we will now demonstrate how the administrator reviews and processes incoming legislative submissions from barangays.
 > 
-> Dito sa 'Nakabinbin' tab, makikita natin ang isang panukalang ordinansa na isinumite ng Barangay Camp Tinio. Bubuksan ng LGU Admin ang review dialog upang suriin ang mga probisyon nito. 
+> Under the Pending tab, we select an ordinance proposal submitted by Barangay Camp Tinio. The administrator reviews its title, provisions, and proposed penalties through an accessible modal dialog.
 > 
-> Sa pag-click ng 'Aprubahan', agad na nagtatala ang sistema ng administrative audit log, ina-update ang status ng rekord sa 'Naaprubahan', at awtomatiko itong inilalathala sa pampublikong portal upang makita ng mga mamamayan."
+> Upon clicking Approve, the system updates the record status to Approved, logs an administrative audit timestamp, and immediately publishes the ordinance to the public portal for citizen viewing."
 
 ---
 
@@ -175,30 +177,30 @@ Before hitting the record button, ensure your local environment is configured an
 - **File:** `test-fixtures/ordinance-sample-text.pdf`
 
 #### On-Screen Action:
-1. Click the prominent button: **"Magdagdag ng Ordinansa"** or **"AI Auto-Extract"**.
-2. Show the modal dialog titled **"AI Auto-Extraction ng Dokumento"**.
-3. Click the file upload box and select `ordinance-sample-text.pdf` (or drag and drop).
+1. Click the button: **"Magdagdag ng Ordinansa"** or **"AI Auto-Extract"**.
+2. An interactive modal dialog opens titled **"AI Auto-Extraction ng Dokumento"**.
+3. Click the upload zone and select `test-fixtures/ordinance-sample-text.pdf`.
 4. Click **"I-Extract gamit ang AI"**.
-5. Highlight the animated multi-step progress indicator on screen:
-   - *Hakbang 1: Pagsusuri sa Dokumento at OCR Vision...*
-   - *Hakbang 2: Pag-extract ng Resolution Number at Serye...*
-   - *Hakbang 3: Pagbabalangkas ng Pamagat at mga Parusa...*
+5. Highlight the animated multi-stage progress indicator:
+   - *Stage 1: Document Analysis & Multimodal OCR...*
+   - *Stage 2: Parsing Resolution Number & Year Series...*
+   - *Stage 3: Structuring Summary, Categories, & Sanctions...*
 6. Watch the form fields automatically populate with extracted metadata:
    - **Resolution Number:** `2024-572`
    - **Series Year:** `2024`
-   - **Pamagat:** Cleaned title without bureaucratic clutter
-   - **Kategorya:** `Kapayapaan at Kaayusan` / `Trapiko`
-   - **Buod & Parusa:** Structured fine breakdown (1st Offense, 2nd Offense, 3rd Offense)
-7. Make a minor edit to demonstrate human-in-the-loop verification, then click **"I-save at I-lathala"**.
+   - **Title:** Cleaned official ordinance title
+   - **Category:** `Kapayapaan at Kaayusan` / `Trapiko`
+   - **Summary & Penalties:** Structured breakdown of first, second, and third offense fines
+7. Make a minor text adjustment to demonstrate human-in-the-loop review, then click **"I-save at I-lathala"**.
 
-#### 🗣️ Verbatim Narration:
-> "Ipinagmamalaki naming ipakita ang isa sa mga pangunahing teknikal na inobasyon ng aming proyekto: ang **AI-Powered Multimodal OCR Ordinance Parser** na pinapagana ng Google Gemini.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We now highlight one of the primary technical innovations of our research: the AI-Powered Multimodal OCR Ordinance Extractor, powered by Google Gemini.
 > 
-> Sa tradisyonal na sistema, ang mga kawani ng City Hall ay manu-manong nagta-type ng bawat pahina ng ordinansa—isang prosesong mabagal at madaling magkamali. Sa aming sistema, i-a-upload lamang ng administrator ang opisyal na PDF o mga litrato ng scanned pages ng ordinansa kahit may mga selyo o lagda.
+> Traditionally, government clerks spend hours manually transcribing multi-page scanned documents—a process prone to typographical errors. With our system, the administrator simply uploads the digital PDF or scanned image copies of an ordinance, even if it contains official stamps and physical signatures.
 > 
-> Sa loob ng ilang segundo, binabasa ng multimodal AI model ang buong dokumento, inaalis ang mga bureaucratic preambles, at awtomatikong pinupunan ang Resolution Number, taon, kategorya, buod, at ang eksaktong listahan ng mga multa at parusa. 
+> Within seconds, the multimodal vision model extracts the document, filters out verbose bureaucratic preambles, and automatically populates the resolution number, series year, category, legal summary, and tiered penalties.
 > 
-> Sinusuportahan ng modal ang human-in-the-loop review upang magawa ng administrator ang anumang kaukulang pagwawasto bago pinal na i-save sa database. Binabawasan nito ang encoding time nang higit 85 porsyento."
+> The system includes a human-in-the-loop verification step, allowing the administrator to confirm or adjust the extracted data before committing it to the database, reducing manual encoding time by over eighty-five percent."
 
 ---
 
@@ -207,17 +209,17 @@ Before hitting the record button, ensure your local environment is configured an
 
 #### On-Screen Action:
 1. Navigate to **"Mga Opisyal / Users"** in the sidebar.
-2. Show the directory of registered administrative accounts (LGU Admin, Barangay Captains, Secretaries).
-3. Click **"Magrehistro ng Opisyal"** or show the Barangay account creation modal.
+2. Display the directory of registered administrative accounts (LGU Admin, Barangay Captains, Secretaries).
+3. Click **"Magrehistro ng Opisyal"** or display the Barangay account creation modal.
 4. Point out the role selection (`LGU_ADMIN`, `BARANGAY_ADMIN`), assigned barangay dropdown (strictly mapped to Cabanatuan's barangays), and password hashing.
 5. Click over to **"Direktoryo ng Barangay"** (`/admin/lgu/barangays`) showing monitoring coverage across Cabanatuan City.
 
-#### 🗣️ Verbatim Narration:
-> "Alinsunod sa Item 17 ng gabay, ipinapakita naman natin ang **User and Barangay Account Management**.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Covering Item seventeen of the guide, we present User and Barangay Account Management.
 > 
-> Dito pinamamahalaan ng LGU ang direktoryo ng mga opisyal sa 89 na mga barangay ng Cabanatuan. Maaaring magtalaga ang LGU Admin ng bagong Punong Barangay o Kalihim na may tiyak na saklaw o scope. 
+> Here, the City Administrator manages the official roster of registered barangay captains and administrative secretaries across Cabanatuan City. New accounts can be provisioned with dedicated role-based privileges and mapped directly to their assigned barangay.
 > 
-> Ang bawat account ay protektado ng bcrypt password hashing at mahigpit na naka-isolate sa kanilang partikular na barangay jurisdiction upang mapanatili ang integridad ng mga datos."
+> Passwords are encrypted using salted bcrypt hashing, ensuring complete credential safety and data isolation between jurisdictions."
 
 ---
 
@@ -228,13 +230,13 @@ Before hitting the record button, ensure your local environment is configured an
 1. Click **"Mga Ulat ng Komunidad"** (`/admin/lgu/reports`).
 2. Show the city-wide monitoring table showing incident reports filed by citizens across all barangays (e.g., illegal dumping, open burning, traffic obstructions).
 3. Navigate to **"Mga Balita at Anunsyo"** (`/admin/lgu/news`).
-4. Click **"Maglathala ng Anunsyo"**, type Title: `"Public Advisory: Oplan Kalinisan sa Lungsod 2026"`, select category `"Advisory"`, and click Publish.
+4. Click **"Maglathala ng Anunsyo"**, type Title: `"Public Advisory: City-Wide Cleanliness and Anti-Littering Drive 2026"`, select category `"Advisory"`, and click Publish.
 5. Show the toast notification and immediate update in the news list.
 
-#### 🗣️ Verbatim Narration:
-> "Sa **City-Wide Community Reports Desk**, sinusubaybayan ng City Hall ang lahat ng insidente ng paglabag sa ordinansa na iniulat ng mga mamamayan sa buong lungsod. Nagbibigay ito sa LGU ng kabuuang larawan sa mga lugar na nangangailangan ng mas mahigpit na pagpapatupad.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "In the Community Reports Monitoring Desk, the city government maintains continuous visibility over ordinance violation reports filed by citizens across all eighty-nine barangays.
 > 
-> Bukod dito, sa pamamagitan ng **News & Advisories Module**, maaaring mag-broadcast ang pamahalaang lungsod ng mga opisyal na anunsyo at paalala ukol sa mga bagong regulasyon na agad na lumalabas sa pampublikong portal."
+> Furthermore, through the News and Advisories module, city hall can broadcast official legislative advisories, reminders, and updates that synchronize instantly with the public portal for citizen awareness."
 
 ---
 
@@ -248,12 +250,12 @@ Before hitting the record button, ensure your local environment is configured an
 4. Show the exported official legislative summary document rendered with the official seal of Cabanatuan City, serial codes, and tabular format.
 5. Click **"Analytics"** (`/admin/lgu/analytics`) to briefly showcase interactive charts: Enactment Velocity (Line chart) and Category Breakdown (Pie chart).
 
-#### 🗣️ Verbatim Narration:
-> "Para sa Item 20 ng defense guide, ipinapakita natin ang **Report Generation and Governance Analytics**.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Addressing Item twenty of the guide, we demonstrate Report Generation and Governance Analytics.
 > 
-> Sa Legislative Report Generator, madaling makapag-e-export ang LGU ng opisyal na PDF compilation ng mga ordinansa na kumpleto kalakip ang Opisyal na Selyo ng Lungsod ng Cabanatuan para sa mga physical archive at session documentation ng Sangguniang Panlungsod.
+> Using the Legislative Report Generator, administrators can export official PDF documentation containing comprehensive ordinance listings complete with the Official Seal of Cabanatuan City for legislative records and physical archives.
 > 
-> Sa tab naman ng Analytics, makikita ang mga interactive visual charts para sa bilis ng pagpasa ng mga ordinansa at ang distribusyon ng mga patakaran gamit ang accessible Recharts components."
+> In the Analytics view, administrators can explore interactive visual charts tracking ordinance enactment velocity, policy distributions, and citizen report resolution rates."
 
 ---
 
@@ -263,8 +265,8 @@ Before hitting the record button, ensure your local environment is configured an
 2. Confirm logout.
 3. System clears cookies and returns cleanly to `/login`.
 
-#### 🗣️ Verbatim Narration:
-> "Matapos ang tungkulin sa antas ng lungsod, ligtas na magsa-sign out ang LGU Super Admin upang buksan naman ang antas ng pamamahala sa barangay."
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Having concluded the city-level administrative walkthrough, the administrator securely signs out to transition to the barangay governance tier."
 
 ---
 
@@ -284,10 +286,10 @@ Before hitting the record button, ensure your local environment is configured an
 2. Click **"Pumasok sa Portal"**.
 3. System redirects to `/admin/barangay`.
 
-#### 🗣️ Verbatim Narration:
-> "Ngayon naman ay papasok tayo bilang **Barangay Administrator**. Magla-log in tayo bilang Punong Barangay ng **Barangay Camp Tinio**.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We now sign in under the Barangay Administrator Flow as the Barangay Captain of Barangay Camp Tinio.
 > 
-> Dito natin mapatutunayan ang mahigpit na role-based data isolation ng sistema: ang punong barangay ay may access lamang sa mga talaan, panukala, at mga ulat na sumasakop sa kanyang sariling barangay."
+> This demonstrates our multi-tenant role-based data isolation: the barangay official can only access and manage legislative records and community reports that fall strictly within their own barangay jurisdiction."
 
 ---
 
@@ -297,14 +299,14 @@ Before hitting the record button, ensure your local environment is configured an
 #### On-Screen Action:
 1. Highlight the dashboard header: **"Barangay Governance Dashboard — Camp Tinio"**.
 2. Show the scoped metric cards:
-   - Lokal na Ordinansa ng Camp Tinio
-   - Mga Nakabinbing Panukala
-   - Mga Ulat ng Komunidad mula sa mga Residente ng Camp Tinio
+   - Local Ordinances of Camp Tinio
+   - Pending Legislative Proposals
+   - Community Reports received from Camp Tinio residents
 
-#### 🗣️ Verbatim Narration:
-> "Ito ang Barangay Governance Dashboard ng Camp Tinio. Hindi tulad ng city-wide view ng LGU, ang mga numero at tsart dito ay awtomatikong naka-filter para lamang sa nasasakupan ng Camp Tinio.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "This is the Barangay Governance Dashboard for Camp Tinio. Unlike the city-wide LGU view, all statistics, graphs, and notifications here are scoped exclusively to Camp Tinio.
 > 
-> Nakikita ng punong barangay ang bilang ng kanilang mga aktibong lokal na ordinansa at ang dami ng mga natanggap na reklamo o ulat mula sa kanilang mga kabarangay."
+> The Barangay Captain can monitor their active local ordinances, draft resolutions, and recent incident reports filed by their constituents."
 
 ---
 
@@ -313,20 +315,20 @@ Before hitting the record button, ensure your local environment is configured an
 
 #### On-Screen Action:
 1. Click **"Mga Ulat ng Residente"** (`/admin/barangay/reports`).
-2. Open a newly submitted incident report (e.g., *Ilegal na Pagsusunog ng Basura sa Purok 4*).
+2. Open a newly submitted incident report (e.g., *Illegal Waste Burning in Purok 4*).
 3. Review the reported details, date, and description.
 4. Click the status dropdown and change from **"Bago / Pending"** to **"Inaaksyunan / In Progress"**.
-5. Add an action remark: `"Ipinag-utos na sa Barangay Tanod Desk para sa beripikasyon at on-site inspection."`
+5. Add an action remark: `"Forwarded to Barangay Tanod Desk for on-site inspection and verification."`
 6. Click **"I-update ang Status"**.
 7. Show toast confirmation and updated badge.
 8. Sign out as Barangay Admin.
 
-#### 🗣️ Verbatim Narration:
-> "Sa Barangay Incident Reports Desk, pinoproseso ng pamunuan ang mga ulat ng paglabag na isinumite ng mga residente.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "In the Barangay Incident Reports Desk, officials triage citizen concerns.
 > 
-> Bubuksan natin ang ulat ukol sa ilegal na pagsusunog ng basura sa Purok 4. Matapos suriin, ia-update natin ang status mula sa 'Bago' patungo sa 'Inaaksyunan' kalakip ang opisyal na tala na ipinadala na ito sa mga barangay tanod para sa beripikasyon. 
+> We open an incident report regarding open waste burning in Purok Four. After inspecting the citizen's report, we update the status from New to In Progress, attaching an official note stating that barangay officers have been dispatched for verification.
 > 
-> Ang ganitong transaksyon ay nagbibigay ng maagap na feedback loop sa pagitan ng barangay at ng mga mamamayan. Magsa-sign out na tayo upang ipakita ang karanasan ng end-user."
+> This creates an active feedback loop between local officials and the community. We now sign out to demonstrate the public citizen experience."
 
 ---
 
@@ -343,12 +345,12 @@ Before hitting the record button, ensure your local environment is configured an
 2. Emphasize that all public features are accessible **without login** for complete civic transparency.
 3. Show that citizens can optionally log in via `juan@cabanatuan.gov.ph` / `citizen123` for submitting authenticated civic feedback.
 
-#### 🗣️ Verbatim Narration:
-> "Tutungo naman tayo sa **End-User Flow**.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We now transition to the End-User Citizen Flow.
 > 
-> Mahalagang bigyang-diin na sa Cabanatuan City Ordinance Portal, hindi kinakailangang pilitin ang mamamayan na magrehistro o mag-log in upang makapagbasa ng mga batas at ordinansa. Ang aming layunin ay bukas na transparency para sa bawat Cabanatueño. 
+> A critical design principle of the Cabanatuan City Ordinance Portal is zero-barrier public transparency. Citizens are not required to create an account or sign in simply to read local laws, search ordinances, or consult the AI assistant.
 > 
-> Gayunpaman, mayroon ding nakalaang Citizen account tulad ni Juan Dela Cruz para sa mga residenteng nais magkaroon ng nakatala at personalized na karanasan."
+> However, an optional citizen account is available for residents who wish to file and track official community reports."
 
 ---
 
@@ -362,10 +364,10 @@ Before hitting the record button, ensure your local environment is configured an
    - **Category Quick Chips:** `#Basura`, `#Trapiko`, `#Kalusugan`, `#Kapayapaan`.
 2. Click the **Theme Toggle** (`theme-toggle.tsx`) in the top navigation bar to switch between **Dark Mode** and **Light Mode**, showing zero-flicker CSS tokens and high contrast.
 
-#### 🗣️ Verbatim Narration:
-> "Ito ang pampublikong interface ng portal. Sinasalubong ang residente ng isang modernong landing page na may **interactive 3D ordinance archive**, mabilisang category tags para sa mga karaniwang paksa tulad ng basura at trapiko, at ang pinakabagong anunsyo mula sa City Hall.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "This is the citizen landing interface. Residents are welcomed with an interactive 3D digital ordinance archive, quick category tags for common concerns such as waste disposal and traffic rules, and the latest official advisories from City Hall.
 > 
-> Sumusunod din ang aming sistema sa Web Content Accessibility Guidelines (WCAG) kung saan mayroon itong seamless **Dark at Light mode toggle** na nagpapanatili ng tamang contrast ratio para sa mga may kapansanan sa paningin o nagbabasa sa gabi."
+> The portal adheres strictly to Web Content Accessibility Guidelines, featuring a persistent Light and Dark theme toggle that maintains accessible contrast ratios across all viewports."
 
 ---
 
@@ -374,17 +376,17 @@ Before hitting the record button, ensure your local environment is configured an
 
 #### On-Screen Action:
 1. Type `"Curfew"` in the search bar and press `Enter` to navigate to `/ordinances?search=Curfew`.
-2. Show the matching ordinances rendered instantly (e.g. *Ordinansa Blg. 2022-018: Pagpapatupad ng Curfew Hours para sa mga Menor de Edad*).
+2. Show the matching ordinances rendered instantly (e.g. *Ordinance on Curfew Hours for Minors*).
 3. Clear search. Demonstrate **Year Range Filter** (e.g. 2022 to 2026).
 4. Select Category Filter: **"Kalusugan at Sanitasyon"**.
 5. Watch the cards update with smooth skeleton shimmer states and accurate count badge.
 
-#### 🗣️ Verbatim Narration:
-> "Sa **Public Ordinance Explorer**, napapadali ang paghahanap ng mga lokal na regulasyon. 
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "In the Public Ordinance Explorer, finding local regulations is fast and intuitive.
 > 
-> Maaaring maghanap ang mamamayan gamit ang natural keywords o resolution number. Halimbawa, sa paghahanap ng salitang 'Curfew', agad na lumalabas ang kaukulang ordinansa para sa mga menor de edad sa lungsod.
+> Citizens can search using plain keywords or resolution numbers. For instance, searching for 'Curfew' immediately returns the municipal ordinance regarding curfew hours for minors.
 > 
-> Bukod sa keyword search, mayroon itong dynamic year range slider at policy domain filters upang mabilis na masubaybayan ang mga bagong batas sa kalusugan, kalakalan, o kapayapaan."
+> In addition to keyword search, users can combine dynamic year range sliders with policy category filters to discover health, environmental, and public safety regulations."
 
 ---
 
@@ -401,12 +403,12 @@ Before hitting the record button, ensure your local environment is configured an
 5. Demonstrate zoom in, zoom out, and click the **"I-download ang Dokumento"** button to show direct download capability.
 6. Press the `Escape` key to smoothly dismiss the modal.
 
-#### 🗣️ Verbatim Narration:
-> "Alinsunod sa Item 29 ng guide, ipinapakita natin kung paano binabasa at dina-download ng mamamayan ang opisyal na dokumento.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Addressing Item twenty-nine of the guide, we demonstrate how citizens view and download official documentation.
 > 
-> Sa **Split-Screen Ordinance Detail View**, malinaw na nakaayos ang bawat probisyon, saklaw, at takdang multa upang madaling maunawaan ng karaniwang tao nang walang nakalilitong legal jargon.
+> The split-screen ordinance viewer breaks down complex legal texts into readable articles, penalties, and designated enforcement agencies.
 > 
-> Kung kailangan ng mamamayan ng sertipikadong kopya para sa legal o opisyal na layunin, bubuksan lamang ang integrated PDF viewer modal kung saan maaaring basahin ang nilagdaang orihinal na dokumento, mag-zoom in, o direktang i-download ang kopya sa kanilang computer o cellphone."
+> If a resident requires an official copy for legal purposes, they can open the integrated PDF viewer modal to inspect the signed document with zoom controls, or download the original file directly to their device."
 
 ---
 
@@ -417,25 +419,23 @@ Before hitting the record button, ensure your local environment is configured an
 1. Click **"AI Assistant"** in the navigation bar to open `/chatbot`.
 2. Point out the clear disclaimer badge at the top:
    > *"Ang AI Assistant ay nagbibigay ng impormasyon batay lamang sa mga opisyal na ordinansa ng Cabanatuan City. Hindi ito nagbibigay ng legal advice."*
-3. **Question 1 (Tagalog Inquiry with Specific Ordinance Citation):**
-   - Type and send: `"Ano po ang parusa kapag nahuling nagkakalat o nagsusunog ng basura sa barangay?"`
+3. **Question 1 (Tagalog / English Inquiry with Specific Ordinance Citation):**
+   - Type and send: `"What are the penalties for open burning of waste or garbage in our barangay?"`
    - Observe real-time token streaming.
    - Highlight the AI's response: cites exact Resolution Number, series year, and tiered monetary fines / community service penalties.
 4. **Question 2 (Safety Guardrail & Honest Out-of-Scope Test):**
-   - Type and send: `"Paano po kumuha ng DFA passport?"` or `"Sino po ang nanalo sa NBA?"`
+   - Type and send: `"How do I apply for a Philippine passport at DFA?"` or `"Who won the latest basketball championship?"`
    - Observe the response: The AI politely and honestly explains that it is strictly scoped to Cabanatuan City ordinances, does not hallucinate national agency procedures, and advises the resident accordingly.
 5. Demonstrate the **"Bagong Usapan / Clear Chat"** button and local storage session persistence.
 
-#### 🗣️ Verbatim Narration:
-> "Dumako tayo sa pinakamalaking technological breakthrough ng aming pag-aaral: ang **'Cabanatuan Ordinance AI' Civic Assistant**, na pinapagana ng Google Gemini gamit ang Retrieval-Augmented Generation o RAG.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "We now turn to the flagship feature of our research: the Cabanatuan Ordinance AI Civic Assistant, powered by Google Gemini using Retrieval-Augmented Generation.
 > 
-> Kadalasan, nahihirapan ang mga residente na maunawaan ang mga legal na termino ng mga ordinansa. Dito, maaaring magtanong ang mamamayan sa purong Tagalog o Taglish. 
+> Citizens often struggle to interpret technical legal phrasing. Through our conversational AI, residents can ask questions in natural English, Tagalog, or Taglish.
 > 
-> Halimbawa, nagtanong tayo: *'Ano ang parusa kapag nahuling nagsusunog ng basura?'* 
+> For example, when asking: 'What are the penalties for open burning of waste?', our retrieval pipeline queries the local database for relevant ordinances and injects them as grounding context into the Gemini model. Notice that the AI cites the exact resolution number, specific article sections, and the tiered penalty structure from first to third offenses.
 > 
-> Sa halip na mag-imbento ng sagot, hinahanap muna ng aming RAG pipeline sa lokal na database ang kaukulang ordinansa at ibinibigay ito bilang konteksto sa Gemini model. Makikita ninyo na eksaktong binanggit ng AI ang Resolution Number, ang mga kaukulang seksyon, at ang tiered fines mula una hanggang ikatlong paglabag.
-> 
-> Bukod dito, mayroon itong mahigpit na **ethical safety guardrail**: kapag tinanong ito ng out-of-scope na paksa tulad ng DFA passport o pampalakasan, magalang nitong nililinaw ang kanyang limitasyon na ito ay eksklusibo lamang para sa mga lokal na ordinansa ng Cabanatuan at hindi nagbibigay ng legal advice."
+> Furthermore, the AI enforces strict ethical safety boundaries. When asked unrelated questions such as passport renewals or sports trivia, it politely clarifies that its knowledge is strictly delimited to Cabanatuan City ordinances and that it does not provide legal counsel."
 
 ---
 
@@ -449,20 +449,20 @@ Before hitting the record button, ensure your local environment is configured an
    - Show the instant field validation errors: *"Kinakailangan ang barangay"*, *"Pakilagay ang lokasyon at detalye"*.
 3. **Fill out the Valid Report:**
    - Barangay: Select **"Camp Tinio"** (participating barangay).
-   - Kategorya ng Paglabag: **"Ilegal na Pagtatapon ng Basura / Open Burning"**.
-   - Lokasyon / Landmark: `"Purok 4, malapit sa kanto ng San Josef Road"`.
-   - Detalye ng Insidente: `"May patuloy na nagsusunog ng mga tuyong dahon at plastik tuwing hapon."`
+   - Violation Category: **"Ilegal na Pagtatapon ng Basura / Open Burning"**.
+   - Location / Landmark: `"Purok 4, near the corner of San Josef Road"`.
+   - Incident Details: `"Ongoing open burning of dry leaves and plastic waste occurring during late afternoons."`
 4. Demonstrate **Draft Persistence**: Refresh the browser page (`F5`) to prove that typed contents survive accidental reload via client-side draft storage!
 5. Click **"I-sumite ang Ulat sa Barangay"**.
 
-#### 🗣️ Verbatim Narration:
-> "Para sa Item 25 at 26 ng guide, ipinapakita natin ang **Community Incident Reporting Module**.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "For Items twenty-five and twenty-six of the guide, we demonstrate the Community Incident Reporting module.
 > 
-> Kung makaranas ang residente ng paglabag sa ordinansa sa kanilang komunidad, maaari silang magsumite ng ulat nang direkta sa kanilang barangay hall.
+> When residents witness an ordinance violation, they can submit an official report directly to their barangay hall.
 > 
-> Sinubukan nating i-submit ang blangkong form upang ipakita ang matibay na validation ng sistema na pumipigil sa maling input. Mayroon din itong automatic draft persistence kung saan kahit ma-refresh ang browser, hindi mawawala ang nai-type ng residente. 
+> Attempting to submit an empty form triggers accessible field validations, preventing malformed submissions. The form also features client-side draft persistence, ensuring that user input is never lost upon an accidental page refresh.
 > 
-> Pipiliin natin ang Barangay Camp Tinio, ilalagay ang lokasyon sa Purok 4, at isa-submit ang ulat."
+> We select Barangay Camp Tinio, specify the incident details in Purok Four, and submit the report."
 
 ---
 
@@ -472,45 +472,47 @@ Before hitting the record button, ensure your local environment is configured an
 #### On-Screen Action:
 1. Highlight the green confirmation alert banner rendered on screen (`role="alert"`).
 2. Point out:
-   - **Kumpirmasyon:** Matagumpay na naipadala ang ulat.
-   - **Target Barangay Hall:** Barangay Camp Tinio.
-   - **Transaction / Reference Code:** Awtomatikong nabuo para sa monitoring.
-3. Briefly highlight that this seamlessly ties back to the earlier **Barangay Admin Flow (Part 2)** where the Punong Barangay receives, triages, and updates the report status.
+   - **Confirmation Notice:** Report successfully submitted.
+   - **Destination Barangay Hall:** Barangay Camp Tinio.
+   - **Reference Tracking Code:** Generated unique identifier for tracking.
+3. Briefly highlight that this seamlessly ties back to the earlier **Barangay Admin Flow (Part 2)** where the Punong Barangay received, triaged, and updated this exact report.
 
-#### 🗣️ Verbatim Narration:
-> "Agad na nagpapakita ang portal ng pormal na validation alert na naglalaman ng opisyal na reference tracking code at nagpapatunay na natanggap na ng Barangay Hall ng Camp Tinio ang ulat.
+#### 🗣️ Verbatim Voice Narration (AI Voice):
+> "Upon submission, the portal displays an instant confirmation banner containing an official transaction reference code, verifying that the report has been routed to the Barangay Hall of Camp Tinio.
 > 
-> Ito ang eksaktong ulat na nakita natin kanina sa Barangay Admin Flow kung saan agarang naaksyunan at nabago ng pamunuan ang status nito. Sa pamamagitan nito, nagkakaroon ng ganap na transparency at pananagutan ang lokal na pamahalaan."
+> This is the exact report that we reviewed and processed earlier during the Barangay Administrator walkthrough, proving complete end-to-end transparency and operational traceability."
 
 ---
 
-## 🎯 WRAP-UP & TRANSITION TO DEFENSE Q&A (`13:45 – 14:15`)
+## 🎯 WRAP-UP & DEFENSE CONCLUSION (`13:45 – 14:15`)
 **Guide Reference: Section III & IV**
 
 ### On-Screen Action:
 - Return to the clean Homepage or the Capstone Slide Summary.
-- Presenter looks at the camera with confident demeanor.
+- Present a final closing screen with project credits.
 
-### 🗣️ Verbatim Narration:
-> "Sa kabuuan, naipakita po natin ang buong functional lifecycle ng **Cabanatuan City Ordinance Portal**:
+### 🗣️ Verbatim Voice Narration (AI Voice):
+> "In summary, we have demonstrated the complete operational lifecycle of the Cabanatuan City Ordinance Portal:
 > 
-> 1. Ang sentralisadong pamamahala, multimodal OCR AI parsing, at PDF legislative reporting ng **LGU Super Admin**;
-> 2. Ang localized oversight at incident triage ng **Barangay Captain** sa 89 na mga barangay; at
-> 3. Ang walang-hadlang na pampublikong akses, split-screen legal explorer, civic reporting, at bilingual Gemini RAG chatbot para sa bawat **Mamamayan** ng Lungsod ng Cabanatuan.
+> First, centralized administration, multimodal AI document parsing, and PDF legislative reporting for City Hall;
 > 
-> Dito po nagtatapos ang aming opisyal na system demonstration walkthrough. Maraming salamat po sa inyong pakikinig, at buong puso po kaming handa na sagutin ang mga katanungan ng ating kagalang-galang na panel ng mga eksperto."
+> Second, localized governance and citizen incident triage for the eighty-nine administrative barangays; and
+> 
+> Third, zero-barrier public access, split-screen legal exploration, civic reporting, and the bilingual Gemini AI assistant for the citizens of Cabanatuan City.
+> 
+> This concludes our official system walkthrough. Thank you very much for your time and attention, and we look forward to your questions during the defense examination."
 
 ---
 
-## 📌 Panel Defense Quick-Reference Card (Anticipated Q&A)
+## 📌 Defense Panel FAQ Cheat Sheet (Anticipated Questions & Answers)
 
-Keep these answers ready for the live defense Q&A:
+Keep these answers ready for the live panel examination:
 
-1. **Q: Bakit Google Gemini ang piniling AI model sa halip na OpenAI o lokal na LLM?**  
-   *A:* "Ayon sa aming pananaliksik sa Chapter 1 at 2, may pambihirang bilis at cost-efficiency ang Gemini 3.5 Flash Lite para sa multimodal OCR vision at bilingual Tagalog/English comprehension. Bukod dito, sa pamamagitan ng Retrieval-Augmented Generation (RAG), ang Gemini API ang tanging external call ng sistema, habang ang lahat ng sensitibong datos ng LGU ay nananatiling 100% lokal sa loob ng database."
+1. **Question: Why was Google Gemini chosen over OpenAI or a self-hosted model?**  
+   *Answer:* "Google Gemini 3.5 Flash Lite was selected based on our technical benchmarks in Chapter Two. It provides native multimodal vision capabilities for scanning physical ordinance pages and superior bilingual Tagalog and English comprehension at sub-second inference speeds. Furthermore, under our Retrieval-Augmented Generation architecture, the Gemini API is the only external service call, keeping all city records private within our local SQLite database."
 
-2. **Q: Ano ang proteksyon laban sa 'AI Hallucination' o maling legal advice?**  
-   *A:* "Mahigpit na ipinatutupad sa system prompt at RAG pipeline ang 'Grounding Constraint'. Tanging ang mga opisyal na probisyon na nakuha mula sa lokal na database ang ginagamit bilang konteksto. Malinaw ding nakasaad sa disclaimer na ang sistema ay ordinance information portal lamang at hindi legal counsel o legal authority."
+2. **Question: How does the system prevent AI hallucinations and unauthorized legal advice?**  
+   *Answer:* "The AI chatbot enforces strict grounding constraints. It only generates answers based on retrieved context from uploaded city ordinances stored in the local database. A prominent system-wide disclaimer clarifies that the assistant is an information-retrieval tool, not a legal authority, and explicitly refuses out-of-scope national legal inquiries."
 
-3. **Q: Paano pinangangalagaan ang seguridad sa pagitan ng iba't ibang barangay?**  
-   *A:* "Nagpatupad kami ng multi-tenant schema isolation gamit ang Prisma ORM at JWT role-based access control. Ang bawat session token ay may nakatalang `barangayId`. Kung susubukan ng isang Barangay Admin na i-access ang URL o API ng ibang barangay, awtomatiko itong hinaharang ng server-side route guards."
+3. **Question: How is multi-tenant security handled across eighty-nine barangays?**  
+   *Answer:* "We implemented multi-tenant role-based access control using Prisma ORM and cryptographically verified JSON Web Tokens. Each barangay administrator's session is strictly bounded to their assigned barangay identifier. Server-side middleware and route guards automatically deny any cross-barangay record mutations."
