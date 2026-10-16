@@ -99,8 +99,8 @@ export function LoginClient() {
         <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 flex items-center justify-center">
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Left Column: Hero Branding & Tagline */}
-            <div className="flex flex-col justify-center lg:col-span-7 max-w-xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-100 px-3 py-1 font-mono text-xs font-semibold tracking-widest text-emerald-800 uppercase dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
+            <div className="flex flex-col items-start justify-center lg:col-span-7 max-w-xl">
+              <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-100 px-3 py-1 font-mono text-xs font-semibold tracking-widest text-emerald-800 uppercase dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full animate-pulse bg-emerald-600 dark:bg-emerald-400" />
                 <span>Mag-login sa Portal</span>
               </div>
