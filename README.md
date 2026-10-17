@@ -8,7 +8,7 @@
 [![Prisma ORM](https://img.shields.io/badge/Prisma_7-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
 [![SQLite](https://img.shields.io/badge/SQLite_3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Google Gemini AI](https://img.shields.io/badge/Google_Gemini_3.5_Flash_Lite-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg?style=for-the-badge)](https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg?style=for-the-badge)](https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal-v2/blob/main/LICENSE)
 
 ---
 
@@ -87,7 +87,7 @@ graph TD
 ## Project Structure
 
 ```text
-cabanatuan-city-ordinance-portal/
+cabanatuan-city-ordinance-portal-v2/
 ├── prisma/
 │   ├── schema.prisma              # Relational schema (Ordinance, Report, User, News, Analytics)
 │   ├── seed.ts                    # Realistic seeding script for City & Barangay data
@@ -141,8 +141,8 @@ cabanatuan-city-ordinance-portal/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal.git
-cd cabanatuan-city-ordinance-portal
+git clone https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal-v2.git
+cd cabanatuan-city-ordinance-portal-v2
 ```
 
 ### 2. Install Dependencies
@@ -212,5 +212,5 @@ The system will perform full TypeScript type verification, linting, and generate
 ## License & LGU Attribution
 
 Copyright © 2026 **Lungsod ng Cabanatuan** (Cabanatuan City Local Government Unit).  
-Released under the **[MIT License](https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal/blob/main/LICENSE)**.  
+Released under the **[MIT License](https://github.com/jsoul-dev/cabanatuan-city-ordinance-portal-v2/blob/main/LICENSE)**.  
 Designed and developed for public civic transparency and local governance.
