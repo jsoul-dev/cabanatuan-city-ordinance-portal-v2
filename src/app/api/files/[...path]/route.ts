@@ -54,6 +54,14 @@ export async function GET(
     const mimeType = getMimeType(requestedPath);
     const fileName = path.basename(requestedPath);
 
+    const { searchParams } = new URL(request.url);
+    const isDownload =
+      searchParams.get("download") === "1" ||
+      searchParams.get("download") === "true";
+    const disposition = isDownload
+      ? `attachment; filename="${fileName}"`
+      : "inline";
+
     const range = request.headers.get("range");
 
     if (range) {
@@ -90,7 +98,7 @@ export async function GET(
           "Accept-Ranges": "bytes",
           "Content-Length": chunkSize.toString(),
           "Content-Type": mimeType,
-          "Content-Disposition": `inline; filename="${fileName}"`,
+          "Content-Disposition": disposition,
           "Cache-Control": "public, max-age=31536000, immutable",
         },
       });
@@ -114,7 +122,7 @@ export async function GET(
         "Content-Length": fileSize.toString(),
         "Accept-Ranges": "bytes",
         "Content-Type": mimeType,
-        "Content-Disposition": `inline; filename="${fileName}"`,
+        "Content-Disposition": disposition,
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
@@ -145,13 +153,21 @@ export async function HEAD(
     const mimeType = getMimeType(requestedPath);
     const fileName = path.basename(requestedPath);
 
+    const { searchParams } = new URL(request.url);
+    const isDownload =
+      searchParams.get("download") === "1" ||
+      searchParams.get("download") === "true";
+    const disposition = isDownload
+      ? `attachment; filename="${fileName}"`
+      : "inline";
+
     return new NextResponse(null, {
       status: 200,
       headers: {
         "Content-Length": fileStat.size.toString(),
         "Accept-Ranges": "bytes",
         "Content-Type": mimeType,
-        "Content-Disposition": `inline; filename="${fileName}"`,
+        "Content-Disposition": disposition,
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });

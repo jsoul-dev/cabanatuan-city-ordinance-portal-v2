@@ -98,15 +98,37 @@ export function PdfViewerModal({
   };
 
   const handleOpenNewTab = () => {
-    if (pdfUrl) {
-      window.open(pdfUrl, "_blank", "noopener,noreferrer");
+    if (!pdfUrl) return;
+
+    if (pdfUrl.startsWith("data:")) {
+      try {
+        const parts = pdfUrl.split(",");
+        const mimeMatch = parts[0].match(/:(.*?);/);
+        const mime = mimeMatch ? mimeMatch[1] : "application/pdf";
+        const byteCharacters = atob(parts[1]);
+        const byteNumbers = new Uint8Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const blob = new Blob([byteNumbers], { type: mime });
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, "_blank", "noopener,noreferrer");
+        return;
+      } catch (e) {
+        console.error("Failed to parse data URL for new tab:", e);
+      }
     }
+
+    window.open(pdfUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleDownload = async () => {
     if (!pdfUrl) return;
     try {
-      const response = await fetch(pdfUrl);
+      const downloadUrl = pdfUrl.includes("?")
+        ? `${pdfUrl}&download=1`
+        : `${pdfUrl}?download=1`;
+      const response = await fetch(downloadUrl);
       const blob = await response.blob();
       const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -200,32 +222,20 @@ export function PdfViewerModal({
           </div>
         </div>
 
-        {/* Modal Body: Either PDF object OR printable document view */}
+        {/* Modal Body: Either PDF iframe OR printable document view */}
         <div className="flex-1 w-full bg-neutral-900 overflow-y-auto relative">
           {pdfUrl ? (
-            <>
-              <object
-                data={`${pdfUrl}#toolbar=1&view=FitH`}
-                type="application/pdf"
-                className="h-full w-full"
-                aria-label={`PDF Document - ${title}`}
-              >
-                <div className="flex flex-col items-center justify-center h-full gap-4 p-8 text-center text-white">
-                  <p>Hindi ma-preview ang PDF sa browser na ito.</p>
-                  <button 
-                    onClick={handleDownload}
-                    className="inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[var(--accent-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] transition-colors shadow-sm"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    I-download ang PDF
-                  </button>
-                </div>
-              </object>
+            <div className="relative h-full w-full">
+              <iframe
+                src={`${pdfUrl}#toolbar=1&view=FitH`}
+                className="h-full w-full border-0 bg-neutral-900"
+                title={`PDF Document - ${title}`}
+              />
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-4 py-2 rounded-full text-xs text-neutral-300 pointer-events-none hidden sm:flex items-center gap-1.5 shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
                 Kung hindi ma-load ang preview, i-click ang "Buksan sa Bagong Tab" sa itaas.
               </div>
-            </>
+            </div>
           ) : (
             <div
               ref={printRef}

@@ -8,6 +8,13 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
+  const { searchParams } = new URL(request.url);
+  const isDownload =
+    searchParams.get("download") === "1" ||
+    searchParams.get("download") === "true";
+  const disposition = isDownload
+    ? `attachment; filename="${slug}.pdf"`
+    : "inline";
 
   try {
     const ordinance = await prisma.ordinance.findUnique({
@@ -30,7 +37,7 @@ export async function GET(
         return new NextResponse(buffer, {
           headers: {
             "Content-Type": "application/pdf",
-            "Content-Disposition": `inline; filename="${slug}.pdf"`,
+            "Content-Disposition": disposition,
             "Cache-Control": "public, max-age=31536000, immutable",
           },
         });
@@ -50,7 +57,7 @@ export async function GET(
       return new NextResponse(buffer, {
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `inline; filename="${slug}.pdf"`,
+          "Content-Disposition": disposition,
           "Cache-Control": "public, max-age=31536000, immutable",
         },
       });
@@ -62,7 +69,7 @@ export async function GET(
       return new NextResponse(buffer, {
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `inline; filename="${slug}.pdf"`,
+          "Content-Disposition": disposition,
           "Cache-Control": "public, max-age=31536000, immutable",
         },
       });
@@ -72,5 +79,42 @@ export async function GET(
   } catch (error) {
     console.error("Error serving PDF:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}
+
+export async function HEAD(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  const { searchParams } = new URL(request.url);
+  const isDownload =
+    searchParams.get("download") === "1" ||
+    searchParams.get("download") === "true";
+  const disposition = isDownload
+    ? `attachment; filename="${slug}.pdf"`
+    : "inline";
+
+  try {
+    const ordinance = await prisma.ordinance.findUnique({
+      where: { slug },
+      select: { pdfUrl: true },
+    });
+
+    if (!ordinance || !ordinance.pdfUrl) {
+      return new NextResponse(null, { status: 404 });
+    }
+
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": disposition,
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "public, max-age=31536000, immutable",
+      },
+    });
+  } catch {
+    return new NextResponse(null, { status: 500 });
   }
 }
