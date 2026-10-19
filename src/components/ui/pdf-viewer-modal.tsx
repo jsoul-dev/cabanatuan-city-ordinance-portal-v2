@@ -3,7 +3,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
 import { formatResolutionDisplay } from "@/lib/ordinance-utils";
+
+const PdfCanvasViewer = dynamic(
+  () => import("@/components/ui/pdf-canvas-viewer").then((mod) => mod.PdfCanvasViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex flex-col items-center justify-center h-full w-full bg-neutral-900 text-neutral-400 gap-3">
+        <svg className="animate-spin h-8 w-8 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p className="text-sm font-medium text-neutral-300">Ikinakarga ang opisyal na PDF...</p>
+      </div>
+    ),
+  }
+);
 
 interface PdfViewerModalProps {
   isOpen: boolean;
@@ -91,7 +108,8 @@ export function PdfViewerModal({
 
   const handlePrint = () => {
     if (pdfUrl) {
-      window.open(pdfUrl, "_blank", "noopener,noreferrer");
+      const viewerUrl = `/pdf-viewer?url=${encodeURIComponent(pdfUrl)}&title=${encodeURIComponent(title)}&res=${encodeURIComponent(resolutionNumber || "")}&slug=${encodeURIComponent(slug || "")}`;
+      window.open(viewerUrl, "_blank", "noopener,noreferrer");
     } else {
       window.print();
     }
@@ -100,26 +118,8 @@ export function PdfViewerModal({
   const handleOpenNewTab = () => {
     if (!pdfUrl) return;
 
-    if (pdfUrl.startsWith("data:")) {
-      try {
-        const parts = pdfUrl.split(",");
-        const mimeMatch = parts[0].match(/:(.*?);/);
-        const mime = mimeMatch ? mimeMatch[1] : "application/pdf";
-        const byteCharacters = atob(parts[1]);
-        const byteNumbers = new Uint8Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const blob = new Blob([byteNumbers], { type: mime });
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, "_blank", "noopener,noreferrer");
-        return;
-      } catch (e) {
-        console.error("Failed to parse data URL for new tab:", e);
-      }
-    }
-
-    window.open(pdfUrl, "_blank", "noopener,noreferrer");
+    const viewerUrl = `/pdf-viewer?url=${encodeURIComponent(pdfUrl)}&title=${encodeURIComponent(title)}&res=${encodeURIComponent(resolutionNumber || "")}&slug=${encodeURIComponent(slug || "")}`;
+    window.open(viewerUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleDownload = async () => {
@@ -222,20 +222,15 @@ export function PdfViewerModal({
           </div>
         </div>
 
-        {/* Modal Body: Either PDF iframe OR printable document view */}
-        <div className="flex-1 w-full bg-neutral-900 overflow-y-auto relative">
+        {/* Modal Body: Either PDF Canvas Viewer OR printable document view */}
+        <div className="flex-1 w-full bg-neutral-900 overflow-hidden relative">
           {pdfUrl ? (
-            <div className="relative h-full w-full">
-              <iframe
-                src={`${pdfUrl}#toolbar=1&view=FitH`}
-                className="h-full w-full border-0 bg-neutral-900"
-                title={`PDF Document - ${title}`}
-              />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 px-4 py-2 rounded-full text-xs text-neutral-300 pointer-events-none hidden sm:flex items-center gap-1.5 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                Kung hindi ma-load ang preview, i-click ang "Buksan sa Bagong Tab" sa itaas.
-              </div>
-            </div>
+            <PdfCanvasViewer
+              pdfUrl={pdfUrl}
+              title={title}
+              onDownload={handleDownload}
+              onOpenNewTab={handleOpenNewTab}
+            />
           ) : (
             <div
               ref={printRef}
