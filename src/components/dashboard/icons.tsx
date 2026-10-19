@@ -359,6 +359,27 @@ export function ArrowRightIcon({ size = 18, className = "", ...props }: IconProp
   );
 }
 
+export function ArrowUpIcon({ size = 18, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m5 12 7-7 7 7" />
+      <path d="M12 19V5" />
+    </svg>
+  );
+}
+
 export function PlusIcon({ size = 18, className = "", ...props }: IconProps) {
   return (
     <svg
@@ -1148,4 +1169,5 @@ export const IconMap: Record<string, React.FC<IconProps>> = {
   calendar: CalendarDaysIcon,
   civicHall: CivicHallIcon,
   barangayHouse: BarangayHouseIcon,
+  arrowUp: ArrowUpIcon,
 };

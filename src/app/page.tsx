@@ -3,6 +3,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ScrollToTopButton } from "@/components/scroll-to-top";
 import { OrdinanceArchiveCanvas } from "@/components/3d/ordinance-archive-canvas";
 import {
   OrdinanceAiSimulator,
@@ -479,6 +480,7 @@ export default async function LandingPage() {
       </main>
 
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }

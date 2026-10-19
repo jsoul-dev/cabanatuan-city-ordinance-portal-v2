@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ScrollToTopButton } from "@/components/scroll-to-top";
 import { OrdinanceExplorerClient } from "./ordinance-explorer-client";
 
 export const metadata: Metadata = {
@@ -89,6 +90,7 @@ export default async function OrdinancesPage({
       </main>
 
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }
