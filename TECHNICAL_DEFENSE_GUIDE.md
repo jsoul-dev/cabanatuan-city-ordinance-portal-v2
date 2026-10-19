@@ -2,7 +2,7 @@
 
 > **Target Audience:** Capstone Project Proponents, Lead Developers, System Evaluators, and Defense Panelists.  
 > **System Name:** Web-Based AI-Assisted Ordinance Information System (Cabanatuan City Ordinance Portal)  
-> **Core Focus:** Deep-dive technical explanations of RAG, Multimodal AI/OCR, PDF Generation & Viewing, Security/RBAC, Database Lifecycle, and Panel Q&A Defense.
+> **Core Focus:** Deep-dive technical explanations of RAG, Multimodal AI/OCR, PDF Generation & Viewing, 3D WebGL, HTTP Byte Streaming, Security/RBAC, and Panel Q&A Defense.
 
 ---
 
@@ -26,13 +26,20 @@
    - [Ordinance Review & Publication Lifecycle](#ordinance-review--publication-lifecycle)
    - [Citizen Incident Reporting & Jurisdiction Routing](#citizen-incident-reporting--jurisdiction-routing)
    - [Authentication & Role-Based Access Control (RBAC)](#authentication--role-based-access-control-rbac)
-6. [Panel Defense Cheat Sheet (Anticipated Questions & Tough Q&A)](#6-panel-defense-cheat-sheet-anticipated-questions--tough-qa)
+6. [Advanced Technical Modules & Underlying Mechanisms](#6-advanced-technical-modules--underlying-mechanisms)
+   - [Interactive 3D WebGL Ordinance Archive Monolith (Three.js)](#interactive-3d-webgl-ordinance-archive-monolith-threejs)
+   - [HTTP Range-Request Streaming Engine (HTTP 206 Partial Content)](#http-range-request-streaming-engine-http-206-partial-content)
+   - [Secure File Upload Pipeline with Cryptographic Entropy](#secure-file-upload-pipeline-with-cryptographic-entropy)
+   - [Multi-Faceted Explorer Engine & Dynamic Year Boundary Calculation](#multi-faceted-explorer-engine--dynamic-year-boundary-calculation)
+   - [Chat Session Throttling & Hybrid State Architecture](#chat-session-throttling--hybrid-state-architecture)
+7. [Panel Defense Cheat Sheet (Anticipated Questions & Tough Q&A)](#7-panel-defense-cheat-sheet-anticipated-questions--tough-qa)
    - [AI & RAG Questions](#ai--rag-questions)
    - [PDF & Document Processing Questions](#pdf--document-processing-questions)
-   - [Data & Architecture Questions](#data--architecture-questions)
+   - [Advanced Modules & Architecture Questions](#advanced-modules--architecture-questions)
+   - [Data & Database Questions](#data--database-questions)
    - [Security & Legal Compliance Questions](#security--legal-compliance-questions)
    - [Performance & Scalability Questions](#performance--scalability-questions)
-7. [Summary Checklist for Panel Presentation](#7-summary-checklist-for-panel-presentation)
+8. [Summary Checklist for Panel Presentation](#8-summary-checklist-for-panel-presentation)
 
 ---
 
@@ -44,6 +51,7 @@ The **Cabanatuan City Ordinance Portal** is a production-grade full-stack web ap
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                              CLIENT BROWSER                                  │
 │  - Public Explorer & Split-Screen PDF Viewer (pdfjs-dist + Canvas Worker)    │
+│  - 3D Interactive Archive Monolith (Three.js + Procedural Vector Canvas)     │
 │  - "Cabanatuan Ordinance AI" Streaming Chatbot Interface                     │
 │  - Citizen Incident Reporting Form (Anonymous / Identified)                 │
 │  - Executive Reports Generator (jsPDF + AutoTable Client Vector Compiler)    │
@@ -57,7 +65,8 @@ The **Cabanatuan City Ordinance Portal** is a production-grade full-stack web ap
 │  ┌───────────────────────┐  ┌────────────────────┐  ┌─────────────────────┐ │
 │  │ Route Middleware      │  │ API Endpoints      │  │ Server Actions      │ │
 │  │ (JWT & RBAC Guard)    │  │ /api/chat (RAG)    │  │ db: CRUD, reviews,  │ │
-│  │ /admin/:path*         │  │ /api/ordinances/...│  │ report routing      │ │
+│  │ /admin/:path*         │  │ /api/files/...     │  │ report routing      │ │
+│  │                       │  │ /api/upload        │  │                     │ │
 │  └───────────────────────┘  └──────────┬─────────┘  └──────────┬──────────┘ │
 │                                        │                       │             │
 │  ┌─────────────────────────────────────┴───────────────────────┴──────────┐  │
@@ -463,7 +472,110 @@ Located in: [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%2
 
 ---
 
-## 6. Panel Defense Cheat Sheet (Anticipated Questions & Tough Q&A)
+## 6. Advanced Technical Modules & Underlying Mechanisms
+
+Beyond RAG and PDF processing, the system incorporates five advanced technical implementations that ensure high performance, security, and scalability:
+
+### Interactive 3D WebGL Ordinance Archive Monolith (Three.js)
+Located in: [`src/components/3d/civic-monolith-canvas.tsx`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/components/3d/civic-monolith-canvas.tsx)
+
+```
+[ Three.js Scene: WebGLRenderer ]
+          │
+  ┌───────┴──────────────────────────────────────────┐
+  │ 1. Procedural Vector Canvases (mulberry32 PRNG)  │
+  │    - Renders official seals, headers, paragraphs │
+  │    - 0 static PNG/JPG texture downloads          │
+  ├──────────────────────────────────────────────────┤
+  │ 2. Cylindrical Helix Layout Matrix               │
+  │    - R = 2.1m, Step = 0.5 rad (~12.5 pages/turn) │
+  │    - 48 to 60 dynamic ordinance meshes           │
+  ├──────────────────────────────────────────────────┤
+  │ 3. Raycasting & Mouse Intersection               │
+  │    - THREE.Raycaster tracks cursor vector (x, y) │
+  │    - Triggers interactive hover elevation & info │
+  ├──────────────────────────────────────────────────┤
+  │ 4. next-themes Dynamic Shading Synchronization   │
+  │    - Light mode: emerald accents & crisp fog     │
+  │    - Dark mode: deep obsidian background & glow  │
+  └──────────────────────────────────────────────────┘
+```
+
+1. **Zero Asset Texture Generation:** Rather than downloading megabytes of static document images, an offscreen HTML5 2D canvas draws realistic procedural legal documents dynamically using a deterministic 32-bit pseudorandom number generator (`mulberry32`).
+2. **Interactive 3D Raycasting:** Uses `THREE.Raycaster` to compute ray-mesh intersections in 3D coordinate space. Hovering over a page elevates it forward, changes cursor state, and displays interactive tooltips.
+3. **Decoupled Physics & Smooth Orbit:** Camera position lerps smoothly based on mouse drag momentum with touch-event support for mobile devices.
+
+---
+
+### HTTP Range-Request Streaming Engine (HTTP 206 Partial Content)
+Located in: [`src/app/api/files/[...path]/route.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/app/api/files/%5B...path%5D/route.ts)
+
+When opening 30MB+ scanned municipal gazettes, loading the entire file into server RAM or forcing full downloads causes memory exhaustion and UI freezing.
+
+1. **Byte-Range Slicing (`Accept-Ranges: bytes`):** When the browser or PDF.js sends a `Range: bytes=0-65535` header, the server slices only the requested bytes:
+   ```typescript
+   const chunkSize = end - start + 1;
+   const fileStream = fs.createReadStream(requestedPath, { start, end });
+   return new NextResponse(webStream, {
+     status: 206, // HTTP Partial Content
+     headers: {
+       "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+       "Accept-Ranges": "bytes",
+       "Content-Length": chunkSize.toString(),
+       "Content-Type": mimeType,
+       "Cache-Control": "public, max-age=31536000, immutable",
+     },
+   });
+   ```
+2. **Directory Traversal / LFI Guard:** Prevents path escape attacks (e.g., `../../../../etc/passwd` or `.env`):
+   ```typescript
+   const uploadsBase = path.resolve(process.cwd(), "public", "uploads");
+   const requestedPath = path.resolve(uploadsBase, ...pathSegments);
+   if (!requestedPath.startsWith(uploadsBase)) {
+     return new NextResponse("Forbidden", { status: 403 });
+   }
+   ```
+
+---
+
+### Secure File Upload Pipeline with Cryptographic Entropy
+Located in: [`src/app/api/upload/route.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/app/api/upload/route.ts)
+
+1. **15MB Buffer Capping:** Enforces `MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024` on both multipart and base64 streams.
+2. **Dual-MIME & Extension Whitelisting:** Cross-verifies HTTP MIME headers against allowed file extensions (`.pdf`, `.jpg`, `.jpeg`, `.png`, `.webp`) to prevent executable file masking.
+3. **Cryptographic Entropy Renaming:** Strips unsafe characters and appends high-entropy random bytes to prevent filename collisions and arbitrary file overwrite attacks:
+   ```typescript
+   function sanitizeFileName(name: string): string {
+     const ext = path.extname(name).toLowerCase();
+     const base = path.basename(name, ext).replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 50);
+     const randomSuffix = crypto.randomBytes(4).toString("hex");
+     return `${Date.now()}-${base}-${randomSuffix}${ext}`;
+   }
+   ```
+
+---
+
+### Multi-Faceted Explorer Engine & Dynamic Year Boundary Calculation
+Located in: [`src/app/ordinances/ordinance-explorer-client.tsx`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/app/ordinances/ordinance-explorer-client.tsx#L50-L125)
+
+1. **Dynamic Database Year Resolution:** Instead of hardcoding static years that decay over time, the client dynamically inspects the database record set to construct chronological year options, backed by a standard fallback (`2015–2026`).
+2. **Dual-Mode Temporal Logic:** Seamlessly switches between:
+   - *Single Year:* Exact match (`ordYear.toString() === selectedYear`).
+   - *Year Range:* Boundary interval checking ($[\text{selectedYearStart}, \text{selectedYearEnd}]$) using `-Infinity` and `Infinity` bounds.
+3. **5-Criteria Memoized Search:** Uses React's `useMemo` to filter across Jurisdiction (`Type`), `BarangayId`, `Category`, `Year`, and Full-Text Keywords (Title, Resolution No., Content, Tags, and Coverage) in a single pass without re-rendering lag.
+
+---
+
+### Chat Session Throttling & Hybrid State Architecture
+Located in: [`src/app/api/chat/route.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/app/api/chat/route.ts#L40-L75) and [`src/lib/chat-storage.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/lib/chat-storage.ts)
+
+1. **1-Session-Per-Device Rule:** To prevent database bloat, the backend maintains a strict **1-to-1 session mapping** in the `chat_sessions` table.
+2. **Serialized JSON Messaging:** Rather than inserting a separate table row for each chat bubble, conversation history is serialized and stored in an internal JSON column (`messages: Json`).
+3. **Hybrid Persistence:** Chat state is cached in browser `localStorage` for zero-latency instant rendering and synchronized to SQLite in the background, allowing citizens to close the tab and resume without losing session context.
+
+---
+
+## 7. Panel Defense Cheat Sheet (Anticipated Questions & Tough Q&A)
 
 ### AI & RAG Questions
 
@@ -516,21 +628,37 @@ Located in: [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%2
 
 ---
 
-### Data & Architecture Questions
+### Advanced Modules & Architecture Questions
 
-#### Q7: "Why did you use SQLite instead of MySQL or PostgreSQL?"
+#### Q7: "Is the 3D Monolith on the landing page a pre-rendered video or WebGL, and does it cause performance lag?"
+> **Your Defense:**  
+> "It is a real-time WebGL canvas built with Three.js. To prevent mobile lag, we eliminated static image textures and generated lightweight procedural vector canvases. We capped the animation loop using `requestAnimationFrame` and decoupled the physics so that when the canvas scrolls out of the viewport, GPU load drops to near zero."
+
+#### Q8: "What happens when an admin or citizen opens a 30MB or 50MB scanned PDF ordinance? Does the server crash or freeze the browser while downloading?"
+> **Your Defense:**  
+> "We implemented an HTTP Range-Request streaming handler with HTTP 206 Partial Content. The client requests byte ranges on demand, allowing instant page display without memory spikes. Furthermore, we enforce strict canonical path validation to eliminate Local File Inclusion (LFI) and path traversal vulnerabilities."
+
+#### Q9: "If 1,000 citizens send 20 messages each to the chatbot, did you insert 20,000 rows into your database?"
+> **Your Defense:**  
+> "No. To prevent database row explosion, we enforce a strict 1-session-per-user/device constraint in `chat_sessions`. The entire conversation history is serialized and updated as a structured JSON array (`messages: Json`), preventing database bloat while maintaining fast indexed lookups."
+
+---
+
+### Data & Database Questions
+
+#### Q10: "Why did you use SQLite instead of MySQL or PostgreSQL?"
 > **Your Defense:**  
 > "For this capstone implementation, we utilized SQLite via `@prisma/adapter-better-sqlite3` to deliver a completely **self-contained, zero-configuration local deployment**.  
 > - Because we used **Prisma ORM v7**, our entire data schema (`prisma/schema.prisma`) is completely database-agnostic.  
 > - Migrating our production deployment to enterprise PostgreSQL (e.g. Supabase, AWS RDS) or MySQL requires modifying only the `provider` line in `schema.prisma` and running `prisma db push`. All entity relationships, enums, composite indexes, and queries remain 100% identical."
 
-#### Q8: "How do your composite indexes improve database performance?"
+#### Q11: "How do your composite indexes improve database performance?"
 > **Your Defense:**  
 > "In [`schema.prisma`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/prisma/schema.prisma#L132-L133), we established composite multi-column indexes on `ordinances`:  
 > `@@index([status, category])` and `@@index([status, year])`.  
 > In our Public Explorer, citizens frequently filter by multiple facets simultaneously—such as looking for all `APPROVED` ordinances under the `Environment` category in year `2024`. Single-column indexes force the database engine to perform index merge operations or full table scans. Our composite B-tree indexes allow the database engine to locate the exact subset of records in a single logarithmic lookup ($O(\log N)$)."
 
-#### Q9: "Why use Next.js Server Actions instead of traditional REST API controllers?"
+#### Q12: "Why use Next.js Server Actions instead of traditional REST API controllers?"
 > **Your Defense:**  
 > "Server Actions (introduced in Next.js App Router) offer significant architectural benefits over traditional REST endpoints:  
 > 1. **End-to-End Type Safety:** Server Actions run directly on the server but are called as standard asynchronous TypeScript functions on the client, eliminating boilerplate `fetch()`, manual endpoint URL strings, and redundant request/response DTO interfaces.  
@@ -541,20 +669,20 @@ Located in: [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%2
 
 ### Security & Legal Compliance Questions
 
-#### Q10: "How does the system comply with the Data Privacy Act of 2012 (Republic Act No. 10173)?"
+#### Q13: "How does the system comply with the Data Privacy Act of 2012 (Republic Act No. 10173)?"
 > **Your Defense:**  
 > "We implemented Privacy by Design across three areas:  
 > 1. **Anonymous Incident Reporting:** Citizens can file reports completely anonymously (`is_anonymous: true`). When selected, the server action strictly strips the citizen's name and contact phone, storing them as `NULL` in the database.  
 > 2. **Unauthenticated Public AI Inquiries:** Citizens are not required to create an account or provide personal data to consult the AI assistant.  
 > 3. **Role-Based Data Segregation:** Incident reports and citizen contact info are accessible only by authenticated barangay officials belonging to that specific jurisdiction, preventing unauthorized disclosure or data harvesting."
 
-#### Q11: "What prevents a Barangay Admin from viewing or approving ordinances from another Barangay or City level?"
+#### Q14: "What prevents a Barangay Admin from viewing or approving ordinances from another Barangay or City level?"
 > **Your Defense:**  
 > "Security is enforced at two distinct boundaries:  
 > 1. **Route Level (Middleware):** [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/middleware.ts) inspects the verified JWT session cookie. A user with the `BARANGAY_ADMIN` role attempting to access `/admin/lgu/*` is blocked and redirected to the home page.  
 > 2. **Query Level (Database Layer):** In [`src/lib/dashboard-queries.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/src/lib/dashboard-queries.ts), all database queries executed by a Barangay Admin are automatically injected with `where: { barangayId: session.barangayId }`. Furthermore, approval actions (`approveOrdinance`, `rejectOrdinance`) verify that `session.role === 'LGU_ADMIN'`; any attempt by a Barangay Admin to trigger an LGU action returns an immediate `Unauthorized` error."
 
-#### Q12: "How do you protect against SQL Injection and Cross-Site Scripting (XSS)?"
+#### Q15: "How do you protect against SQL Injection and Cross-Site Scripting (XSS)?"
 > **Your Defense:**  
 > "1. **SQL Injection:** All database operations are mediated exclusively through Prisma ORM, which automatically parameterizes all queries and escapes input values before execution. Raw string SQL concatenation is nowhere used in the application.  
 > 2. **XSS Protection:** React 19 natively sanitizes and escapes all expressions rendered within JSX brackets `{}` before inserting them into the DOM, neutralizing malicious `<script>` tags injected via user input or report descriptions."
@@ -563,14 +691,14 @@ Located in: [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%2
 
 ### Performance & Scalability Questions
 
-#### Q13: "What happens if 500 citizens use the AI Assistant at the exact same moment? How do you prevent server overload?"
+#### Q16: "What happens if 500 citizens use the AI Assistant at the exact same moment? How do you prevent server overload?"
 > **Your Defense:**  
 > "Our architecture is optimized for high concurrency through three mechanisms:  
 > 1. **Stateless Edge Computing:** The chat API endpoint runs as an asynchronous, non-blocking Node.js serverless route, offloading intensive generative inference to Google's distributed GPU infrastructure.  
 > 2. **Session Persistence Throttling:** Rather than creating a new database row for every chat bubble, our system maintains a strict **1-session-per-user/device** constraint in `chat_sessions`, updating an internal serialized JSON array to prevent database row explosion.  
 > 3. **Token Context Capping:** By windowing the conversational history to the last 10 messages and truncating retrieved ordinance sections, we cap prompt sizes to under 1,500 tokens, guaranteeing fast round-trip times and preventing API timeout bottlenecks."
 
-#### Q14: "How does the system ensure fast page loads even with hundreds of ordinance documents?"
+#### Q17: "How does the system ensure fast page loads even with hundreds of ordinance documents?"
 > **Your Defense:**  
 > "1. **Server-Side Rendering (SSR) & Static Prerendering:** Public ordinance listings and details are rendered on the server with Next.js, serving pre-computed HTML directly to the browser for near-instant Largest Contentful Paint (LCP).  
 > 2. **Optimized Pagination & Column Projections:** Our database queries use Prisma's `select` projection to fetch only necessary card metadata (title, resolution number, category, year) rather than loading megabytes of full ordinance markdown text into memory.  
@@ -578,10 +706,11 @@ Located in: [`src/middleware.ts`](file:///c:/.JC/Antigravity-Projects/Capstone%2
 
 ---
 
-## 7. Summary Checklist for Panel Presentation
+## 8. Summary Checklist for Panel Presentation
 
-When presenting to the panel, emphasize these **Four Unique Architectural Strengths**:
+When presenting to the panel, emphasize these **Five Unique Architectural Strengths**:
 1. **Not Just a Chatbot, but a Grounded Civic RAG System:** Explain that your AI is grounded in real, legally enacted Cabanatuan City resolutions, backed by a mathematical multi-field weighted scoring algorithm.
 2. **End-to-End Multimodal Automation:** Show how scanned paper documents are transformed into structured, searchable digital laws through your Two-Stage OCR and JSON Schema pipeline, reducing manual encoder workload by over 80%.
 3. **High-Performance Document Ecosystem:** Highlight your dual PDF architecture—in-browser client vector report generation via `jsPDF` (zero server load) and multi-threaded Retina canvas rendering via `pdfjs-dist` Web Workers.
-4. **Institutional Integrity & Privacy Compliance:** Highlight that the system enforces dual-tier governance (Barangay drafts, LGU approves) and fully respects the Data Privacy Act of 2012 through anonymous reporting and role-segregated data access.
+4. **Architectural Elegance & Resource Efficiency:** Present the 3D procedural WebGL canvas (zero texture overhead), HTTP 206 byte streaming, and 1-to-1 session JSON throttling as proof of thoughtful software engineering.
+5. **Institutional Integrity & Privacy Compliance:** Highlight that the system enforces dual-tier governance (Barangay drafts, LGU approves) and fully respects the Data Privacy Act of 2012 through anonymous reporting and role-segregated data access.
