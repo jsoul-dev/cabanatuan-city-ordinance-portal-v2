@@ -40,6 +40,8 @@ export async function submitOrdinance(formData: FormData): Promise<{ error?: str
   const yearStr = (formData.get("year") as string)?.trim() || (series || new Date().getFullYear().toString());
   const year = parseInt(yearStr, 10) || new Date().getFullYear();
 
+  const isDraft = formData.get("isDraft") === "true" || formData.get("status") === "DRAFT";
+
   if (!title || !resolutionNumber) {
     return { error: "Pamagat at Resolution Number ay kinakailangan." };
   }
@@ -56,7 +58,7 @@ export async function submitOrdinance(formData: FormData): Promise<{ error?: str
       description,
       category: category as never,
       type: "BARANGAY",
-      status: "PENDING",
+      status: isDraft ? "DRAFT" : "PENDING",
       barangayId: user.barangayId,
       submittedById: session.userId,
       pdfUrl,
@@ -104,6 +106,11 @@ export async function resubmitBarangayOrdinance(
     return { error: "Hindi matagpuan o walang pahintulot sa ordinansang ito." };
   }
 
+  if (ordinance.status === "APPROVED") {
+    return { error: "Hindi maaaring i-edit ang naaprubahan nang ordinansa." };
+  }
+
+  const isDraft = formData.get("isDraft") === "true" || formData.get("status") === "DRAFT";
   const title = (formData.get("title") as string)?.trim() || ordinance.title;
   const resolutionNumber =
     (formData.get("resolutionNumber") as string)?.trim() || ordinance.resolutionNumber;
@@ -147,9 +154,49 @@ export async function resubmitBarangayOrdinance(
       tags,
       dateEnacted,
       year,
-      status: "PENDING",
-      rejectedReason: null, // Clear revision notice on resubmission
+      status: isDraft ? "DRAFT" : "PENDING",
+      rejectedReason: isDraft ? ordinance.rejectedReason : null, // Clear revision notice on resubmission, keep if still draft
     },
+  });
+
+  revalidatePath("/admin/barangay");
+  revalidatePath("/admin/barangay/ordinances");
+  revalidatePath("/admin/lgu");
+  revalidatePath("/admin/lgu/ordinances");
+  return {};
+}
+
+export async function deleteBarangayOrdinance(
+  ordinanceId: string
+): Promise<{ error?: string }> {
+  const session = await getSession();
+
+  if (!session || session.role !== "BARANGAY_ADMIN") {
+    return { error: "Hindi awtorisado. Tanging Barangay Admin lamang ang makakapag-tanggal." };
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId },
+  });
+
+  if (!user?.barangayId) {
+    return { error: "Walang naitalang barangay para sa iyong account." };
+  }
+
+  const ordinance = await prisma.ordinance.findUnique({
+    where: { id: ordinanceId },
+  });
+
+  if (!ordinance || ordinance.barangayId !== user.barangayId) {
+    return { error: "Hindi matagpuan o walang pahintulot sa ordinansang ito." };
+  }
+
+  if (ordinance.status === "APPROVED") {
+    return { error: "Hindi maaaring tanggalin ang naaprubahan nang ordinansa." };
+  }
+
+  await prisma.ordinance.delete({
+    where: { id: ordinanceId },
   });
 
   revalidatePath("/admin/barangay");

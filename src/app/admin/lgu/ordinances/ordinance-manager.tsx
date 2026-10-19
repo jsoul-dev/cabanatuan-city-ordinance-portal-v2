@@ -5,7 +5,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
-import { approveOrdinance, rejectOrdinance, deleteOrdinance, createCityOrdinance } from "../actions";
+import { approveOrdinance, rejectOrdinance, deleteOrdinance, createCityOrdinance, denyOrdinanceWithNotice } from "../actions";
 import {
   FileTextIcon,
   HourglassIcon,
@@ -245,7 +245,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
   };
 
   const [dialogState, setDialogState] = useState<{
-    type: "approve" | "reject" | "delete" | null;
+    type: "approve" | "reject" | "revision" | "delete" | null;
     id: string;
     title: string;
   }>({ type: null, id: "", title: "" });
@@ -264,7 +264,7 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
   }, []);
 
   const openDialog = useCallback(
-    (type: "approve" | "reject" | "delete", id: string, title: string, btn: HTMLButtonElement) => {
+    (type: "approve" | "reject" | "revision" | "delete", id: string, title: string, btn: HTMLButtonElement) => {
       setDialogState({ type, id, title });
       setRejectReason("");
       setTriggerRef(btn);
@@ -285,9 +285,10 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
     startTransition(async () => {
       let result: { error?: string } = {};
 
-      if (type === "approve")      result = await approveOrdinance(id);
-      else if (type === "reject")  result = await rejectOrdinance(id, rejectReason);
-      else if (type === "delete")  result = await deleteOrdinance(id);
+      if (type === "approve")       result = await approveOrdinance(id);
+      else if (type === "reject")   result = await rejectOrdinance(id, rejectReason);
+      else if (type === "revision") result = await denyOrdinanceWithNotice(id, rejectReason, true);
+      else if (type === "delete")   result = await deleteOrdinance(id);
 
       if (result.error) {
         toast.error(result.error);
@@ -298,6 +299,9 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         } else if (type === "reject") {
           setOrdinances((prev) => prev.map((o) => o.id === id ? { ...o, status: "REJECTED", rejectedReason: rejectReason } : o));
           toast.success("Ordinansa ay tinanggihan.");
+        } else if (type === "revision") {
+          setOrdinances((prev) => prev.map((o) => o.id === id ? { ...o, status: "DRAFT", rejectedReason: rejectReason } : o));
+          toast.success("Ibinalik sa Barangay bilang Draft para sa rebisyon.");
         } else if (type === "delete") {
           setOrdinances((prev) => prev.filter((o) => o.id !== id));
           toast.success("Ordinansa ay natanggal.");
@@ -686,6 +690,16 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
                             <button
                               type="button"
                               disabled={isPending}
+                              onClick={(e) => openDialog("revision", ord.id, ord.title, e.currentTarget)}
+                              className="min-h-[36px] inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-amber-500/10 px-2.5 py-1.5 text-xs font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 disabled:opacity-50"
+                              aria-label={`Humiling ng rebisyon para sa ordinansa: ${ord.title}`}
+                            >
+                              <FileEditIcon size={13} />
+                              <span>Ibalik sa Draft</span>
+                            </button>
+                            <button
+                              type="button"
+                              disabled={isPending}
                               onClick={(e) => openDialog("reject", ord.id, ord.title, e.currentTarget)}
                               className="min-h-[36px] inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-red-500/10 px-2.5 py-1.5 text-xs font-semibold text-red-700 dark:text-red-400 hover:bg-red-500/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
                               aria-label={`Tanggihan ang ordinansa: ${ord.title}`}
@@ -724,6 +738,21 @@ export function LguOrdinanceManager({ initialOrdinances, defaultReviewId }: Prop
         variant="default"
         onConfirm={handleConfirm}
         onCancel={closeDialog}
+      />
+
+      <ConfirmDialog
+        open={dialogState.type === "revision"}
+        title="Humiling ng Rebisyon (Ibalik sa Draft)"
+        description={`"${dialogState.title}"\nIbigay ang mga puna o kailangang baguhin ng Barangay bago ito maaprubahan.`}
+        confirmLabel="Ibalik sa Draft"
+        cancelLabel="Bumalik"
+        variant="warning"
+        onConfirm={handleConfirm}
+        onCancel={closeDialog}
+        reason={rejectReason}
+        onReasonChange={setRejectReason}
+        reasonLabel="Mga Puna at Hinihiling na Rebisyon"
+        reasonRequired
       />
 
       <ConfirmDialog

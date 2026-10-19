@@ -58,7 +58,9 @@ export async function denyOrdinanceWithNotice(
 
   revalidatePath("/admin/lgu");
   revalidatePath("/admin/lgu/ordinances");
+  revalidatePath("/admin/barangay");
   revalidatePath("/admin/barangay/ordinances");
+  revalidatePath("/ordinances");
   return {};
 }
 

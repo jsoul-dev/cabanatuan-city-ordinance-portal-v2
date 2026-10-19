@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useTransition, useRef } from "react";
+import { useState, useTransition, useRef, useCallback } from "react";
+import Link from "next/link";
 import { StatusBadge } from "@/components/dashboard/status-badge";
+import { ConfirmDialog } from "@/components/dashboard/confirm-dialog";
 import { toast } from "sonner";
-import { submitOrdinance } from "../actions";
+import { submitOrdinance, resubmitBarangayOrdinance, deleteBarangayOrdinance } from "../actions";
 import {
   FileTextIcon,
   HourglassIcon,
@@ -13,6 +15,9 @@ import {
   AiBotSparkleIcon,
   OrdinancesScrollIcon,
   InboxEmptyIcon,
+  EyeIcon,
+  Trash2Icon,
+  AlertTriangleIcon,
 } from "@/components/dashboard/icons";
 
 interface Ordinance {
@@ -20,8 +25,19 @@ interface Ordinance {
   slug: string;
   title: string;
   resolutionNumber: string;
+  ordinanceLabel?: string | null;
   series: string | null;
+  year?: number | null;
+  dateEnacted?: Date | string | null;
   category: string | null;
+  description?: string | null;
+  content?: string | null;
+  penalties?: string | null;
+  coverage?: string | null;
+  enforcement?: string | null;
+  signatories?: string | null;
+  tags?: any;
+  pdfUrl?: string | null;
   status: "DRAFT" | "PENDING" | "APPROVED" | "REJECTED";
   createdAt: Date;
   rejectedReason: string | null;
@@ -71,6 +87,9 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
   const [statusFilter, setStatusFilter] = useState<OrdinanceStatus>("ALL");
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [editingOrdinance, setEditingOrdinance] = useState<Ordinance | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Ordinance | null>(null);
+  const [saveAsDraft, setSaveAsDraft] = useState(false);
   const [formError, setFormError] = useState("");
   const [isPending, startTransition] = useTransition();
   const addBtnRef = useRef<HTMLButtonElement>(null);
@@ -113,14 +132,41 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
     setFormError("");
   };
 
-  const handleOpenModal = () => {
+  const handleOpenCreateModal = () => {
+    setEditingOrdinance(null);
     resetForm();
+    setShowModal(true);
+  };
+
+  const handleOpenEditModal = (ord: Ordinance) => {
+    setEditingOrdinance(ord);
+    setFormState({
+      title: ord.title || "",
+      resolutionNumber: ord.resolutionNumber || "",
+      ordinanceLabel: ord.ordinanceLabel || "",
+      series: ord.series || new Date().getFullYear().toString(),
+      year: ord.year?.toString() || new Date().getFullYear().toString(),
+      dateEnacted: ord.dateEnacted ? new Date(ord.dateEnacted).toISOString().split("T")[0] : "",
+      category: ord.category && ORDINANCE_CATEGORIES.includes(ord.category) ? ord.category : "General",
+      description: ord.description || "",
+      content: ord.content || "",
+      penalties: ord.penalties || "",
+      coverage: ord.coverage || "",
+      enforcement: ord.enforcement || "",
+      signatories: ord.signatories || "",
+      tags: Array.isArray(ord.tags) ? ord.tags.join(", ") : (typeof ord.tags === "string" ? ord.tags : ""),
+      pdfUrl: ord.pdfUrl || "",
+    });
+    setExtractText("");
+    setSelectedFiles([]);
+    setFormError("");
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     if (extracting) return;
     setShowModal(false);
+    setEditingOrdinance(null);
     addBtnRef.current?.focus();
   };
 
@@ -222,19 +268,48 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
     e.preventDefault();
     setFormError("");
     const fd = new FormData(e.currentTarget);
+    if (saveAsDraft) {
+      fd.set("isDraft", "true");
+    }
+
     startTransition(async () => {
-      const result = await submitOrdinance(fd);
+      let result: { error?: string };
+      if (editingOrdinance) {
+        result = await resubmitBarangayOrdinance(editingOrdinance.id, fd);
+      } else {
+        result = await submitOrdinance(fd);
+      }
+
       if (result.error) {
         setFormError(result.error);
         toast.error(result.error);
       } else {
-        toast.success("Ordinansa ay matagumpay na naisumite para sa pagsusuri ng LGU.");
+        const msg = saveAsDraft
+          ? "Ordinansa ay matagumpay na nai-save bilang Draft."
+          : (editingOrdinance
+              ? "Ordinansa ay matagumpay na naisumite muli para sa pagsusuri ng LGU."
+              : "Ordinansa ay matagumpay na naisumite para sa pagsusuri ng LGU.");
+        toast.success(msg);
         setShowModal(false);
-        addBtnRef.current?.focus();
+        setEditingOrdinance(null);
         window.location.reload();
       }
     });
   };
+
+  const handleDeleteConfirm = useCallback(() => {
+    if (!deleteTarget) return;
+    startTransition(async () => {
+      const res = await deleteBarangayOrdinance(deleteTarget.id);
+      if (res.error) {
+        toast.error(res.error);
+      } else {
+        setOrdinances((prev) => prev.filter((o) => o.id !== deleteTarget.id));
+        toast.success("Ordinansa ay matagumpay na natanggal.");
+      }
+      setDeleteTarget(null);
+    });
+  }, [deleteTarget]);
 
   const filtered = ordinances.filter((o) => {
     const matchStatus = statusFilter === "ALL" || o.status === statusFilter;
@@ -242,7 +317,7 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
     return matchStatus && matchSearch;
   });
 
-  function formatDate(d: Date) {
+  function formatDate(d: Date | string) {
     return new Date(d).toLocaleDateString("fil-PH", { month: "short", day: "numeric", year: "numeric" });
   }
 
@@ -251,7 +326,7 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
       {/* Toolbar */}
       {canSubmit && (
         <div className="flex items-center justify-end">
-          <button ref={addBtnRef} type="button" onClick={handleOpenModal}
+          <button ref={addBtnRef} type="button" onClick={handleOpenCreateModal}
             className="min-h-[44px] rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
           >
             + Magsumite ng Ordinansa
@@ -298,14 +373,28 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                 <div>
                   <h2 id="submit-ordinance-title" className="text-base font-bold text-[var(--text-ink)] flex items-center gap-2">
                     <OrdinancesScrollIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
-                    <span>Irehistro ang Bagong Ordinansa</span>
+                    <span>{editingOrdinance ? "I-edit ang Ordinansa" : "Irehistro ang Bagong Ordinansa"}</span>
                   </h2>
-                  <p className="text-xs text-[var(--text-mute)] mt-0.5">Awtomatikong kukunin ang mga detalye gamit ang AI.</p>
+                  <p className="text-xs text-[var(--text-mute)] mt-0.5">
+                    {editingOrdinance
+                      ? "Baguhin ang mga detalye at i-save bilang draft o muling isumite sa LGU."
+                      : "Awtomatikong kukunin ang mga detalye gamit ang AI o i-type nang manu-mano."}
+                  </p>
                 </div>
                 <button type="button" onClick={handleCloseModal} aria-label="Isara" className="text-[var(--text-mute)] hover:text-[var(--text-ink)] p-1 rounded-md text-lg">✕</button>
               </div>
 
               <div className="p-5 space-y-5">
+                {/* ── Revision Notice if returned to draft / rejected ── */}
+                {editingOrdinance?.rejectedReason && (
+                  <div className="rounded-[var(--radius-sm)] border border-amber-500/40 bg-amber-500/10 p-4 text-xs text-amber-900 dark:text-amber-200 space-y-1.5 animate-in fade-in">
+                    <div className="flex items-center gap-2 font-bold text-amber-800 dark:text-amber-300">
+                      <AlertTriangleIcon size={16} className="shrink-0 text-amber-600 dark:text-amber-400" />
+                      <span>Paalala / Hinihiling na Rebisyon mula sa LGU Admin:</span>
+                    </div>
+                    <p className="whitespace-pre-wrap pl-6 leading-relaxed font-medium">{editingOrdinance.rejectedReason}</p>
+                  </div>
+                )}
                 {/* ── AI Auto-Extract Section ── */}
                 <div className="rounded-[var(--radius-md)] border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-3">
                   <div className="flex items-center gap-2.5">
@@ -468,15 +557,34 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
               </div>
 
               {/* Footer */}
-              <div className="sticky bottom-0 z-10 bg-[var(--bg-card)] border-t border-[var(--border-hairline)] p-5 flex gap-3 justify-end">
+              <div className="sticky bottom-0 z-10 bg-[var(--bg-card)] border-t border-[var(--border-hairline)] p-5 flex flex-wrap gap-3 justify-end items-center">
                 <button type="button" onClick={handleCloseModal}
                   className="min-h-[44px] rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-4 py-2 text-sm font-semibold text-[var(--text-ink)] hover:bg-[var(--border-hairline)] transition-colors">
                   Kanselahin
                 </button>
-                <button type="submit" disabled={isPending}
-                  className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors disabled:opacity-50">
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  onClick={() => setSaveAsDraft(true)}
+                  className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--border-hairline)] bg-[var(--bg-card)] px-4 py-2 text-sm font-semibold text-[var(--text-ink)] hover:bg-[var(--bg-canvas)] transition-colors disabled:opacity-50"
+                >
+                  <FileEditIcon size={16} className="text-[var(--text-mute)]" />
+                  <span>{isPending && saveAsDraft ? "Inililigtas…" : "I-save bilang Draft"}</span>
+                </button>
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  onClick={() => setSaveAsDraft(false)}
+                  className="min-h-[44px] inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors disabled:opacity-50"
+                >
                   <OrdinancesScrollIcon size={16} />
-                  <span>{isPending ? "Isinusumite…" : "Isumite para sa Pagsusuri"}</span>
+                  <span>
+                    {isPending && !saveAsDraft
+                      ? "Isinusumite…"
+                      : editingOrdinance
+                      ? "Isumite Muli para sa Pagsusuri"
+                      : "Isumite para sa Pagsusuri"}
+                  </span>
                 </button>
               </div>
             </form>
@@ -516,7 +624,7 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
             </div>
             <p className="text-sm font-semibold text-[var(--text-ink)]">{ordinances.length === 0 ? "Wala pang ordinansa ang inyong barangay." : "Walang nahanap na ordinansa."}</p>
             {ordinances.length === 0 && canSubmit && (
-              <button type="button" onClick={handleOpenModal} className="mt-4 min-h-[44px] rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors">Magsumite ng Unang Ordinansa</button>
+              <button type="button" onClick={handleOpenCreateModal} className="mt-4 min-h-[44px] rounded-[var(--radius-sm)] bg-[var(--accent-primary)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-primary)]/90 transition-colors">Magsumite ng Unang Ordinansa</button>
             )}
           </div>
         ) : (
@@ -525,8 +633,8 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
               <caption className="sr-only">Listahan ng lahat ng ordinansa ng inyong barangay</caption>
               <thead>
                 <tr className="border-b border-[var(--border-hairline)] bg-[var(--bg-canvas)]">
-                  {["Res. No.", "Pamagat", "Status", "Isinumite ni", "Petsa"].map((h) => (
-                    <th key={h} scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-[var(--text-mute)]">{h}</th>
+                  {["Res. No.", "Pamagat", "Status", "Isinumite ni", "Petsa", "Aksyon"].map((h) => (
+                    <th key={h} scope="col" className={`px-4 py-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-mute)] ${h === "Aksyon" ? "text-right" : "text-left"}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -543,6 +651,41 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
                     <td className="px-4 py-3"><StatusBadge type="ordinance" status={ord.status} /></td>
                     <td className="px-4 py-3 text-sm text-[var(--text-body)]">{ord.submittedBy.name}</td>
                     <td className="px-4 py-3 text-xs text-[var(--text-mute)] whitespace-nowrap">{formatDate(ord.createdAt)}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1.5 justify-end">
+                        {ord.status === "APPROVED" && (
+                          <Link
+                            href={`/ordinances/${ord.slug}`}
+                            className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border-hairline)] text-xs text-[var(--text-body)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-colors px-2"
+                            aria-label={`Tingnan ang ordinansa: ${ord.title}`}
+                          >
+                            <EyeIcon size={15} />
+                          </Link>
+                        )}
+                        {canSubmit && (ord.status === "DRAFT" || ord.status === "REJECTED") && (
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEditModal(ord)}
+                            className="min-h-[36px] inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-[var(--accent-primary)]/10 px-2.5 py-1.5 text-xs font-semibold text-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+                            aria-label={`I-edit ang ordinansa: ${ord.title}`}
+                          >
+                            <FileEditIcon size={13} />
+                            <span>{ord.status === "DRAFT" ? "I-edit / Isumite" : "Muling Isumite"}</span>
+                          </button>
+                        )}
+                        {canSubmit && (ord.status === "DRAFT" || ord.status === "REJECTED") && (
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => setDeleteTarget(ord)}
+                            className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-mute)] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50"
+                            aria-label={`Tanggalin ang ordinansa: ${ord.title}`}
+                          >
+                            <Trash2Icon size={15} />
+                          </button>
+                        )}
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -550,6 +693,18 @@ export function BarangayOrdinanceManager({ initialOrdinances, canSubmit }: Props
           </div>
         )}
       </div>
+
+      {/* Confirm Deletion Dialog */}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Tanggalin ang Ordinansa?"
+        description={`Permanenteng matatanggal ang ordinansang ito:\n"${deleteTarget?.title}"`}
+        confirmLabel="Tanggalin"
+        cancelLabel="Huwag"
+        variant="danger"
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }
