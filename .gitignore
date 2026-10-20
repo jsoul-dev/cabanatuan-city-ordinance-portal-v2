@@ -50,6 +50,7 @@ public/uploads/*
 
 # Custom project excludes (Agent rules, skills, internal docs, and unrelated markdown)
 *.pdf
+!docs/user_manual/output/*.pdf
 .agents/
 .assets/
 .gemini/
