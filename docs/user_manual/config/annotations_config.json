@@ -1,0 +1,1676 @@
+{
+  "generatedAt": "2026-10-20T20:00:48.787Z",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "screenshots": {
+    "common_01_homepage_hero": {
+      "role": "common",
+      "name": "common_01_homepage_hero",
+      "filename": "common_01_homepage_hero.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\common\\common_01_homepage_hero.png",
+      "annotatedFilename": "common_01_homepage_hero_annotated.png",
+      "title": "Cabanatuan City Ordinance Portal — Public Landing Page",
+      "caption": "The public homepage provides zero-barrier access to city ordinances, quick search, interactive 3D archive, and civic links.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Cabanatuan City Seal & Portal Branding",
+          "box": {
+            "x": 32,
+            "y": 14,
+            "width": 147,
+            "height": 36
+          }
+        },
+        {
+          "num": 2,
+          "label": "Main Navigation Bar",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 64
+          }
+        },
+        {
+          "num": 3,
+          "label": "Hero Search Bar",
+          "box": {
+            "x": 32,
+            "y": 575,
+            "width": 386,
+            "height": 46
+          }
+        },
+        {
+          "num": 4,
+          "label": "Quick Category Discovery Chips",
+          "box": {
+            "x": 260,
+            "y": 350,
+            "width": 760,
+            "height": 42
+          }
+        },
+        {
+          "num": 5,
+          "label": "Interactive 3D Ordinance Archive Canvas",
+          "box": {
+            "x": 773,
+            "y": 207,
+            "width": 462,
+            "height": 460
+          }
+        },
+        {
+          "num": 6,
+          "label": "Portal Theme Toggle (Dark/Light)",
+          "box": {
+            "x": 1200,
+            "y": 20,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "common_02_login_page": {
+      "role": "common",
+      "name": "common_02_login_page",
+      "filename": "common_02_login_page.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\common\\common_02_login_page.png",
+      "annotatedFilename": "common_02_login_page_annotated.png",
+      "title": "Portal Multi-Role Authentication Interface",
+      "caption": "Secure sign-in interface supporting Role-Based Access Control (RBAC) for LGU Super Administrators, Barangay Officials, and Citizens.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Official Portal Authentication Header",
+          "box": {
+            "x": 64,
+            "y": 0,
+            "width": 1152,
+            "height": 84
+          }
+        },
+        {
+          "num": 2,
+          "label": "Official Email Address Input Field",
+          "box": {
+            "x": 809,
+            "y": 309,
+            "width": 334,
+            "height": 46
+          }
+        },
+        {
+          "num": 3,
+          "label": "Password Input Field",
+          "box": {
+            "x": 809,
+            "y": 393,
+            "width": 334,
+            "height": 46
+          }
+        },
+        {
+          "num": 4,
+          "label": "Sign In / Submit Button (Pumasok sa Portal)",
+          "box": {
+            "x": 809,
+            "y": 463,
+            "width": 334,
+            "height": 48
+          }
+        },
+        {
+          "num": 5,
+          "label": "Quick Role Preset Access Chips",
+          "box": {
+            "x": 680,
+            "y": 480,
+            "width": 380,
+            "height": 60
+          }
+        },
+        {
+          "num": 6,
+          "label": "Return to Public Portal Homepage Link",
+          "box": {
+            "x": 1041,
+            "y": 35,
+            "width": 143,
+            "height": 30
+          }
+        }
+      ]
+    },
+    "common_03_theme_toggle": {
+      "role": "common",
+      "name": "common_03_theme_toggle",
+      "filename": "common_03_theme_toggle.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\common\\common_03_theme_toggle.png",
+      "annotatedFilename": "common_03_theme_toggle_annotated.png",
+      "title": "Persistent High-Contrast Dark Mode Display",
+      "caption": "Zero-flicker dark aesthetic compliant with WCAG accessibility standards, designed for comfortable nighttime civic reading.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Dark High-Contrast Civic Header",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 65
+          }
+        },
+        {
+          "num": 2,
+          "label": "Active Dark Mode Theme Toggle",
+          "box": {
+            "x": 1200,
+            "y": 20,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Dark Glassmorphic Search & Suggestion Bar",
+          "box": {
+            "x": 32,
+            "y": 575,
+            "width": 386,
+            "height": 46
+          }
+        },
+        {
+          "num": 4,
+          "label": "Interactive 3D Cylinder Archive (Dark Scheme)",
+          "box": {
+            "x": 773,
+            "y": 207,
+            "width": 462,
+            "height": 460
+          }
+        }
+      ]
+    },
+    "citizen_01_ordinance_explorer": {
+      "role": "citizen",
+      "name": "citizen_01_ordinance_explorer",
+      "filename": "citizen_01_ordinance_explorer.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_01_ordinance_explorer.png",
+      "annotatedFilename": "citizen_01_ordinance_explorer_annotated.png",
+      "title": "Public Ordinance Explorer & Dynamic Search",
+      "caption": "Comprehensive search and multi-filtering system enabling citizens to find city and barangay ordinances by keyword, year, and category.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Full-Text Keyword Search Input",
+          "box": {
+            "x": 48,
+            "y": 100,
+            "width": 450,
+            "height": 44
+          }
+        },
+        {
+          "num": 2,
+          "label": "Policy Category Filter Chips",
+          "box": {
+            "x": 49,
+            "y": 489,
+            "width": 1182,
+            "height": 26
+          }
+        },
+        {
+          "num": 3,
+          "label": "Dynamic Year Range Filter Slider",
+          "box": {
+            "x": 880,
+            "y": 100,
+            "width": 350,
+            "height": 60
+          }
+        },
+        {
+          "num": 4,
+          "label": "Jurisdiction Scope Filter (City vs Barangay)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 8490
+          }
+        },
+        {
+          "num": 5,
+          "label": "Ordinance Card Grid with Status & Category Tags",
+          "box": {
+            "x": 32,
+            "y": 600,
+            "width": 1216,
+            "height": 7439
+          }
+        }
+      ]
+    },
+    "citizen_02_ordinance_detail": {
+      "role": "citizen",
+      "name": "citizen_02_ordinance_detail",
+      "filename": "citizen_02_ordinance_detail.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_02_ordinance_detail.png",
+      "annotatedFilename": "citizen_02_ordinance_detail_annotated.png",
+      "title": "Split-Screen Ordinance Detail & Legal Provisions View",
+      "caption": "Structured presentation of ordinance text, breaking complex legislation into readable articles, penalties, and enforcement mechanisms.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Official Ordinance Title & Resolution Number",
+          "box": {
+            "x": 189,
+            "y": 203,
+            "width": 902,
+            "height": 165
+          }
+        },
+        {
+          "num": 2,
+          "label": "Legislative Metadata (Date, Series Year, Enacting Body)",
+          "box": {
+            "x": 48,
+            "y": 160,
+            "width": 750,
+            "height": 40
+          }
+        },
+        {
+          "num": 3,
+          "label": "Structured Legal Articles & Provisions (Split-Screen Left)",
+          "box": {
+            "x": 48,
+            "y": 220,
+            "width": 750,
+            "height": 540
+          }
+        },
+        {
+          "num": 4,
+          "label": "Summary, Sanctions & Tiered Penalties Card (Right)",
+          "box": {
+            "x": 830,
+            "y": 220,
+            "width": 400,
+            "height": 320
+          }
+        },
+        {
+          "num": 5,
+          "label": "Open Official PDF Document Viewer Button",
+          "box": {
+            "x": 189,
+            "y": 709,
+            "width": 256,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "citizen_03_pdf_modal": {
+      "role": "citizen",
+      "name": "citizen_03_pdf_modal",
+      "filename": "citizen_03_pdf_modal.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_03_pdf_modal.png",
+      "annotatedFilename": "citizen_03_pdf_modal_annotated.png",
+      "title": "Official Scanned PDF Viewer Modal",
+      "caption": "Integrated in-browser document viewer allowing residents to examine official stamped ordinances, zoom into signatures, and download verified copies.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Official Document Modal Dialog Header",
+          "box": {
+            "x": 180,
+            "y": 40,
+            "width": 920,
+            "height": 50
+          }
+        },
+        {
+          "num": 2,
+          "label": "Embedded Digital PDF Document Canvas",
+          "box": {
+            "x": 200,
+            "y": 100,
+            "width": 880,
+            "height": 620
+          }
+        },
+        {
+          "num": 3,
+          "label": "Interactive Zoom & Pagination Controls",
+          "box": {
+            "x": 750,
+            "y": 45,
+            "width": 180,
+            "height": 38
+          }
+        },
+        {
+          "num": 4,
+          "label": "Direct PDF File Download Action Button",
+          "box": {
+            "x": 732,
+            "y": 66,
+            "width": 165,
+            "height": 32
+          }
+        },
+        {
+          "num": 5,
+          "label": "Modal Dismiss / Close Action (Esc)",
+          "box": {
+            "x": 1070,
+            "y": 45,
+            "width": 36,
+            "height": 36
+          }
+        }
+      ]
+    },
+    "citizen_04_ai_assistant": {
+      "role": "citizen",
+      "name": "citizen_04_ai_assistant",
+      "filename": "citizen_04_ai_assistant.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_04_ai_assistant.png",
+      "annotatedFilename": "citizen_04_ai_assistant_annotated.png",
+      "title": "Cabanatuan Ordinance AI — Bilingual Civic Assistant",
+      "caption": "Retrieval-Augmented Generation (RAG) assistant powered by Google Gemini, answering citizen inquiries with official ordinance citations.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Civic Safety & Informational Disclaimer Banner",
+          "box": {
+            "x": 458,
+            "y": 845,
+            "width": 769,
+            "height": 14
+          }
+        },
+        {
+          "num": 2,
+          "label": "Quick Common Inquiry Action Buttons",
+          "box": {
+            "x": 80,
+            "y": 130,
+            "width": 1120,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Citizen Inquiry Message Bubble",
+          "box": {
+            "x": 462,
+            "y": 233,
+            "width": 761,
+            "height": 67
+          }
+        },
+        {
+          "num": 4,
+          "label": "Gemini RAG Assistant Answer with Ordinance Citations",
+          "box": {
+            "x": 57,
+            "y": 467,
+            "width": 356,
+            "height": 75
+          }
+        },
+        {
+          "num": 5,
+          "label": "Bilingual Question Input Field",
+          "box": {
+            "x": 458,
+            "y": 783,
+            "width": 769,
+            "height": 50
+          }
+        },
+        {
+          "num": 6,
+          "label": "Send Message Action Button",
+          "box": {
+            "x": 1130,
+            "y": 680,
+            "width": 48,
+            "height": 48
+          }
+        }
+      ]
+    },
+    "citizen_05_community_report_form": {
+      "role": "citizen",
+      "name": "citizen_05_community_report_form",
+      "filename": "citizen_05_community_report_form.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_05_community_report_form.png",
+      "annotatedFilename": "citizen_05_community_report_form_annotated.png",
+      "title": "Community Incident Reporting Desk",
+      "caption": "Citizen incident submission interface equipped with client-side draft auto-save persistence and direct routing to barangay halls.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "24/7 City Emergency Hotline Numbers Banner",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 1678
+          }
+        },
+        {
+          "num": 2,
+          "label": "Assigned Barangay Jurisdiction Dropdown",
+          "box": {
+            "x": 369,
+            "y": 713,
+            "width": 259,
+            "height": 40
+          }
+        },
+        {
+          "num": 3,
+          "label": "Incident Category Selector",
+          "box": {
+            "x": 369,
+            "y": 713,
+            "width": 259,
+            "height": 40
+          }
+        },
+        {
+          "num": 4,
+          "label": "Incident Subject / Summary Input Field",
+          "box": {
+            "x": 310,
+            "y": 410,
+            "width": 660,
+            "height": 44
+          }
+        },
+        {
+          "num": 5,
+          "label": "Incident Narrative & Location Details Textarea",
+          "box": {
+            "x": 310,
+            "y": 480,
+            "width": 660,
+            "height": 120
+          }
+        },
+        {
+          "num": 6,
+          "label": "Anonymous Reporting Toggle & Contact Fields",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 1678
+          }
+        },
+        {
+          "num": 7,
+          "label": "Submit Incident Report Action Button",
+          "box": {
+            "x": 369,
+            "y": 1150,
+            "width": 273,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "citizen_06_report_submitted": {
+      "role": "citizen",
+      "name": "citizen_06_report_submitted",
+      "filename": "citizen_06_report_submitted.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_06_report_submitted.png",
+      "annotatedFilename": "citizen_06_report_submitted_annotated.png",
+      "title": "Submission Confirmation & Tracking Reference",
+      "caption": "Confirmation alert providing a unique tracking code for citizen verification, seamlessly connecting to barangay admin triage.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Official Submission Confirmation Alert Banner",
+          "box": {
+            "x": 427,
+            "y": -360,
+            "width": 500,
+            "height": 500
+          }
+        },
+        {
+          "num": 2,
+          "label": "Target Barangay Hall Routing Notification",
+          "box": {
+            "x": 0,
+            "y": -424,
+            "width": 1280,
+            "height": 1678
+          }
+        },
+        {
+          "num": 3,
+          "label": "Official Tracking Reference Code",
+          "box": {
+            "x": 330,
+            "y": 240,
+            "width": 620,
+            "height": 35
+          }
+        },
+        {
+          "num": 4,
+          "label": "File Another Report / Return Option",
+          "box": {
+            "x": 330,
+            "y": 290,
+            "width": 220,
+            "height": 40
+          }
+        }
+      ]
+    },
+    "citizen_07_civic_news": {
+      "role": "citizen",
+      "name": "citizen_07_civic_news",
+      "filename": "citizen_07_civic_news.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\citizen\\citizen_07_civic_news.png",
+      "annotatedFilename": "citizen_07_civic_news_annotated.png",
+      "title": "City Hall News & Barangay Advisories Feed",
+      "caption": "Public information broadcast feed synchronizing official legislative reminders and community announcements across Cabanatuan City.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Civic News & Legislative Advisories Header",
+          "box": {
+            "x": 160,
+            "y": 151,
+            "width": 960,
+            "height": 48
+          }
+        },
+        {
+          "num": 2,
+          "label": "News Category Filter Tabs (Lahat, Lungsod, Barangay)",
+          "box": {
+            "x": 48,
+            "y": 140,
+            "width": 400,
+            "height": 40
+          }
+        },
+        {
+          "num": 3,
+          "label": "Pinned Official Executive Advisory Card",
+          "box": {
+            "x": 48,
+            "y": 200,
+            "width": 1184,
+            "height": 180
+          }
+        },
+        {
+          "num": 4,
+          "label": "Chronological Community News Feed",
+          "box": {
+            "x": 48,
+            "y": 400,
+            "width": 1184,
+            "height": 360
+          }
+        }
+      ]
+    },
+    "barangay_01_dashboard": {
+      "role": "barangay_admin",
+      "name": "barangay_01_dashboard",
+      "filename": "barangay_01_dashboard.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_01_dashboard.png",
+      "annotatedFilename": "barangay_01_dashboard_annotated.png",
+      "title": "Barangay Governance Dashboard (Camp Tinio)",
+      "caption": "Localized dashboard scoped exclusively to Barangay Camp Tinio, displaying local ordinance counts, pending approvals, and constituent reports.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Barangay-Scoped Header ('Barangay Governance Dashboard — Camp Tinio')",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 323,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Local Enacted Ordinances Metric Card",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 3,
+          "label": "Pending Legislative Proposals Metric Card",
+          "box": {
+            "x": 500,
+            "y": 90,
+            "width": 220,
+            "height": 110
+          }
+        },
+        {
+          "num": 4,
+          "label": "Active Community Incident Reports Metric Card",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 5,
+          "label": "Recent Community Incident Triage Feed",
+          "box": {
+            "x": 260,
+            "y": 220,
+            "width": 980,
+            "height": 500
+          }
+        },
+        {
+          "num": 6,
+          "label": "Barangay Admin Dedicated Navigation Sidebar",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 256,
+            "height": 800
+          }
+        }
+      ]
+    },
+    "barangay_02_ordinance_management": {
+      "role": "barangay_admin",
+      "name": "barangay_02_ordinance_management",
+      "filename": "barangay_02_ordinance_management.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_02_ordinance_management.png",
+      "annotatedFilename": "barangay_02_ordinance_management_annotated.png",
+      "title": "Barangay Ordinance Management & Repository",
+      "caption": "Administrative table for managing local resolutions across their complete lifecycle: Drafts, Pending LGU Submissions, and Approved laws.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Legislative Status Tabs (Lahat, Pending, Approved, Draft, Rejected)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 2,
+          "label": "Create / Propose New Ordinance Action Button",
+          "box": {
+            "x": 1040,
+            "y": 90,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Local Ordinance Keyword Search Input",
+          "box": {
+            "x": 894,
+            "y": 236,
+            "width": 354,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "Barangay Ordinance Records Table with Status Badges",
+          "box": {
+            "x": 289,
+            "y": 299,
+            "width": 958,
+            "height": 625
+          }
+        },
+        {
+          "num": 5,
+          "label": "Item Action Controls (View, Edit Draft, Resubmit)",
+          "box": {
+            "x": 1161,
+            "y": 340,
+            "width": 86,
+            "height": 65
+          }
+        }
+      ]
+    },
+    "barangay_03_draft_ordinance_modal": {
+      "role": "barangay_admin",
+      "name": "barangay_03_draft_ordinance_modal",
+      "filename": "barangay_03_draft_ordinance_modal.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_03_draft_ordinance_modal.png",
+      "annotatedFilename": "barangay_03_draft_ordinance_modal_annotated.png",
+      "title": "Drafting & Transmitting Barangay Ordinances",
+      "caption": "Multi-stage proposal form enabling officials to prepare local legislation, save works-in-progress as drafts, or transmit them directly to City Hall.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "New Ordinance Proposal Modal Dialog Header",
+          "box": {
+            "x": 300,
+            "y": 50,
+            "width": 680,
+            "height": 40
+          }
+        },
+        {
+          "num": 2,
+          "label": "Proposed Title & Resolution Number Input Fields",
+          "box": {
+            "x": 320,
+            "y": 110,
+            "width": 640,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Legislative Category & Year Series Dropdowns",
+          "box": {
+            "x": 320,
+            "y": 175,
+            "width": 310,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "Legal Summary & Prohibited Acts Content Fields",
+          "box": {
+            "x": 320,
+            "y": 240,
+            "width": 640,
+            "height": 100
+          }
+        },
+        {
+          "num": 5,
+          "label": "Save as Draft Action Button (Internal Staging)",
+          "box": {
+            "x": 620,
+            "y": 680,
+            "width": 160,
+            "height": 44
+          }
+        },
+        {
+          "num": 6,
+          "label": "Submit to LGU for Approval Button (Official Transmittal)",
+          "box": {
+            "x": 800,
+            "y": 680,
+            "width": 160,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "barangay_04_ai_extraction_modal": {
+      "role": "barangay_admin",
+      "name": "barangay_04_ai_extraction_modal",
+      "filename": "barangay_04_ai_extraction_modal.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_04_ai_extraction_modal.png",
+      "annotatedFilename": "barangay_04_ai_extraction_modal_annotated.png",
+      "title": "AI Multimodal OCR Ordinance Extraction Interface",
+      "caption": "Automated extraction tool utilizing Google Gemini to convert scanned physical paper ordinances into structured database records in seconds.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "AI Auto-Extraction Section Header & Gemini Sparkle Badge",
+          "box": {
+            "x": 320,
+            "y": 90,
+            "width": 640,
+            "height": 40
+          }
+        },
+        {
+          "num": 2,
+          "label": "Scanned Document PDF / Image File Dropzone",
+          "box": {
+            "x": 320,
+            "y": 140,
+            "width": 640,
+            "height": 90
+          }
+        },
+        {
+          "num": 3,
+          "label": "Execute Multimodal AI Parsing Button ('I-Extract gamit ang AI')",
+          "box": {
+            "x": 320,
+            "y": 240,
+            "width": 220,
+            "height": 40
+          }
+        },
+        {
+          "num": 4,
+          "label": "Multimodal OCR Status & Parsing Sequence",
+          "box": {
+            "x": 560,
+            "y": 240,
+            "width": 400,
+            "height": 40
+          }
+        },
+        {
+          "num": 5,
+          "label": "Auto-Populated Form Inputs with Human Verification",
+          "box": {
+            "x": 320,
+            "y": 300,
+            "width": 640,
+            "height": 350
+          }
+        }
+      ]
+    },
+    "barangay_05_community_reports": {
+      "role": "barangay_admin",
+      "name": "barangay_05_community_reports",
+      "filename": "barangay_05_community_reports.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_05_community_reports.png",
+      "annotatedFilename": "barangay_05_community_reports_annotated.png",
+      "title": "Barangay Incident Reports Management Desk",
+      "caption": "Triage desk where barangay officials monitor, inspect, and process violation reports submitted by local residents.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Barangay Community Incident Reports Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 323,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Status Filter Chips (Lahat, Bago, Inaaksyunan, Naresolba)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 3,
+          "label": "Incident Report Record Row with Timestamp & Category",
+          "box": {
+            "x": 289,
+            "y": 280,
+            "width": 958,
+            "height": 65
+          }
+        },
+        {
+          "num": 4,
+          "label": "Constituent Anonymity / Contact Verification Badge",
+          "box": {
+            "x": 868,
+            "y": 280,
+            "width": 134,
+            "height": 65
+          }
+        },
+        {
+          "num": 5,
+          "label": "Triage & Status Action Control",
+          "box": {
+            "x": 1107,
+            "y": 280,
+            "width": 140,
+            "height": 65
+          }
+        }
+      ]
+    },
+    "barangay_06_report_triage_modal": {
+      "role": "barangay_admin",
+      "name": "barangay_06_report_triage_modal",
+      "filename": "barangay_06_report_triage_modal.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_06_report_triage_modal.png",
+      "annotatedFilename": "barangay_06_report_triage_modal_annotated.png",
+      "title": "Incident Report Triage & Resolution Processing",
+      "caption": "Action dialog enabling barangay leaders to dispatch officers, record findings, and transition complaints to 'In Progress' or 'Resolved'.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Incident Case Triage Dialog Header",
+          "box": {
+            "x": 350,
+            "y": 100,
+            "width": 580,
+            "height": 40
+          }
+        },
+        {
+          "num": 2,
+          "label": "Constituent Incident Details & Evidence Overview",
+          "box": {
+            "x": 370,
+            "y": 160,
+            "width": 540,
+            "height": 200
+          }
+        },
+        {
+          "num": 3,
+          "label": "Resolution Status Selector (Bago -> Inaaksyunan -> Naresolba)",
+          "box": {
+            "x": 370,
+            "y": 380,
+            "width": 540,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "Barangay Official Action Remarks & Findings Field",
+          "box": {
+            "x": 370,
+            "y": 440,
+            "width": 540,
+            "height": 90
+          }
+        },
+        {
+          "num": 5,
+          "label": "Confirm Status Update Action Button",
+          "box": {
+            "x": 740,
+            "y": 550,
+            "width": 170,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "barangay_07_ordinance_reports_analytics": {
+      "role": "barangay_admin",
+      "name": "barangay_07_ordinance_reports_analytics",
+      "filename": "barangay_07_ordinance_reports_analytics.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\barangay_admin\\barangay_07_ordinance_reports_analytics.png",
+      "annotatedFilename": "barangay_07_ordinance_reports_analytics_annotated.png",
+      "title": "Barangay Legislative Reports & Analytics Desk",
+      "caption": "Reporting module allowing barangay officials to generate formatted summaries of local legislation for barangay hall records.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Barangay-Scoped Legislative Reports Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 323,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Report Criteria & Category Selector",
+          "box": {
+            "x": 288,
+            "y": 176,
+            "width": 960,
+            "height": 350
+          }
+        },
+        {
+          "num": 3,
+          "label": "Generate Localized Report Button",
+          "box": {
+            "x": 636,
+            "y": 393,
+            "width": 193,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "Official Export & PDF Download Toolbar",
+          "box": {
+            "x": 260,
+            "y": 330,
+            "width": 980,
+            "height": 80
+          }
+        }
+      ]
+    },
+    "lgu_01_executive_dashboard": {
+      "role": "lgu_admin",
+      "name": "lgu_01_executive_dashboard",
+      "filename": "lgu_01_executive_dashboard.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_01_executive_dashboard.png",
+      "annotatedFilename": "lgu_01_executive_dashboard_annotated.png",
+      "title": "City Government Executive Governance Dashboard",
+      "caption": "Executive overview displaying city-wide legislative health metrics, pending barangay proposals, and real-time activity stream.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Executive Dashboard Header & City Hall Governance Scope",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "City-Wide KPI Cards (Total Ordinances, Approved, Pending, Drafts, Barangays)",
+          "box": {
+            "x": 288,
+            "y": 96,
+            "width": 960,
+            "height": 130
+          }
+        },
+        {
+          "num": 3,
+          "label": "Quick Governance Action Shortcuts (Add Ordinance, Export, Reviews)",
+          "box": {
+            "x": 260,
+            "y": 230,
+            "width": 980,
+            "height": 60
+          }
+        },
+        {
+          "num": 4,
+          "label": "Recent City-Wide Legislative Activity Log",
+          "box": {
+            "x": 260,
+            "y": 310,
+            "width": 980,
+            "height": 450
+          }
+        },
+        {
+          "num": 5,
+          "label": "Full Executive Navigation Sidebar (8 Integrated Administrative Modules)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 256,
+            "height": 800
+          }
+        }
+      ]
+    },
+    "lgu_02_ordinance_repository": {
+      "role": "lgu_admin",
+      "name": "lgu_02_ordinance_repository",
+      "filename": "lgu_02_ordinance_repository.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_02_ordinance_repository.png",
+      "annotatedFilename": "lgu_02_ordinance_repository_annotated.png",
+      "title": "City Ordinance Central Repository & Status Triage",
+      "caption": "Central repository managing all official city ordinances and legislative proposals submitted by eighty-nine administrative barangays.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Accessible Status Filter Tabs with Live Record Counters",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 2,
+          "label": "Instant City Ordinance Repository Search Input",
+          "box": {
+            "x": 903,
+            "y": 270,
+            "width": 345,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Add City Ordinance / AI Document Parsing Action Button",
+          "box": {
+            "x": 1040,
+            "y": 90,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "City-Wide Ordinance Repository Table with Jurisdiction Badges",
+          "box": {
+            "x": 289,
+            "y": 333,
+            "width": 1333,
+            "height": 3764
+          }
+        },
+        {
+          "num": 5,
+          "label": "Legislative Oversight Action Controls (Review, Enact, Delete)",
+          "box": {
+            "x": 1223,
+            "y": 374,
+            "width": 399,
+            "height": 65
+          }
+        }
+      ]
+    },
+    "lgu_03_review_approve_modal": {
+      "role": "lgu_admin",
+      "name": "lgu_03_review_approve_modal",
+      "filename": "lgu_03_review_approve_modal.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_03_review_approve_modal.png",
+      "annotatedFilename": "lgu_03_review_approve_modal_annotated.png",
+      "title": "Reviewing & Approving Barangay Ordinance Submissions",
+      "caption": "Sangguniang Panlungsod review interface for evaluating proposed barangay ordinances, attaching official comments, and granting legal approval.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Sangguniang Panlungsod Legislative Review Dialog Header",
+          "box": {
+            "x": 350,
+            "y": 80,
+            "width": 580,
+            "height": 40
+          }
+        },
+        {
+          "num": 2,
+          "label": "Barangay Proposal Summary & Enactment Metadata",
+          "box": {
+            "x": 370,
+            "y": 130,
+            "width": 540,
+            "height": 180
+          }
+        },
+        {
+          "num": 3,
+          "label": "City Legal Review Comments & Observation Remarks",
+          "box": {
+            "x": 370,
+            "y": 330,
+            "width": 540,
+            "height": 90
+          }
+        },
+        {
+          "num": 4,
+          "label": "Official Enactment / Approval Action Button ('Aprubahan')",
+          "box": {
+            "x": 550,
+            "y": 440,
+            "width": 170,
+            "height": 44
+          }
+        },
+        {
+          "num": 5,
+          "label": "Request Revision / Deny Submission Button ('Tanggihan')",
+          "box": {
+            "x": 740,
+            "y": 440,
+            "width": 170,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "lgu_04_ai_document_extraction": {
+      "role": "lgu_admin",
+      "name": "lgu_04_ai_document_extraction",
+      "filename": "lgu_04_ai_document_extraction.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_04_ai_document_extraction.png",
+      "annotatedFilename": "lgu_04_ai_document_extraction_annotated.png",
+      "title": "Multimodal OCR Ordinance Extractor (Powered by Gemini)",
+      "caption": "High-throughput AI parser transforming scanned multi-page paper ordinances into verified digital records with tiered fine extraction.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "AI-Powered Multimodal OCR Ordinance Extractor Header",
+          "box": {
+            "x": 320,
+            "y": 80,
+            "width": 640,
+            "height": 40
+          }
+        },
+        {
+          "num": 2,
+          "label": "Official Scanned Resolution Upload Dropzone",
+          "box": {
+            "x": 320,
+            "y": 130,
+            "width": 640,
+            "height": 90
+          }
+        },
+        {
+          "num": 3,
+          "label": "Multimodal AI Parsing Execution Button",
+          "box": {
+            "x": 320,
+            "y": 230,
+            "width": 220,
+            "height": 40
+          }
+        },
+        {
+          "num": 4,
+          "label": "Auto-Populated Resolution Number, Series & Enactment Date",
+          "box": {
+            "x": 320,
+            "y": 290,
+            "width": 310,
+            "height": 44
+          }
+        },
+        {
+          "num": 5,
+          "label": "Auto-Extracted Tiered Sanctions & Fines Breakdown",
+          "box": {
+            "x": 320,
+            "y": 480,
+            "width": 640,
+            "height": 80
+          }
+        }
+      ]
+    },
+    "lgu_05_users_management": {
+      "role": "lgu_admin",
+      "name": "lgu_05_users_management",
+      "filename": "lgu_05_users_management.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_05_users_management.png",
+      "annotatedFilename": "lgu_05_users_management_annotated.png",
+      "title": "User Accounts & Barangay Officials Administration",
+      "caption": "Administrative user directory for provisioning barangay captains and city personnel with cryptographically secure role-based access control.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "City Government Official Personnel Roster Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Register New Official Action Button ('Magrehistro ng Opisyal')",
+          "box": {
+            "x": 1040,
+            "y": 32,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Official Directory Table with Security Badges",
+          "box": {
+            "x": 289,
+            "y": 237,
+            "width": 958,
+            "height": 676
+          }
+        },
+        {
+          "num": 4,
+          "label": "Role-Based Privilege Badges (LGU Admin vs Barangay Admin)",
+          "box": {
+            "x": 769,
+            "y": 278,
+            "width": 156,
+            "height": 63
+          }
+        },
+        {
+          "num": 5,
+          "label": "Assigned Territorial Barangay Jurisdiction Tag",
+          "box": {
+            "x": 925,
+            "y": 278,
+            "width": 134,
+            "height": 63
+          }
+        }
+      ]
+    },
+    "lgu_06_barangays_directory": {
+      "role": "lgu_admin",
+      "name": "lgu_06_barangays_directory",
+      "filename": "lgu_06_barangays_directory.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_06_barangays_directory.png",
+      "annotatedFilename": "lgu_06_barangays_directory_annotated.png",
+      "title": "Barangay Directory & Territorial Coverage",
+      "caption": "Directory tracking participation, enacted local resolutions, and administrative contacts across all eighty-nine barangays of Cabanatuan City.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Cabanatuan City Barangay Directory Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Active Participation & Onboarding Indicators",
+          "box": {
+            "x": 288,
+            "y": 176,
+            "width": 960,
+            "height": 106
+          }
+        },
+        {
+          "num": 3,
+          "label": "Registered Barangay Directory Cards with Ordinance Counters",
+          "box": {
+            "x": 260,
+            "y": 290,
+            "width": 980,
+            "height": 450
+          }
+        },
+        {
+          "num": 4,
+          "label": "Local Jurisdiction Contact & Profile Shortcuts",
+          "box": {
+            "x": 280,
+            "y": 400,
+            "width": 120,
+            "height": 36
+          }
+        }
+      ]
+    },
+    "lgu_07_city_reports_monitoring": {
+      "role": "lgu_admin",
+      "name": "lgu_07_city_reports_monitoring",
+      "filename": "lgu_07_city_reports_monitoring.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_07_city_reports_monitoring.png",
+      "annotatedFilename": "lgu_07_city_reports_monitoring_annotated.png",
+      "title": "City-Wide Community Reports Monitoring Desk",
+      "caption": "Centralized supervisory desk enabling city hall administrators to monitor resident concerns and audit barangay action resolution times.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "City-Wide Community Reports Monitoring Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Territorial Barangay Filter Dropdown (All 89 Barangays)",
+          "box": {
+            "x": 260,
+            "y": 90,
+            "width": 280,
+            "height": 42
+          }
+        },
+        {
+          "num": 3,
+          "label": "Resolution Status Filter Tabs (Lahat, Bago, Inaaksyunan, Naresolba)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 4,
+          "label": "Consolidated City-Wide Incident Records Table",
+          "box": {
+            "x": 289,
+            "y": 239,
+            "width": 958,
+            "height": 2812
+          }
+        },
+        {
+          "num": 5,
+          "label": "Executive Incident Oversight & Status Update Action",
+          "box": {
+            "x": 1092,
+            "y": 280,
+            "width": 155,
+            "height": 65
+          }
+        }
+      ]
+    },
+    "lgu_08_news_publishing": {
+      "role": "lgu_admin",
+      "name": "lgu_08_news_publishing",
+      "filename": "lgu_08_news_publishing.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_08_news_publishing.png",
+      "annotatedFilename": "lgu_08_news_publishing_annotated.png",
+      "title": "Civic News & Public Advisories Broadcast Desk",
+      "caption": "Communication center for publishing legislative alerts, curfew reminders, and public health directives to the citizen-facing portal.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Civic News & Legislative Broadcasts Desk Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Publish New Advisory Action Button ('Maglathala ng Anunsyo')",
+          "box": {
+            "x": 1040,
+            "y": 32,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "num": 3,
+          "label": "Published Public News & Emergency Advisories List",
+          "box": {
+            "x": 313,
+            "y": 245,
+            "width": 910,
+            "height": 279
+          }
+        },
+        {
+          "num": 4,
+          "label": "Priority Pinning Toggle for Urgent Civic Directives",
+          "box": {
+            "x": 920,
+            "y": 120,
+            "width": 120,
+            "height": 36
+          }
+        },
+        {
+          "num": 5,
+          "label": "Advisory Management Controls (Edit, Delete, Sync to Public Feed)",
+          "box": {
+            "x": 1060,
+            "y": 120,
+            "width": 160,
+            "height": 36
+          }
+        }
+      ]
+    },
+    "lgu_09_legislative_report_generator": {
+      "role": "lgu_admin",
+      "name": "lgu_09_legislative_report_generator",
+      "filename": "lgu_09_legislative_report_generator.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_09_legislative_report_generator.png",
+      "annotatedFilename": "lgu_09_legislative_report_generator_annotated.png",
+      "title": "Official Legislative Report Generator & PDF Exporter",
+      "caption": "Formal reporting tool generating certified legislative summaries with official headers, serial codes, and tabular PDF document generation.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Legislative Report Structure Selector (All, by Month, Barangay, Category, Status)",
+          "box": {
+            "x": 260,
+            "y": 90,
+            "width": 310,
+            "height": 260
+          }
+        },
+        {
+          "num": 2,
+          "label": "Multi-Criteria Filter Parameters (Year, Status, Category, Origin)",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 3,
+          "label": "Execute Report Generation Action Button",
+          "box": {
+            "x": 636,
+            "y": 469,
+            "width": 193,
+            "height": 44
+          }
+        },
+        {
+          "num": 4,
+          "label": "Official Government Header Preview with Cabanatuan City Seal",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 800
+          }
+        },
+        {
+          "num": 5,
+          "label": "Export Formal PDF Document Action Button ('I-download bilang PDF')",
+          "box": {
+            "x": 1024,
+            "y": 659,
+            "width": 207,
+            "height": 44
+          }
+        }
+      ]
+    },
+    "lgu_10_analytics_charts": {
+      "role": "lgu_admin",
+      "name": "lgu_10_analytics_charts",
+      "filename": "lgu_10_analytics_charts.png",
+      "originalPath": "C:\\.JC\\Antigravity-Projects\\Capstone Project v2\\app\\docs\\user_manual\\screenshots\\original\\lgu_admin\\lgu_10_analytics_charts.png",
+      "annotatedFilename": "lgu_10_analytics_charts_annotated.png",
+      "title": "Governance Analytics & Policy Trend Visualizations",
+      "caption": "Interactive data visualization suite tracking legislative velocity, thematic distributions, and civic report resolution performance.",
+      "elements": [
+        {
+          "num": 1,
+          "label": "Governance Analytics & Policy Intelligence Header",
+          "box": {
+            "x": 280,
+            "y": 10,
+            "width": 292,
+            "height": 28
+          }
+        },
+        {
+          "num": 2,
+          "label": "Legislative Enactment Velocity Trend Chart (Yearly Trajectory)",
+          "box": {
+            "x": 260,
+            "y": 90,
+            "width": 640,
+            "height": 320
+          }
+        },
+        {
+          "num": 3,
+          "label": "Policy Category Distribution Breakdown Chart",
+          "box": {
+            "x": 920,
+            "y": 90,
+            "width": 320,
+            "height": 320
+          }
+        },
+        {
+          "num": 4,
+          "label": "Barangay Legislative Participation & Enactment Ranking",
+          "box": {
+            "x": 260,
+            "y": 430,
+            "width": 480,
+            "height": 310
+          }
+        },
+        {
+          "num": 5,
+          "label": "Citizen Report Resolution Rate & Efficiency Metrics",
+          "box": {
+            "x": 760,
+            "y": 430,
+            "width": 480,
+            "height": 310
+          }
+        }
+      ]
+    }
+  }
+}
