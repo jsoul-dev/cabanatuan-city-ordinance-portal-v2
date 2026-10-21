@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CABANATUAN ORDINANCE HUB RECORD (Unnormalized Form)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #ffffff;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+    .unf-card {
+      width: 920px;
+      border: 1.8px solid #000000;
+      background: #ffffff;
+    }
+    .unf-header {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 9px 12px;
+      border-bottom: 1.8px solid #000000;
+      letter-spacing: 0.3px;
+    }
+    .unf-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 28px;
+      padding: 16px 24px 20px 24px;
+      font-size: 13px;
+      line-height: 1.48;
+      color: #000000;
+    }
+    .col {
+      display: flex;
+      flex-direction: column;
+    }
+    .attr {
+      padding: 0.5px 0;
+    }
+    .group-header {
+      font-weight: bold;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+    .section-header {
+      font-style: italic;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="unf-card">
+    <div class="unf-header">
+      CABANATUAN_ORDINANCE_HUB_RECORD (Unnormalized Form)
+    </div>
+    <div class="unf-body">
+      <!-- COLUMN 1 -->
+      <div class="col">
+        <div class="attr">user_id</div>
+        <div class="attr">name</div>
+        <div class="attr">email</div>
+        <div class="attr">password_hash</div>
+        <div class="attr">role</div>
+        <div class="attr">user_created_at</div>
+        <div class="attr">user_updated_at</div>
+
+        <div class="section-header">Barangay Jurisdiction (if affiliated)</div>
+        <div class="attr">barangay_name</div>
+        <div class="attr">barangay_description</div>
+        <div class="attr">barangay_created_at</div>
+
+        <div class="section-header">Official Credentials (role = admin)</div>
+        <div class="attr">official_title</div>
+        <div class="attr">authorization_level</div>
+        <div class="attr">department</div>
+
+        <div class="group-header">{ Ordinances }</div>
+        <div class="attr">ordinance_id</div>
+        <div class="attr">slug</div>
+        <div class="attr">title</div>
+        <div class="attr">resolution_number</div>
+        <div class="attr">ordinance_label</div>
+        <div class="attr">series</div>
+        <div class="attr">type</div>
+        <div class="attr">status</div>
+        <div class="attr">description</div>
+        <div class="attr">content</div>
+        <div class="attr">category</div>
+      </div>
+
+      <!-- COLUMN 2 -->
+      <div class="col">
+        <div class="attr">penalties</div>
+        <div class="attr">signatories</div>
+        <div class="attr">pdf_url</div>
+        <div class="attr">date_enacted</div>
+        <div class="attr">year</div>
+        <div class="attr">coverage</div>
+        <div class="attr">articles</div>
+        <div class="attr">enforcement</div>
+        <div class="attr">ordinance_barangay_name</div>
+        <div class="attr">submitted_by_name</div>
+        <div class="attr">submitted_by_email</div>
+        <div class="attr">reviewed_by_name</div>
+        <div class="attr">reviewed_by_email</div>
+        <div class="attr">approved_at</div>
+        <div class="attr">rejected_reason</div>
+        <div class="attr">ordinance_created_at</div>
+        <div class="attr">ordinance_updated_at</div>
+
+        <div class="group-header">{ Ordinance Tags } within each ordinance</div>
+        <div class="attr">tag_name</div>
+
+        <div class="group-header">{ Community Reports }</div>
+        <div class="attr">report_id</div>
+        <div class="attr">report_type</div>
+        <div class="attr">report_description</div>
+        <div class="attr">photo_url</div>
+        <div class="attr">contact_name</div>
+        <div class="attr">contact_phone</div>
+        <div class="attr">is_anonymous</div>
+        <div class="attr">report_status</div>
+        <div class="attr">report_barangay_name</div>
+        <div class="attr">report_submitted_at</div>
+        <div class="attr">report_resolved_at</div>
+      </div>
+
+      <!-- COLUMN 3 -->
+      <div class="col">
+        <div class="group-header">{ Civic News Items }</div>
+        <div class="attr">news_id</div>
+        <div class="attr">news_title</div>
+        <div class="attr">news_content</div>
+        <div class="attr">news_category</div>
+        <div class="attr">is_pinned</div>
+        <div class="attr">published_at</div>
+        <div class="attr">news_created_at</div>
+        <div class="attr">news_updated_at</div>
+
+        <div class="group-header">{ AI Chat Sessions }</div>
+        <div class="attr">session_id</div>
+        <div class="attr">session_user_name</div>
+        <div class="attr">session_created_at</div>
+
+        <div class="group-header">{ Chat Messages } within each session</div>
+        <div class="attr">message_id</div>
+        <div class="attr">message_role</div>
+        <div class="attr">message_content</div>
+        <div class="attr">sent_at</div>
+
+        <div class="section-header">System parameters (repeated per record)</div>
+        <div class="attr">rag_top_k</div>
+        <div class="attr">similarity_threshold</div>
+        <div class="attr">ai_model_name</div>
+        <div class="attr">ai_temperature</div>
+        <div class="attr">max_context_length</div>
+        <div class="attr">allowed_file_types</div>
+        <div class="attr">max_upload_size_mb</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
