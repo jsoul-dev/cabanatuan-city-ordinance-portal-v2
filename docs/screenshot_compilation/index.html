@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System UI Screenshot Compilation & Wireframe Reference</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <!-- Header Banner -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Capstone v2</span>
+          <span class="text-xs text-slate-400">Cabanatuan City Legislative Portal</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white mt-1">System UI Screenshot Compilation & Wireframe Hub</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="UI_Screenshots_Wireframe_Compilation.pdf" download class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Download PDF Guide
+        </a>
+        <button onclick="copyMasterPrompt()" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke_linecap="round" stroke_linejoin="round" stroke_width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+          Copy ChatGPT Master Prompt
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation / Filter Bar -->
+  <div class="bg-slate-900 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <button onclick="filterCategory('all')" id="btn-all" class="cat-btn px-3 py-1.5 rounded-md text-xs font-semibold bg-emerald-600 text-white transition">All Screens (14)</button>
+        <button onclick="filterCategory('citizen')" id="btn-citizen" class="cat-btn px-3 py-1.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Citizen Portal (6)</button>
+        <button onclick="filterCategory('barangay')" id="btn-barangay" class="cat-btn px-3 py-1.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Barangay Admin (3)</button>
+        <button onclick="filterCategory('lgu')" id="btn-lgu" class="cat-btn px-3 py-1.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">City LGU Admin (4)</button>
+        <button onclick="filterCategory('boards')" id="btn-boards" class="cat-btn px-3 py-1.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Composite Boards (3)</button>
+      </div>
+      <div class="text-xs text-slate-400">
+        Click any screen to zoom • Instant copy prompts for ChatGPT
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-10">
+
+    <!-- Overview Banner Notice -->
+    <div class="p-5 rounded-xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/40 via-slate-900 to-slate-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <span>🚀</span> Ready for ChatGPT Wireframing & Skeleton Generation
+        </h2>
+        <p class="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">
+          You don't need to upload every single page. You can either upload the <strong class="text-emerald-400">00_MASTER_COMPILATION_OVERVIEW.png</strong> (an all-in-one 4K board of the core screens), the <strong class="text-indigo-400">PDF Guide</strong>, or individual key screens below with the pre-crafted ChatGPT prompts.
+        </p>
+      </div>
+      <a href="boards/00_MASTER_COMPILATION_OVERVIEW.png" download class="whitespace-nowrap px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow transition">
+        Download All-in-One Master Board ↓
+      </a>
+    </div>
+
+    <!-- Section: Composite Boards -->
+    <section id="section-boards" class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+          Master Composite Collage Boards (Upload 1 Image to ChatGPT)
+        </h2>
+        <span class="text-xs text-slate-400">High-Resolution Multi-Screen Sheets</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Board 1 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-indigo-500/50 transition flex flex-col">
+          <div class="p-4 border-b border-slate-800 bg-slate-900/60">
+            <span class="text-xs font-bold text-indigo-400">MASTER OVERVIEW</span>
+            <h3 class="text-sm font-semibold text-white mt-0.5">All-in-One System Grid</h3>
+            <p class="text-xs text-slate-400 mt-1">12 essential screens compiled in a 3x4 grid</p>
+          </div>
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('boards/00_MASTER_COMPILATION_OVERVIEW.png', 'Master All-in-One Compilation Overview')">
+            <img src="boards/00_MASTER_COMPILATION_OVERVIEW.png" alt="Master Board" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold">View Full Size</span>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between mt-auto">
+            <button onclick="copyPrompt('master')" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">Copy ChatGPT Prompt</button>
+            <a href="boards/00_MASTER_COMPILATION_OVERVIEW.png" download class="text-xs text-slate-300 hover:text-white">Download ↓</a>
+          </div>
+        </div>
+
+        <!-- Board 2 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-emerald-500/50 transition flex flex-col">
+          <div class="p-4 border-b border-slate-800 bg-slate-900/60">
+            <span class="text-xs font-bold text-emerald-400">CITIZEN PORTAL</span>
+            <h3 class="text-sm font-semibold text-white mt-0.5">Citizen & Public Flow Sheet</h3>
+            <p class="text-xs text-slate-400 mt-1">6 core citizen screens (Search, Detail, AI, Reports)</p>
+          </div>
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('boards/01_CITIZEN_PORTAL_COMPILATION.png', 'Citizen Portal Compilation')">
+            <img src="boards/01_CITIZEN_PORTAL_COMPILATION.png" alt="Citizen Board" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">View Full Size</span>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between mt-auto">
+            <button onclick="copyPrompt('citizen')" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium">Copy ChatGPT Prompt</button>
+            <a href="boards/01_CITIZEN_PORTAL_COMPILATION.png" download class="text-xs text-slate-300 hover:text-white">Download ↓</a>
+          </div>
+        </div>
+
+        <!-- Board 3 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/50 transition flex flex-col">
+          <div class="p-4 border-b border-slate-800 bg-slate-900/60">
+            <span class="text-xs font-bold text-purple-400">ADMINISTRATIVE PORTALS</span>
+            <h3 class="text-sm font-semibold text-white mt-0.5">Barangay & City Admin Sheet</h3>
+            <p class="text-xs text-slate-400 mt-1">6 management screens (Dashboards, Reviews, Analytics)</p>
+          </div>
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('boards/02_ADMIN_PORTAL_COMPILATION.png', 'Admin Portal Compilation')">
+            <img src="boards/02_ADMIN_PORTAL_COMPILATION.png" alt="Admin Board" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-semibold">View Full Size</span>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between mt-auto">
+            <button onclick="copyPrompt('admin')" class="text-xs text-purple-400 hover:text-purple-300 font-medium">Copy ChatGPT Prompt</button>
+            <a href="boards/02_ADMIN_PORTAL_COMPILATION.png" download class="text-xs text-slate-300 hover:text-white">Download ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Individual Curated Screens -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          Curated Core System Screens
+        </h2>
+        <span class="text-xs text-slate-400">14 Essential Screens • 1600x960 Pristine Resolution</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="screens-grid">
+
+        <!-- Screen Card 01 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#01: Public Citizen Portal - Homepage & Hero</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#01</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/01_Citizen_Homepage_Hero.png', '#01: Public Citizen Portal - Homepage & Hero')">
+            <img src="screens/01_Citizen_Homepage_Hero.png" alt="Public Citizen Portal - Homepage & Hero" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Top Navbar: Brand logo, navigation links, theme toggle, and Sign In action</li><li class='text-[11px] text-slate-300 truncate'>• Hero Section: Search bar with instant autocomplete and scope selector</li><li class='text-[11px] text-slate-300 truncate'>• Metrics Strip: Total ordinances, active barangays, and resolved incidents</li><li class='text-[11px] text-slate-300 truncate'>• Navigation Feature Cards: Ordinance Explorer, AI Chatbot, Community Reports, Civic News</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('01', 'Public Citizen Portal - Homepage & Hero', '/')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/01_Citizen_Homepage_Hero.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 02 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="common">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-500/20 text-slate-400 border border-slate-500/30">
+                  Universal Access
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/login</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#02: System Authentication & Role Sign-In</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#02</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/02_Auth_Login_Modal.png', '#02: System Authentication & Role Sign-In')">
+            <img src="screens/02_Auth_Login_Modal.png" alt="System Authentication & Role Sign-In" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Modal Backdrop: Dimmed focus overlay with close action</li><li class='text-[11px] text-slate-300 truncate'>• Card Header: Cabanatuan official seal, portal title, and sign-in instructions</li><li class='text-[11px] text-slate-300 truncate'>• Role Selector / Segmented Tabs: Citizen, Barangay Official, City Admin</li><li class='text-[11px] text-slate-300 truncate'>• Input Form: Email address, password field with visibility toggle</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('02', 'System Authentication & Role Sign-In', '/login')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/02_Auth_Login_Modal.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 03 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/ordinances</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#03: Public Ordinance Explorer & Filter Engine</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#03</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/03_Citizen_Ordinance_Explorer.png', '#03: Public Ordinance Explorer & Filter Engine')">
+            <img src="screens/03_Citizen_Ordinance_Explorer.png" alt="Public Ordinance Explorer & Filter Engine" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Filter Bar: Keyword search input, category pills (Traffic, Health, Zoning, Safety)</li><li class='text-[11px] text-slate-300 truncate'>• Sorting Controls: Sort by enactment date, ordinance number, or relevance</li><li class='text-[11px] text-slate-300 truncate'>• Ordinance Card Grid: Number badge, title, enactment date, executive summary, category tags</li><li class='text-[11px] text-slate-300 truncate'>• Quick Actions: 'Read Provisions' button and 'Download PDF' quick icon</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('03', 'Public Ordinance Explorer & Filter Engine', '/ordinances')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/03_Citizen_Ordinance_Explorer.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 04 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/ordinances/[slug]</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#04: Ordinance Document Reader & Provisions</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#04</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/04_Citizen_Ordinance_Detail.png', '#04: Ordinance Document Reader & Provisions')">
+            <img src="screens/04_Citizen_Ordinance_Detail.png" alt="Ordinance Document Reader & Provisions" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Breadcrumb Trail: Home > Ordinances > Ordinance Detail</li><li class='text-[11px] text-slate-300 truncate'>• Metadata Banner: Ordinance number, author/sponsor, date approved, effectivity date</li><li class='text-[11px] text-slate-300 truncate'>• Executive Summary Box: Key takeaways in plain language for public comprehension</li><li class='text-[11px] text-slate-300 truncate'>• Provisions Content Body: Structured legal sections, articles, and definitions</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('04', 'Ordinance Document Reader & Provisions', '/ordinances/[slug]')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/04_Citizen_Ordinance_Detail.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 05 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/chatbot</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#05: AI Legislative Assistant & Citation Chatbot</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#05</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/05_Citizen_AI_Legislative_Assistant.png', '#05: AI Legislative Assistant & Citation Chatbot')">
+            <img src="screens/05_Citizen_AI_Legislative_Assistant.png" alt="AI Legislative Assistant & Citation Chatbot" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Chat Stream: Chronological conversation message bubbles (User & AI)</li><li class='text-[11px] text-slate-300 truncate'>• Citation Pill Badges: Clickable ordinance reference links citing exact section numbers</li><li class='text-[11px] text-slate-300 truncate'>• Quick Suggestion Chips: Preset FAQ prompts (e.g. curfew hours, noise regulations, tricycle fares)</li><li class='text-[11px] text-slate-300 truncate'>• Input Bar: Multi-line text query input, send button, and disclaimer badge</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('05', 'AI Legislative Assistant & Citation Chatbot', '/chatbot')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/05_Citizen_AI_Legislative_Assistant.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 06 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/report</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#06: Citizen Incident & Violation Report Form</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#06</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/06_Citizen_Incident_Report_Form.png', '#06: Citizen Incident & Violation Report Form')">
+            <img src="screens/06_Citizen_Incident_Report_Form.png" alt="Citizen Incident & Violation Report Form" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Header Card: Purpose description and community reporting guidelines</li><li class='text-[11px] text-slate-300 truncate'>• Category Dropdown: Violation type (e.g., Illegal Parking, Noise Curfew, Waste Disposal)</li><li class='text-[11px] text-slate-300 truncate'>• Location Selectors: Specific Barangay selector and street/landmark input field</li><li class='text-[11px] text-slate-300 truncate'>• Incident Narrative: Detailed description textarea</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('06', 'Citizen Incident & Violation Report Form', '/report')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/06_Citizen_Incident_Report_Form.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 07 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="citizen">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  Citizen & Public
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/news</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#07: Civic News & Announcements Bulletin</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#07</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/07_Citizen_Civic_News.png', '#07: Civic News & Announcements Bulletin')">
+            <img src="screens/07_Citizen_Civic_News.png" alt="Civic News & Announcements Bulletin" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Featured Spotlight Card: Hero banner for high-priority city announcements</li><li class='text-[11px] text-slate-300 truncate'>• Filter Pills: All, Public Hearings, Advisory, Community Notices, Traffic Updates</li><li class='text-[11px] text-slate-300 truncate'>• News Cards Grid: 3-column card layout with thumbnail image, date badge, title, excerpt</li><li class='text-[11px] text-slate-300 truncate'>• Article Footer: Read More button, sharing links, and author attribution</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('07', 'Civic News & Announcements Bulletin', '/news')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/07_Citizen_Civic_News.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 08 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="barangay">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  Barangay Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/barangay</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#08: Barangay Admin - Operational Dashboard</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#08</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/08_Barangay_Admin_Dashboard.png', '#08: Barangay Admin - Operational Dashboard')">
+            <img src="screens/08_Barangay_Admin_Dashboard.png" alt="Barangay Admin - Operational Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Sidebar Navigation: Dashboard, Ordinances, Community Reports, Analytics, Settings</li><li class='text-[11px] text-slate-300 truncate'>• Header Bar: Barangay identifier badge, quick notifications, user profile menu</li><li class='text-[11px] text-slate-300 truncate'>• KPI Metric Cards: Total Local Ordinances, Active Community Reports, Pending LGU Submissions, Resolution Rate</li><li class='text-[11px] text-slate-300 truncate'>• Recent Activity Feed: Chronological log of recent ordinance drafts and status changes</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('08', 'Barangay Admin - Operational Dashboard', '/admin/barangay')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/08_Barangay_Admin_Dashboard.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 09 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="barangay">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  Barangay Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/barangay/ordinances</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#09: Barangay Admin - Ordinance Registry & Drafting</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#09</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/09_Barangay_Ordinance_Management.png', '#09: Barangay Admin - Ordinance Registry & Drafting')">
+            <img src="screens/09_Barangay_Ordinance_Management.png" alt="Barangay Admin - Ordinance Registry & Drafting" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Action Toolbar: Search input, status filter tabs (All, Draft, Submitted to LGU, Enacted)</li><li class='text-[11px] text-slate-300 truncate'>• Primary CTA: '+ Draft New Ordinance' modal launcher button</li><li class='text-[11px] text-slate-300 truncate'>• Registry Table: Columns for Ordinance No., Title, Category, Submission Date, Workflow Status Badge</li><li class='text-[11px] text-slate-300 truncate'>• Row Actions: Edit draft, upload PDF document, submit to City LGU review, delete draft</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('09', 'Barangay Admin - Ordinance Registry & Drafting', '/admin/barangay/ordinances')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/09_Barangay_Ordinance_Management.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 10 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="barangay">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  Barangay Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/barangay/reports (modal)</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#10: Barangay Admin - Incident Triage & Resolution Modal</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#10</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/10_Barangay_Incident_Triage.png', '#10: Barangay Admin - Incident Triage & Resolution Modal')">
+            <img src="screens/10_Barangay_Incident_Triage.png" alt="Barangay Admin - Incident Triage & Resolution Modal" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Modal Dialog: Focused popup over blurred admin table background</li><li class='text-[11px] text-slate-300 truncate'>• Report Header: Ticket ID, submission timestamp, and reporter contact (or 'Anonymous')</li><li class='text-[11px] text-slate-300 truncate'>• Evidence Viewer: Full photo evidence preview with zoom capability</li><li class='text-[11px] text-slate-300 truncate'>• Status Selector: Radio / dropdown (Pending, Under Investigation, Resolved, Dismissed)</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('10', 'Barangay Admin - Incident Triage & Resolution Modal', '/admin/barangay/reports (modal)')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/10_Barangay_Incident_Triage.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 11 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="lgu">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  City LGU Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/lgu</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#11: LGU City Admin - Executive Oversight Dashboard</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#11</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/11_LGU_Executive_Dashboard.png', '#11: LGU City Admin - Executive Oversight Dashboard')">
+            <img src="screens/11_LGU_Executive_Dashboard.png" alt="LGU City Admin - Executive Oversight Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Admin Sidebar: Executive Dashboard, Ordinance Repository, Review Workflow, User Management, Barangays, Reports, News, Analytics</li><li class='text-[11px] text-slate-300 truncate'>• Executive KPI Strip: Total City Ordinances, Registered Barangays, Pending Legislative Reviews, Total Community Incidents</li><li class='text-[11px] text-slate-300 truncate'>• Legislative Review Urgent Queue: High-priority table of ordinances awaiting City Council action</li><li class='text-[11px] text-slate-300 truncate'>• Barangay Submission Activity: Quick-glance status indicators across all city districts</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('11', 'LGU City Admin - Executive Oversight Dashboard', '/admin/lgu')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/11_LGU_Executive_Dashboard.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 12 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="lgu">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  City LGU Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/lgu/ordinances (modal)</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#12: LGU City Admin - Legislative Review & Approval Modal</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#12</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/12_LGU_Ordinance_Review_Approval.png', '#12: LGU City Admin - Legislative Review & Approval Modal')">
+            <img src="screens/12_LGU_Ordinance_Review_Approval.png" alt="LGU City Admin - Legislative Review & Approval Modal" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Modal Header: Draft Ordinance title, originating barangay, and submission date</li><li class='text-[11px] text-slate-300 truncate'>• Document Preview: Legal provisions summary and AI-extracted compliance parameters</li><li class='text-[11px] text-slate-300 truncate'>• Council Review Remarks: Rich text feedback box for revision notes or commendations</li><li class='text-[11px] text-slate-300 truncate'>• Approval Action Bar: 'Approve & Enact' (Success), 'Request Revisions' (Warning), 'Reject' (Danger), 'Cancel'</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('12', 'LGU City Admin - Legislative Review & Approval Modal', '/admin/lgu/ordinances (modal)')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/12_LGU_Ordinance_Review_Approval.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 13 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="lgu">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  City LGU Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/lgu/reports</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#13: LGU City Admin - City-wide Reports & Incident Monitoring</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#13</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/13_LGU_City_Reports_Monitoring.png', '#13: LGU City Admin - City-wide Reports & Incident Monitoring')">
+            <img src="screens/13_LGU_City_Reports_Monitoring.png" alt="LGU City Admin - City-wide Reports & Incident Monitoring" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Filter Controls: Barangay district dropdown, category selector, date range picker, and resolution status tabs</li><li class='text-[11px] text-slate-300 truncate'>• Summary Metric Badges: Open Incidents, Under Investigation, Resolved, Average Resolution Time</li><li class='text-[11px] text-slate-300 truncate'>• Master Incidents Table: Ticket ID, Date, Barangay, Category, Description Excerpt, Current Status Badge, Action View Button</li><li class='text-[11px] text-slate-300 truncate'>• Export Tools: Export to CSV / PDF report buttons</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('13', 'LGU City Admin - City-wide Reports & Incident Monitoring', '/admin/lgu/reports')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/13_LGU_City_Reports_Monitoring.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+        <!-- Screen Card 14 -->
+        <div class="screen-card bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col" data-cat="lgu">
+          <!-- Header -->
+          <div class="p-3.5 border-b border-slate-800 bg-slate-900/80 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  City LGU Admin
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">/admin/lgu/analytics</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mt-1">#14: LGU City Admin - Legislative Analytics & Trends</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-500">#14</span>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="relative group cursor-pointer aspect-video bg-slate-950 overflow-hidden" onclick="openModal('screens/14_LGU_Legislative_Analytics.png', '#14: LGU City Admin - Legislative Analytics & Trends')">
+            <img src="screens/14_LGU_Legislative_Analytics.png" alt="LGU City Admin - Legislative Analytics & Trends" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Zoom Preview</span>
+            </div>
+          </div>
+
+          <!-- Component Highlights -->
+          <div class="p-3.5 bg-slate-900/40 border-b border-slate-800/80 flex-1">
+            <p class="text-[11px] font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Wireframe Structure:</p>
+            <ul class="space-y-1">
+              <li class='text-[11px] text-slate-300 truncate'>• Date Range Filter: Predefined presets (Last 30 Days, 6 Months, Year-to-Date, All Time)</li><li class='text-[11px] text-slate-300 truncate'>• Summary Stat Cards: Enacted Ordinances, Citizen Report Resolution Rate, Active AI Queries</li><li class='text-[11px] text-slate-300 truncate'>• Chart 1 (Bar/Line): Monthly Ordinance Enactment and Submission Trends</li><li class='text-[11px] text-slate-300 truncate'>• Chart 2 (Donut/Pie): Legislative Distribution by Category (Traffic, Sanitation, Safety, Governance)</li>
+            </ul>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+            <button onclick="copyScreenPrompt('14', 'LGU City Admin - Legislative Analytics & Trends', '/admin/lgu/analytics')" class="text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy Prompt
+            </button>
+            <a href="screens/14_LGU_Legislative_Analytics.png" download class="text-slate-400 hover:text-white">Download PNG ↓</a>
+          </div>
+        </div>
+    
+      </div>
+    </section>
+
+    <!-- Prompt Cheat Sheet Section -->
+    <section class="p-6 rounded-xl border border-slate-800 bg-slate-900 space-y-4">
+      <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+        <span class="text-xl">💬</span> How to send to ChatGPT for Wireframe / Skeleton Generation
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
+        <div class="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+          <span class="font-bold text-emerald-400 text-sm">Option 1: Upload All-in-One Board</span>
+          <p>Download <code class="text-indigo-300 font-mono">00_MASTER_COMPILATION_OVERVIEW.png</code> and upload it directly to ChatGPT with the prompt below. ChatGPT will analyze all 12 core screens at once.</p>
+        </div>
+        <div class="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+          <span class="font-bold text-sky-400 text-sm">Option 2: Upload PDF Compilation</span>
+          <p>Upload <code class="text-indigo-300 font-mono">UI_Screenshots_Wireframe_Compilation.pdf</code> to ChatGPT Plus. ChatGPT parses every page and its structural layout specifications.</p>
+        </div>
+        <div class="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+          <span class="font-bold text-purple-400 text-sm">Option 3: Specific Single Screen</span>
+          <p>Pick just the exact screen you are working on (e.g. AI Assistant or Ordinance Detail), upload its PNG, and click "Copy Prompt" on that card.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Modal -->
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur hidden flex flex-col items-center justify-center p-4" onclick="closeModal()">
+    <div class="max-w-6xl w-full flex flex-col max-h-[92vh]" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 text-white">
+        <h3 id="modal-title" class="text-base font-semibold"></h3>
+        <button onclick="closeModal()" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sm">✕ Close</button>
+      </div>
+      <div class="overflow-auto rounded-lg border border-slate-700 bg-slate-950 max-h-[85vh] flex items-center justify-center">
+        <img id="modal-img" src="" alt="Enlarged" class="max-w-full max-h-full object-contain">
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-emerald-600 text-white px-4 py-2.5 rounded-lg shadow-xl text-xs font-semibold translate-y-20 opacity-0 transition duration-300">
+    Copied prompt to clipboard!
+  </div>
+
+  <script>
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = 'cat-btn px-3 py-1.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+      });
+      const activeBtn = document.getElementById('btn-' + cat);
+      if (activeBtn) {
+        activeBtn.className = 'cat-btn px-3 py-1.5 rounded-md text-xs font-semibold bg-emerald-600 text-white transition';
+      }
+
+      const cards = document.querySelectorAll('.screen-card');
+      const boardsSection = document.getElementById('section-boards');
+
+      if (cat === 'all') {
+        cards.forEach(c => c.style.display = 'flex');
+        boardsSection.style.display = 'block';
+      } else if (cat === 'boards') {
+        cards.forEach(c => c.style.display = 'none');
+        boardsSection.style.display = 'block';
+      } else {
+        boardsSection.style.display = 'none';
+        cards.forEach(c => {
+          c.style.display = (c.getAttribute('data-cat') === cat) ? 'flex' : 'none';
+        });
+      }
+    }
+
+    function openModal(src, title) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('image-modal').classList.add('hidden');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        t.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function copyToClipboard(text, msg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg || "Copied to clipboard!");
+      });
+    }
+
+    function copyMasterPrompt() {
+      const p = `I am attaching screenshots of our web application (Cabanatuan City Ordinance & Legislative Portal).
+
+Please convert these UI screens into low-fidelity wireframes / skeletons for our system design documentation.
+
+For each screen:
+1. Provide an ASCII or structural layout diagram showing the main layout zones (Navbar, Sidebar, Hero/Filters, Main Content Grid/Table, Action Buttons, Modals).
+2. Outline the exact component hierarchy (Container -> Section -> Card/Table -> Controls).
+3. If requested, provide a React + Tailwind CSS skeleton component representing the page loading / low-fidelity wireframe state.
+4. Keep the design clean, modular, and accessible.`;
+      copyToClipboard(p, "Master ChatGPT prompt copied!");
+    }
+
+    function copyPrompt(type) {
+      let p = "";
+      if (type === 'master') {
+        copyMasterPrompt();
+        return;
+      } else if (type === 'citizen') {
+        p = `I am attaching the compilation board of our Citizen & Public Portal screens (Cabanatuan City Ordinance Portal).
+Please convert these 6 public-facing screens (Homepage, Ordinance Explorer, Document Reader, AI Legislative Assistant, Incident Report Form, Civic News) into:
+1. Clean low-fidelity wireframe diagrams (ASCII / Markdown representation).
+2. Component wireframe specifications (Header, Search, Filters, Cards, Forms, Modals).
+3. Clear interaction flow between search -> detail -> AI query -> incident reporting.`;
+      } else if (type === 'admin') {
+        p = `I am attaching the compilation board of our Administrative Portals (Barangay Admin & City LGU Admin).
+Please convert these administrative management screens into low-fidelity wireframe layouts:
+1. Dashboard layout (Sidebar, Metric KPI Cards, Queue Tables).
+2. Ordinance Management & Review Workflow (Table columns, status pills, action modals).
+3. Incident Triage & Legislative Analytics charts wireframe structure.`;
+      }
+      copyToClipboard(p, "Board prompt copied!");
+    }
+
+    function copyScreenPrompt(id, title, route) {
+      const p = `Here is a screenshot of our system UI screen:
+Screen #${id}: ${title}
+Route: ${route}
+
+Please generate:
+1. A clean low-fidelity wireframe / ASCII layout representation of this screen.
+2. A component breakdown listing all UI zones (Navbar/Sidebar, Header, Main content, Inputs/Tables/Cards, Actions).
+3. A Tailwind CSS skeleton component snippet representing this wireframe skeleton.`;
+      copyToClipboard(p, `Prompt for #${id} copied!`);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
