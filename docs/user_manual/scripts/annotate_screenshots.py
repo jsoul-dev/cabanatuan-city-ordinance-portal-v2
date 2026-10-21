@@ -2,9 +2,9 @@
 """
 Screenshot Annotation Engine for Cabanatuan City Ordinance Portal User Manual.
 Uses Python Pillow to programmatically annotate screenshots with:
-  - Semi-transparent highlight tinting
-  - Crisp rounded border outlines
-  - Contrasting numbered circular badges (white outer border, vibrant emerald fill)
+  - 100% transparent interior (0% tint opacity) so underlying UI text is completely legible
+  - Crisp, professional 2px emerald outlines (#10B981)
+  - Numbered circular badges (white outer border, drop shadow, vibrant emerald fill)
   - Clear, anti-aliased typographic numbers mapped 1:1 to manual steps.
 Preserves original unannotated screenshots in screenshots/original/.
 """
@@ -13,7 +13,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont
 
 if sys.stdout.encoding != 'utf-8':
     try:
@@ -28,17 +28,15 @@ ANNOTATED_DIR = BASE_DIR / "screenshots" / "annotated"
 CONFIG_FILE = BASE_DIR / "config" / "annotations_config.json"
 
 # Color Palette (Emerald civic theme)
-STROKE_COLOR = (16, 185, 129, 230)       # #10B981 Emerald
-FILL_TINT_COLOR = (16, 185, 129, 28)      # 11% opacity tint
-BADGE_FILL = (4, 120, 87, 255)            # #047857 Dark Emerald
-BADGE_BORDER = (255, 255, 255, 255)       # White border
-BADGE_SHADOW = (0, 0, 0, 110)             # Drop shadow
-TEXT_COLOR = (255, 255, 255, 255)         # Pure White
-SECONDARY_STROKE = (59, 130, 246, 230)   # Blue alternative
-SECONDARY_FILL = (30, 64, 175, 255)
+STROKE_COLOR = (16, 185, 129, 255)       # #10B981 Crisp Emerald Outline (2px)
+FILL_TINT_COLOR = None                    # 0% opacity (Completely transparent, NO wash/tint)
+BADGE_FILL = (4, 120, 87, 255)            # #047857 Dark Emerald Solid
+BADGE_BORDER = (255, 255, 255, 255)       # Pure White Border Ring
+BADGE_SHADOW = (0, 0, 0, 110)             # Subtle Drop Shadow
+TEXT_COLOR = (255, 255, 255, 255)         # Pure White Number
 
 def load_fonts():
-    """Load high-legibility bold Windows font."""
+    """Load high-legibility bold Windows font for badges."""
     font_paths = [
         r"C:\Windows\Fonts\segoeuib.ttf",
         r"C:\Windows\Fonts\arialbd.ttf",
@@ -47,8 +45,8 @@ def load_fonts():
     for p in font_paths:
         if os.path.exists(p):
             try:
-                badge_font = ImageFont.truetype(p, 16)
-                small_font = ImageFont.truetype(p, 13)
+                badge_font = ImageFont.truetype(p, 14)
+                small_font = ImageFont.truetype(p, 12)
                 return badge_font, small_font
             except Exception:
                 continue
@@ -56,23 +54,23 @@ def load_fonts():
     return default, default
 
 def draw_badge(draw, cx, cy, radius, num_str, font):
-    """Draw a professional anti-aliased badge with drop shadow and border."""
-    # Shadow
+    """Draw a professional anti-aliased badge with drop shadow and white border."""
+    # 1. Subtle Drop Shadow
     draw.ellipse(
         [cx - radius + 1, cy - radius + 2, cx + radius + 1, cy + radius + 2],
         fill=BADGE_SHADOW
     )
-    # White Outer Ring
+    # 2. White Outer Ring (2px thick)
     draw.ellipse(
         [cx - radius - 1, cy - radius - 1, cx + radius + 1, cy + radius + 1],
         fill=BADGE_BORDER
     )
-    # Inner Solid Emerald Circle
+    # 3. Inner Solid Emerald Circle
     draw.ellipse(
         [cx - radius + 1, cy - radius + 1, cx + radius - 1, cy + radius - 1],
         fill=BADGE_FILL
     )
-    # Centered Number
+    # 4. Centered White Number
     bbox = draw.textbbox((0, 0), num_str, font=font)
     tw = bbox[2] - bbox[0]
     th = bbox[3] - bbox[1]
@@ -119,21 +117,20 @@ def annotate_screenshot(screen_key, screen_data, badge_font, small_font):
             if bw <= 4 or bh <= 4:
                 continue
 
-            # Draw highlight rectangle with rounded corners
-            r = min(8, bw // 4, bh // 4)
-            # Tint fill
+            # Draw highlight rectangle with rounded corners (No fill tint, 100% transparent interior)
+            r = min(6, bw // 4, bh // 4)
             draw.rounded_rectangle(
                 [bx, by, bx + bw, by + bh],
                 radius=r,
-                fill=FILL_TINT_COLOR,
+                fill=None,
                 outline=STROKE_COLOR,
                 width=2
             )
 
-            # Badge Position: Prefer top-left of the bounding box
+            # Badge Position: Top-left of the bounding box, resting neatly on the corner
             badge_r = 13
-            bcx = bx - 2
-            bcy = by - 2
+            bcx = bx
+            bcy = by - 6 if by >= 18 else by + 10
 
             # Clamp inside viewport
             bcx = max(badge_r + 4, min(width - badge_r - 4, bcx))
@@ -144,8 +141,8 @@ def annotate_screenshot(screen_key, screen_data, badge_font, small_font):
                 dist_sq = (bcx - px) ** 2 + (bcy - py) ** 2
                 if dist_sq < (badge_r * 2.2) ** 2:
                     # Shift badge to top right or bottom
-                    bcx = min(width - badge_r - 4, bx + bw + 2)
-                    bcy = max(badge_r + 4, by - 2)
+                    bcx = min(width - badge_r - 4, bx + bw - badge_r)
+                    bcy = max(badge_r + 4, by - 6)
                     break
 
             placed_badges.append((bcx, bcy))
@@ -160,7 +157,7 @@ def annotate_screenshot(screen_key, screen_data, badge_font, small_font):
 
 def main():
     print("=======================================================")
-    print("  [ANNOTATOR] Annotating Application Screenshots (Pillow)")
+    print("  🎨 ANNOTATING APPLICATION SCREENSHOTS (CLEAN & CRISP)")
     print("=======================================================\n")
 
     if not CONFIG_FILE.exists():
@@ -178,7 +175,7 @@ def main():
         if annotate_screenshot(key, data, badge_font, small_font):
             count += 1
 
-    print(f"\n[OK] Successfully annotated {count} screenshots!")
+    print(f"\n[OK] Successfully annotated {count} screenshots cleanly!")
     print(f"Output directory: {ANNOTATED_DIR}")
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-20T20:00:48.787Z",
+  "generatedAt": "2026-10-21T05:13:12.062Z",
   "viewport": {
-    "width": 1280,
-    "height": 800
+    "width": 1600,
+    "height": 960
   },
   "screenshots": {
     "common_01_homepage_hero": {
@@ -18,60 +18,70 @@
           "num": 1,
           "label": "Cabanatuan City Seal & Portal Branding",
           "box": {
-            "x": 32,
-            "y": 14,
-            "width": 147,
-            "height": 36
+            "x": 189,
+            "y": 11,
+            "width": 153,
+            "height": 42
           }
         },
         {
           "num": 2,
           "label": "Main Navigation Bar",
           "box": {
-            "x": 0,
+            "x": 157,
             "y": 0,
-            "width": 1280,
-            "height": 64
+            "width": 1286,
+            "height": 70
           }
         },
         {
           "num": 3,
-          "label": "Hero Search Bar",
+          "label": "Hero Ordinance Search Input",
           "box": {
-            "x": 32,
-            "y": 575,
-            "width": 386,
-            "height": 46
+            "x": 157,
+            "y": 647,
+            "width": 392,
+            "height": 52
           }
         },
         {
           "num": 4,
-          "label": "Quick Category Discovery Chips",
+          "label": "Search Submit Button",
           "box": {
-            "x": 260,
-            "y": 350,
-            "width": 760,
-            "height": 42
+            "x": 551,
+            "y": 648,
+            "width": 124,
+            "height": 50
           }
         },
         {
           "num": 5,
-          "label": "Interactive 3D Ordinance Archive Canvas",
+          "label": "Ask AI Assistant Action Button",
           "box": {
-            "x": 773,
-            "y": 207,
-            "width": 462,
-            "height": 460
+            "x": 157,
+            "y": 709,
+            "width": 248,
+            "height": 50
           }
         },
         {
           "num": 6,
+          "label": "Interactive 3D Ordinance Archive Canvas",
+          "box": {
+            "x": 935,
+            "y": 279,
+            "width": 495,
+            "height": 466
+          }
+        },
+        {
+          "num": 7,
           "label": "Portal Theme Toggle (Dark/Light)",
           "box": {
-            "x": 1200,
-            "y": 20,
-            "width": 44,
-            "height": 44
+            "x": 1250,
+            "y": 11,
+            "width": 42,
+            "height": 42
           }
         }
       ]
@@ -89,60 +99,60 @@
           "num": 1,
           "label": "Official Portal Authentication Header",
           "box": {
-            "x": 64,
+            "x": 221,
             "y": 0,
-            "width": 1152,
-            "height": 84
+            "width": 1158,
+            "height": 90
           }
         },
         {
           "num": 2,
           "label": "Official Email Address Input Field",
           "box": {
-            "x": 809,
-            "y": 309,
-            "width": 334,
-            "height": 46
+            "x": 966,
+            "y": 370,
+            "width": 340,
+            "height": 52
           }
         },
         {
           "num": 3,
           "label": "Password Input Field",
           "box": {
-            "x": 809,
-            "y": 393,
-            "width": 334,
-            "height": 46
+            "x": 966,
+            "y": 454,
+            "width": 340,
+            "height": 52
           }
         },
         {
           "num": 4,
-          "label": "Sign In / Submit Button (Pumasok sa Portal)",
+          "label": "Sign In / Submit Button",
           "box": {
-            "x": 809,
-            "y": 463,
-            "width": 334,
-            "height": 48
+            "x": 966,
+            "y": 524,
+            "width": 340,
+            "height": 54
           }
         },
         {
           "num": 5,
           "label": "Quick Role Preset Access Chips",
           "box": {
-            "x": 680,
-            "y": 480,
-            "width": 380,
-            "height": 60
+            "x": 966,
+            "y": 652,
+            "width": 340,
+            "height": 53
           }
         },
         {
           "num": 6,
           "label": "Return to Public Portal Homepage Link",
           "box": {
-            "x": 1041,
-            "y": 35,
-            "width": 143,
-            "height": 30
+            "x": 1198,
+            "y": 32,
+            "width": 149,
+            "height": 36
           }
         }
       ]
@@ -162,38 +172,38 @@
           "box": {
             "x": 0,
             "y": 0,
-            "width": 1280,
-            "height": 65
+            "width": 1600,
+            "height": 71
           }
         },
         {
           "num": 2,
           "label": "Active Dark Mode Theme Toggle",
           "box": {
-            "x": 1200,
-            "y": 20,
-            "width": 44,
-            "height": 44
+            "x": 1250,
+            "y": 11,
+            "width": 42,
+            "height": 42
           }
         },
         {
           "num": 3,
-          "label": "Dark Glassmorphic Search & Suggestion Bar",
+          "label": "Dark Glassmorphic Search Bar",
           "box": {
-            "x": 32,
-            "y": 575,
-            "width": 386,
-            "height": 46
+            "x": 157,
+            "y": 647,
+            "width": 392,
+            "height": 52
           }
         },
         {
           "num": 4,
           "label": "Interactive 3D Cylinder Archive (Dark Scheme)",
           "box": {
-            "x": 773,
-            "y": 207,
-            "width": 462,
-            "height": 460
+            "x": 935,
+            "y": 279,
+            "width": 495,
+            "height": 466
           }
         }
       ]
@@ -211,50 +221,50 @@
           "num": 1,
           "label": "Full-Text Keyword Search Input",
           "box": {
-            "x": 48,
-            "y": 100,
-            "width": 450,
-            "height": 44
+            "x": 206,
+            "y": 343,
+            "width": 1188,
+            "height": 46
           }
         },
         {
           "num": 2,
-          "label": "Policy Category Filter Chips",
+          "label": "Jurisdiction Scope Filter (Lahat, City, Barangay)",
           "box": {
-            "x": 49,
-            "y": 489,
-            "width": 1182,
-            "height": 26
+            "x": 206,
+            "y": 428,
+            "width": 293,
+            "height": 48
           }
         },
         {
           "num": 3,
-          "label": "Dynamic Year Range Filter Slider",
+          "label": "Policy Category Filter Dropdown",
           "box": {
-            "x": 880,
-            "y": 100,
-            "width": 350,
-            "height": 60
+            "x": 803,
+            "y": 428,
+            "width": 293,
+            "height": 46
           }
         },
         {
           "num": 4,
-          "label": "Jurisdiction Scope Filter (City vs Barangay)",
+          "label": "Legislative Year Filter Dropdown",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 8490
+            "x": 1102,
+            "y": 428,
+            "width": 293,
+            "height": 46
           }
         },
         {
           "num": 5,
           "label": "Ordinance Card Grid with Status & Category Tags",
           "box": {
-            "x": 32,
-            "y": 600,
-            "width": 1216,
-            "height": 7439
+            "x": 189,
+            "y": 597,
+            "width": 604,
+            "height": 349
           }
         }
       ]
@@ -272,50 +282,50 @@
           "num": 1,
           "label": "Official Ordinance Title & Resolution Number",
           "box": {
-            "x": 189,
-            "y": 203,
-            "width": 902,
-            "height": 165
+            "x": 346,
+            "y": 200,
+            "width": 908,
+            "height": 171
           }
         },
         {
           "num": 2,
-          "label": "Legislative Metadata (Date, Series Year, Enacting Body)",
+          "label": "Legislative Metadata Bar (Date Enacted & Territorial Coverage)",
           "box": {
-            "x": 48,
-            "y": 160,
-            "width": 750,
-            "height": 40
+            "x": 346,
+            "y": 557,
+            "width": 908,
+            "height": 26
           }
         },
         {
           "num": 3,
-          "label": "Structured Legal Articles & Provisions (Split-Screen Left)",
+          "label": "Executive Legal Summary & Background Rationale Box",
           "box": {
-            "x": 48,
-            "y": 220,
-            "width": 750,
-            "height": 540
+            "x": 346,
+            "y": 381,
+            "width": 908,
+            "height": 116
           }
         },
         {
           "num": 4,
-          "label": "Summary, Sanctions & Tiered Penalties Card (Right)",
+          "label": "Open Official Scanned PDF Viewer Action Button",
           "box": {
-            "x": 830,
-            "y": 220,
-            "width": 400,
-            "height": 320
+            "x": 346,
+            "y": 706,
+            "width": 262,
+            "height": 50
           }
         },
         {
           "num": 5,
-          "label": "Open Official PDF Document Viewer Button",
+          "label": "Structured Legal Articles & Sections Container",
           "box": {
-            "x": 189,
-            "y": 709,
-            "width": 256,
-            "height": 44
+            "x": 317,
+            "y": 811,
+            "width": 966,
+            "height": 149
           }
         }
       ]
@@ -331,52 +341,52 @@
       "elements": [
         {
           "num": 1,
-          "label": "Official Document Modal Dialog Header",
+          "label": "Official Document Modal Dialog Header & Identifier",
           "box": {
-            "x": 180,
-            "y": 40,
-            "width": 920,
-            "height": 50
+            "x": 310,
+            "y": 87,
+            "width": 569,
+            "height": 30
           }
         },
         {
           "num": 2,
           "label": "Embedded Digital PDF Document Canvas",
           "box": {
-            "x": 200,
-            "y": 100,
-            "width": 880,
-            "height": 620
+            "x": 286,
+            "y": 128,
+            "width": 1028,
+            "height": 786
           }
         },
         {
           "num": 3,
-          "label": "Interactive Zoom & Pagination Controls",
+          "label": "Direct PDF File Download Action Button",
           "box": {
-            "x": 750,
-            "y": 45,
-            "width": 180,
+            "x": 889,
+            "y": 71,
+            "width": 171,
             "height": 38
           }
         },
         {
           "num": 4,
-          "label": "Direct PDF File Download Action Button",
+          "label": "Open in Dedicated Full-Screen Tab Button",
           "box": {
-            "x": 732,
-            "y": 66,
-            "width": 165,
-            "height": 32
+            "x": 1063,
+            "y": 70,
+            "width": 183,
+            "height": 40
           }
         },
         {
           "num": 5,
           "label": "Modal Dismiss / Close Action (Esc)",
           "box": {
-            "x": 1070,
-            "y": 45,
-            "width": 36,
-            "height": 36
+            "x": 1256,
+            "y": 73,
+            "width": 34,
+            "height": 34
           }
         }
       ]
@@ -392,62 +402,52 @@
       "elements": [
         {
           "num": 1,
-          "label": "Civic Safety & Informational Disclaimer Banner",
+          "label": "Civic Safety & Informational Disclaimer Notice",
           "box": {
-            "x": 458,
-            "y": 845,
-            "width": 769,
-            "height": 14
+            "x": 214,
+            "y": 294,
+            "width": 362,
+            "height": 86
           }
         },
         {
           "num": 2,
-          "label": "Quick Common Inquiry Action Buttons",
+          "label": "Preset Quick Action Inquiry Buttons",
           "box": {
-            "x": 80,
-            "y": 130,
-            "width": 1120,
-            "height": 44
+            "x": 214,
+            "y": 588,
+            "width": 362,
+            "height": 182
           }
         },
         {
           "num": 3,
-          "label": "Citizen Inquiry Message Bubble",
+          "label": "Bilingual Question Input Field",
           "box": {
-            "x": 462,
-            "y": 233,
-            "width": 761,
-            "height": 67
+            "x": 615,
+            "y": 780,
+            "width": 775,
+            "height": 56
           }
         },
         {
           "num": 4,
-          "label": "Gemini RAG Assistant Answer with Ordinance Citations",
+          "label": "Send Message Action Button",
           "box": {
-            "x": 57,
-            "y": 467,
-            "width": 356,
-            "height": 75
+            "x": 1340,
+            "y": 787,
+            "width": 42,
+            "height": 42
           }
         },
         {
           "num": 5,
-          "label": "Bilingual Question Input Field",
+          "label": "Official Informational Banner & Citation Notice",
           "box": {
-            "x": 458,
-            "y": 783,
-            "width": 769,
-            "height": 50
-          }
-        },
-        {
-          "num": 6,
-          "label": "Send Message Action Button",
-          "box": {
-            "x": 1130,
-            "y": 680,
-            "width": 48,
-            "height": 48
+            "x": 615,
+            "y": 842,
+            "width": 775,
+            "height": 20
           }
         }
       ]
@@ -465,70 +465,70 @@
           "num": 1,
           "label": "24/7 City Emergency Hotline Numbers Banner",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 1678
+            "x": 493,
+            "y": 284,
+            "width": 614,
+            "height": 168
           }
         },
         {
           "num": 2,
           "label": "Assigned Barangay Jurisdiction Dropdown",
           "box": {
-            "x": 369,
-            "y": 713,
-            "width": 259,
-            "height": 40
+            "x": 526,
+            "y": 710,
+            "width": 265,
+            "height": 46
           }
         },
         {
           "num": 3,
           "label": "Incident Category Selector",
           "box": {
-            "x": 369,
-            "y": 713,
-            "width": 259,
-            "height": 40
+            "x": 809,
+            "y": 710,
+            "width": 265,
+            "height": 46
           }
         },
         {
           "num": 4,
           "label": "Incident Subject / Summary Input Field",
           "box": {
-            "x": 310,
-            "y": 410,
-            "width": 660,
-            "height": 44
+            "x": 526,
+            "y": 622,
+            "width": 548,
+            "height": 46
           }
         },
         {
           "num": 5,
           "label": "Incident Narrative & Location Details Textarea",
           "box": {
-            "x": 310,
-            "y": 480,
-            "width": 660,
-            "height": 120
+            "x": 526,
+            "y": 798,
+            "width": 548,
+            "height": 132
           }
         },
         {
           "num": 6,
-          "label": "Anonymous Reporting Toggle & Contact Fields",
+          "label": "Anonymous Reporting Toggle",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 1678
+            "x": 526,
+            "y": 955,
+            "width": 548,
+            "height": 5
           }
         },
         {
           "num": 7,
           "label": "Submit Incident Report Action Button",
           "box": {
-            "x": 369,
-            "y": 1150,
-            "width": 273,
-            "height": 44
+            "x": 526,
+            "y": 1147,
+            "width": 279,
+            "height": -187
           }
         }
       ]
@@ -546,40 +546,30 @@
           "num": 1,
           "label": "Official Submission Confirmation Alert Banner",
           "box": {
-            "x": 427,
-            "y": -360,
-            "width": 500,
-            "height": 500
+            "x": 526,
+            "y": 511,
+            "width": 548,
+            "height": 124
           }
         },
         {
           "num": 2,
-          "label": "Target Barangay Hall Routing Notification",
+          "label": "Draft Auto-Save Status Bar",
           "box": {
-            "x": 0,
-            "y": -424,
-            "width": 1280,
-            "height": 1678
+            "x": 526,
+            "y": 653,
+            "width": 548,
+            "height": 67
           }
         },
         {
           "num": 3,
-          "label": "Official Tracking Reference Code",
+          "label": "Reset & Clear Form Action Button",
           "box": {
-            "x": 330,
-            "y": 240,
-            "width": 620,
-            "height": 35
-          }
-        },
-        {
-          "num": 4,
-          "label": "File Another Report / Return Option",
-          "box": {
-            "x": 330,
-            "y": 290,
-            "width": 220,
-            "height": 40
+            "x": 936,
+            "y": 653,
+            "width": 138,
+            "height": 50
           }
         }
       ]
@@ -597,40 +587,50 @@
           "num": 1,
           "label": "Civic News & Legislative Advisories Header",
           "box": {
-            "x": 160,
-            "y": 151,
-            "width": 960,
-            "height": 48
+            "x": 317,
+            "y": 148,
+            "width": 966,
+            "height": 54
           }
         },
         {
           "num": 2,
-          "label": "News Category Filter Tabs (Lahat, Lungsod, Barangay)",
+          "label": "Official LGU Public Authority Badge",
           "box": {
-            "x": 48,
-            "y": 140,
-            "width": 400,
-            "height": 40
+            "x": 317,
+            "y": 110,
+            "width": 424,
+            "height": 32
           }
         },
         {
           "num": 3,
-          "label": "Pinned Official Executive Advisory Card",
+          "label": "Official Executive Advisory Card",
           "box": {
-            "x": 48,
-            "y": 200,
-            "width": 1184,
-            "height": 180
+            "x": 317,
+            "y": 300,
+            "width": 966,
+            "height": 178
           }
         },
         {
           "num": 4,
-          "label": "Chronological Community News Feed",
+          "label": "Publication Date & Civic Category Badge",
           "box": {
-            "x": 48,
-            "y": 400,
-            "width": 1184,
-            "height": 360
+            "x": 342,
+            "y": 325,
+            "width": 916,
+            "height": 28
+          }
+        },
+        {
+          "num": 5,
+          "label": "Executive Directive Content Narrative",
+          "box": {
+            "x": 342,
+            "y": 401,
+            "width": 916,
+            "height": 52
           }
         }
       ]
@@ -646,62 +646,72 @@
       "elements": [
         {
           "num": 1,
-          "label": "Barangay-Scoped Header ('Barangay Governance Dashboard — Camp Tinio')",
+          "label": "Barangay Governance Dashboard Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 323,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 329,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Local Enacted Ordinances Metric Card",
+          "label": "Local Governance Welcome Banner",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 285,
+            "y": 93,
+            "width": 1286,
+            "height": 141
           }
         },
         {
           "num": 3,
-          "label": "Pending Legislative Proposals Metric Card",
+          "label": "Submit New Ordinance Quick Action Button",
           "box": {
-            "x": 500,
-            "y": 90,
-            "width": 220,
-            "height": 110
+            "x": 1330,
+            "y": 141,
+            "width": 216,
+            "height": 46
           }
         },
         {
           "num": 4,
-          "label": "Active Community Incident Reports Metric Card",
+          "label": "Local Enacted Ordinances Metric Card",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 285,
+            "y": 292,
+            "width": 314,
+            "height": 120
           }
         },
         {
           "num": 5,
-          "label": "Recent Community Incident Triage Feed",
+          "label": "Pending Legislative Proposals Metric Card",
           "box": {
-            "x": 260,
-            "y": 220,
-            "width": 980,
-            "height": 500
+            "x": 609,
+            "y": 292,
+            "width": 314,
+            "height": 120
           }
         },
         {
           "num": 6,
+          "label": "Active Community Incident Reports Metric Card",
+          "box": {
+            "x": 933,
+            "y": 292,
+            "width": 314,
+            "height": 120
+          }
+        },
+        {
+          "num": 7,
           "label": "Barangay Admin Dedicated Navigation Sidebar",
           "box": {
             "x": 0,
             "y": 0,
-            "width": 256,
-            "height": 800
+            "width": 262,
+            "height": 960
           }
         }
       ]
@@ -719,50 +729,50 @@
           "num": 1,
           "label": "Legislative Status Tabs (Lahat, Pending, Approved, Draft, Rejected)",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 285,
+            "y": 233,
+            "width": 600,
+            "height": 52
           }
         },
         {
           "num": 2,
           "label": "Create / Propose New Ordinance Action Button",
           "box": {
-            "x": 1040,
-            "y": 90,
-            "width": 200,
-            "height": 44
+            "x": 1347,
+            "y": 173,
+            "width": 224,
+            "height": 50
           }
         },
         {
           "num": 3,
           "label": "Local Ordinance Keyword Search Input",
           "box": {
-            "x": 894,
-            "y": 236,
-            "width": 354,
-            "height": 44
+            "x": 891,
+            "y": 233,
+            "width": 680,
+            "height": 50
           }
         },
         {
           "num": 4,
           "label": "Barangay Ordinance Records Table with Status Badges",
           "box": {
-            "x": 289,
-            "y": 299,
-            "width": 958,
-            "height": 625
+            "x": 286,
+            "y": 296,
+            "width": 1284,
+            "height": 631
           }
         },
         {
           "num": 5,
           "label": "Item Action Controls (View, Edit Draft, Resubmit)",
           "box": {
-            "x": 1161,
-            "y": 340,
-            "width": 86,
-            "height": 65
+            "x": 1512,
+            "y": 351,
+            "width": 42,
+            "height": 42
           }
         }
       ]
@@ -780,60 +790,50 @@
           "num": 1,
           "label": "New Ordinance Proposal Modal Dialog Header",
           "box": {
-            "x": 300,
-            "y": 50,
-            "width": 680,
-            "height": 40
+            "x": 434,
+            "y": 58,
+            "width": 445,
+            "height": 30
           }
         },
         {
           "num": 2,
-          "label": "Proposed Title & Resolution Number Input Fields",
+          "label": "Proposed Ordinance Title Input Field",
           "box": {
-            "x": 320,
-            "y": 110,
-            "width": 640,
-            "height": 44
+            "x": 434,
+            "y": 523,
+            "width": 732,
+            "height": 50
           }
         },
         {
           "num": 3,
-          "label": "Legislative Category & Year Series Dropdowns",
+          "label": "Legislative Category Dropdown",
           "box": {
-            "x": 320,
-            "y": 175,
-            "width": 310,
-            "height": 44
+            "x": 434,
+            "y": 695,
+            "width": 237,
+            "height": 50
           }
         },
         {
           "num": 4,
-          "label": "Legal Summary & Prohibited Acts Content Fields",
+          "label": "Save as Draft Action Button (Internal Staging)",
           "box": {
-            "x": 320,
-            "y": 240,
-            "width": 640,
-            "height": 100
+            "x": 730,
+            "y": 836,
+            "width": 188,
+            "height": 50
           }
         },
         {
           "num": 5,
-          "label": "Save as Draft Action Button (Internal Staging)",
-          "box": {
-            "x": 620,
-            "y": 680,
-            "width": 160,
-            "height": 44
-          }
-        },
-        {
-          "num": 6,
           "label": "Submit to LGU for Approval Button (Official Transmittal)",
           "box": {
-            "x": 800,
-            "y": 680,
-            "width": 160,
-            "height": 44
+            "x": 924,
+            "y": 836,
+            "width": 242,
+            "height": 50
           }
         }
       ]
@@ -851,50 +851,30 @@
           "num": 1,
           "label": "AI Auto-Extraction Section Header & Gemini Sparkle Badge",
           "box": {
-            "x": 320,
-            "y": 90,
-            "width": 640,
-            "height": 40
+            "x": 434,
+            "y": 141,
+            "width": 732,
+            "height": 264
           }
         },
         {
           "num": 2,
           "label": "Scanned Document PDF / Image File Dropzone",
           "box": {
-            "x": 320,
-            "y": 140,
-            "width": 640,
-            "height": 90
+            "x": 464,
+            "y": 244,
+            "width": 123,
+            "height": 36
           }
         },
         {
           "num": 3,
           "label": "Execute Multimodal AI Parsing Button ('I-Extract gamit ang AI')",
           "box": {
-            "x": 320,
-            "y": 240,
-            "width": 220,
-            "height": 40
-          }
-        },
-        {
-          "num": 4,
-          "label": "Multimodal OCR Status & Parsing Sequence",
-          "box": {
-            "x": 560,
-            "y": 240,
-            "width": 400,
-            "height": 40
-          }
-        },
-        {
-          "num": 5,
-          "label": "Auto-Populated Form Inputs with Human Verification",
-          "box": {
-            "x": 320,
-            "y": 300,
-            "width": 640,
-            "height": 350
+            "x": 451,
+            "y": 342,
+            "width": 698,
+            "height": 46
           }
         }
       ]
@@ -912,50 +892,40 @@
           "num": 1,
           "label": "Barangay Community Incident Reports Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 323,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 329,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Status Filter Chips (Lahat, Bago, Inaaksyunan, Naresolba)",
+          "label": "Status Filter Tabs (Lahat, Bago, Inaaksyunan, Nalutas, Ibinasura)",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 285,
+            "y": 173,
+            "width": 607,
+            "height": 52
           }
         },
         {
           "num": 3,
-          "label": "Incident Report Record Row with Timestamp & Category",
+          "label": "Incident Reports Records Table",
           "box": {
-            "x": 289,
-            "y": 280,
-            "width": 958,
-            "height": 65
+            "x": 286,
+            "y": 236,
+            "width": 1284,
+            "height": 631
           }
         },
         {
           "num": 4,
-          "label": "Constituent Anonymity / Contact Verification Badge",
+          "label": "Inline Status Triage & Resolution Dropdown Control",
           "box": {
-            "x": 868,
-            "y": 280,
-            "width": 134,
-            "height": 65
-          }
-        },
-        {
-          "num": 5,
-          "label": "Triage & Status Action Control",
-          "box": {
-            "x": 1107,
-            "y": 280,
-            "width": 140,
-            "height": 65
+            "x": 1404,
+            "y": 291,
+            "width": 114,
+            "height": 42
           }
         }
       ]
@@ -971,52 +941,52 @@
       "elements": [
         {
           "num": 1,
-          "label": "Incident Case Triage Dialog Header",
+          "label": "Target Incident Report Record Row",
           "box": {
-            "x": 350,
-            "y": 100,
-            "width": 580,
-            "height": 40
+            "x": 286,
+            "y": 277,
+            "width": 1284,
+            "height": 71
           }
         },
         {
           "num": 2,
-          "label": "Constituent Incident Details & Evidence Overview",
+          "label": "Incident Classification Badge",
           "box": {
-            "x": 370,
-            "y": 160,
-            "width": 540,
-            "height": 200
+            "x": 286,
+            "y": 277,
+            "width": 254,
+            "height": 71
           }
         },
         {
           "num": 3,
-          "label": "Resolution Status Selector (Bago -> Inaaksyunan -> Naresolba)",
+          "label": "Reporter Information & Anonymity Verification",
           "box": {
-            "x": 370,
-            "y": 380,
-            "width": 540,
-            "height": 44
+            "x": 935,
+            "y": 277,
+            "width": 158,
+            "height": 71
           }
         },
         {
           "num": 4,
-          "label": "Barangay Official Action Remarks & Findings Field",
+          "label": "Current Report Life-Cycle Status Badge",
           "box": {
-            "x": 370,
-            "y": 440,
-            "width": 540,
-            "height": 90
+            "x": 1087,
+            "y": 277,
+            "width": 177,
+            "height": 71
           }
         },
         {
           "num": 5,
-          "label": "Confirm Status Update Action Button",
+          "label": "Official Status Mutation & Triage Dropdown Selector",
           "box": {
-            "x": 740,
-            "y": 550,
-            "width": 170,
-            "height": 44
+            "x": 1404,
+            "y": 291,
+            "width": 114,
+            "height": 42
           }
         }
       ]
@@ -1034,40 +1004,40 @@
           "num": 1,
           "label": "Barangay-Scoped Legislative Reports Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 323,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 329,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Report Criteria & Category Selector",
+          "label": "Report Type Structure Selector Card",
           "box": {
-            "x": 288,
-            "y": 176,
-            "width": 960,
-            "height": 350
+            "x": 285,
+            "y": 173,
+            "width": 427,
+            "height": 356
           }
         },
         {
           "num": 3,
-          "label": "Generate Localized Report Button",
+          "label": "Multi-Criteria Filter Parameters Panel",
           "box": {
-            "x": 636,
-            "y": 393,
-            "width": 193,
-            "height": 44
+            "x": 722,
+            "y": 173,
+            "width": 849,
+            "height": 356
           }
         },
         {
           "num": 4,
-          "label": "Official Export & PDF Download Toolbar",
+          "label": "Generate Localized Report Action Button",
           "box": {
-            "x": 260,
-            "y": 330,
-            "width": 980,
-            "height": 80
+            "x": 739,
+            "y": 390,
+            "width": 199,
+            "height": 50
           }
         }
       ]
@@ -1085,40 +1055,40 @@
           "num": 1,
           "label": "Executive Dashboard Header & City Hall Governance Scope",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 298,
+            "height": 34
           }
         },
         {
           "num": 2,
           "label": "City-Wide KPI Cards (Total Ordinances, Approved, Pending, Drafts, Barangays)",
           "box": {
-            "x": 288,
-            "y": 96,
-            "width": 960,
-            "height": 130
+            "x": 285,
+            "y": 93,
+            "width": 1286,
+            "height": 120
           }
         },
         {
           "num": 3,
-          "label": "Quick Governance Action Shortcuts (Add Ordinance, Export, Reviews)",
+          "label": "Ordinance Status Life-Cycle Summary Grid",
           "box": {
-            "x": 260,
-            "y": 230,
-            "width": 980,
-            "height": 60
+            "x": 285,
+            "y": 271,
+            "width": 1286,
+            "height": 92
           }
         },
         {
           "num": 4,
           "label": "Recent City-Wide Legislative Activity Log",
           "box": {
-            "x": 260,
-            "y": 310,
-            "width": 980,
-            "height": 450
+            "x": 286,
+            "y": 422,
+            "width": 1284,
+            "height": 371
           }
         },
         {
@@ -1127,8 +1097,8 @@
           "box": {
             "x": 0,
             "y": 0,
-            "width": 256,
-            "height": 800
+            "width": 262,
+            "height": 960
           }
         }
       ]
@@ -1146,50 +1116,40 @@
           "num": 1,
           "label": "Accessible Status Filter Tabs with Live Record Counters",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 285,
+            "y": 267,
+            "width": 609,
+            "height": 52
           }
         },
         {
           "num": 2,
-          "label": "Instant City Ordinance Repository Search Input",
+          "label": "Add City Ordinance Action Button ('+ Bagong City Ordinance')",
           "box": {
-            "x": 903,
-            "y": 270,
-            "width": 345,
-            "height": 44
+            "x": 1343,
+            "y": 190,
+            "width": 211,
+            "height": 50
           }
         },
         {
           "num": 3,
-          "label": "Add City Ordinance / AI Document Parsing Action Button",
+          "label": "Instant City Ordinance Repository Search Input",
           "box": {
-            "x": 1040,
-            "y": 90,
-            "width": 200,
-            "height": 44
+            "x": 900,
+            "y": 267,
+            "width": 671,
+            "height": 50
           }
         },
         {
           "num": 4,
           "label": "City-Wide Ordinance Repository Table with Jurisdiction Badges",
           "box": {
-            "x": 289,
-            "y": 333,
-            "width": 1333,
-            "height": 3764
-          }
-        },
-        {
-          "num": 5,
-          "label": "Legislative Oversight Action Controls (Review, Enact, Delete)",
-          "box": {
-            "x": 1223,
-            "y": 374,
-            "width": 399,
-            "height": 65
+            "x": 286,
+            "y": 330,
+            "width": 1314,
+            "height": 630
           }
         }
       ]
@@ -1205,52 +1165,42 @@
       "elements": [
         {
           "num": 1,
-          "label": "Sangguniang Panlungsod Legislative Review Dialog Header",
+          "label": "Sangguniang Panlungsod Legislative Approval Dialog Header",
           "box": {
-            "x": 350,
-            "y": 80,
-            "width": 580,
-            "height": 40
+            "x": 643,
+            "y": 402,
+            "width": 359,
+            "height": 29
           }
         },
         {
           "num": 2,
-          "label": "Barangay Proposal Summary & Enactment Metadata",
+          "label": "Pending Ordinance Title & Legal Enactment Notice",
           "box": {
-            "x": 370,
-            "y": 130,
-            "width": 540,
-            "height": 180
+            "x": 643,
+            "y": 428,
+            "width": 359,
+            "height": 66
           }
         },
         {
           "num": 3,
-          "label": "City Legal Review Comments & Observation Remarks",
+          "label": "Official Enactment / Approval Action Button ('Aprubahan')",
           "box": {
-            "x": 370,
-            "y": 330,
-            "width": 540,
-            "height": 90
+            "x": 867,
+            "y": 508,
+            "width": 135,
+            "height": 50
           }
         },
         {
           "num": 4,
-          "label": "Official Enactment / Approval Action Button ('Aprubahan')",
+          "label": "Dismiss Review / Return Button ('Bumalik')",
           "box": {
-            "x": 550,
-            "y": 440,
-            "width": 170,
-            "height": 44
-          }
-        },
-        {
-          "num": 5,
-          "label": "Request Revision / Deny Submission Button ('Tanggihan')",
-          "box": {
-            "x": 740,
-            "y": 440,
-            "width": 170,
-            "height": 44
+            "x": 755,
+            "y": 508,
+            "width": 106,
+            "height": 50
           }
         }
       ]
@@ -1268,50 +1218,30 @@
           "num": 1,
           "label": "AI-Powered Multimodal OCR Ordinance Extractor Header",
           "box": {
-            "x": 320,
-            "y": 80,
-            "width": 640,
-            "height": 40
+            "x": 434,
+            "y": 141,
+            "width": 732,
+            "height": 264
           }
         },
         {
           "num": 2,
           "label": "Official Scanned Resolution Upload Dropzone",
           "box": {
-            "x": 320,
-            "y": 130,
-            "width": 640,
-            "height": 90
+            "x": 464,
+            "y": 244,
+            "width": 123,
+            "height": 36
           }
         },
         {
           "num": 3,
           "label": "Multimodal AI Parsing Execution Button",
           "box": {
-            "x": 320,
-            "y": 230,
-            "width": 220,
-            "height": 40
-          }
-        },
-        {
-          "num": 4,
-          "label": "Auto-Populated Resolution Number, Series & Enactment Date",
-          "box": {
-            "x": 320,
-            "y": 290,
-            "width": 310,
-            "height": 44
-          }
-        },
-        {
-          "num": 5,
-          "label": "Auto-Extracted Tiered Sanctions & Fines Breakdown",
-          "box": {
-            "x": 320,
-            "y": 480,
-            "width": 640,
-            "height": 80
+            "x": 451,
+            "y": 342,
+            "width": 698,
+            "height": 46
           }
         }
       ]
@@ -1329,50 +1259,50 @@
           "num": 1,
           "label": "City Government Official Personnel Roster Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 298,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Register New Official Action Button ('Magrehistro ng Opisyal')",
+          "label": "Register New Official Action Button ('Magdagdag ng Opisyal')",
           "box": {
-            "x": 1040,
-            "y": 32,
-            "width": 200,
-            "height": 44
+            "x": 1356,
+            "y": 173,
+            "width": 215,
+            "height": 50
           }
         },
         {
           "num": 3,
           "label": "Official Directory Table with Security Badges",
           "box": {
-            "x": 289,
-            "y": 237,
-            "width": 958,
-            "height": 676
+            "x": 286,
+            "y": 234,
+            "width": 1284,
+            "height": 656
           }
         },
         {
           "num": 4,
           "label": "Role-Based Privilege Badges (LGU Admin vs Barangay Admin)",
           "box": {
-            "x": 769,
-            "y": 278,
-            "width": 156,
-            "height": 63
+            "x": 927,
+            "y": 275,
+            "width": 218,
+            "height": 67
           }
         },
         {
           "num": 5,
           "label": "Assigned Territorial Barangay Jurisdiction Tag",
           "box": {
-            "x": 925,
-            "y": 278,
-            "width": 134,
-            "height": 63
+            "x": 1139,
+            "y": 275,
+            "width": 190,
+            "height": 67
           }
         }
       ]
@@ -1390,40 +1320,50 @@
           "num": 1,
           "label": "Cabanatuan City Barangay Directory Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 298,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Active Participation & Onboarding Indicators",
+          "label": "Barangay Participation & Onboarding Indicators",
           "box": {
-            "x": 288,
-            "y": 176,
-            "width": 960,
-            "height": 106
+            "x": 285,
+            "y": 173,
+            "width": 1286,
+            "height": 112
           }
         },
         {
           "num": 3,
-          "label": "Registered Barangay Directory Cards with Ordinance Counters",
+          "label": "Barangay Search & Filter Input Field",
           "box": {
-            "x": 260,
-            "y": 290,
-            "width": 980,
-            "height": 450
+            "x": 302,
+            "y": 320,
+            "width": 454,
+            "height": 48
           }
         },
         {
           "num": 4,
-          "label": "Local Jurisdiction Contact & Profile Shortcuts",
+          "label": "Register New Barangay Action Button",
           "box": {
-            "x": 280,
-            "y": 400,
-            "width": 120,
-            "height": 36
+            "x": 1276,
+            "y": 320,
+            "width": 278,
+            "height": 48
+          }
+        },
+        {
+          "num": 5,
+          "label": "Barangay Directory Table with Ordinance & Report Counts",
+          "box": {
+            "x": 286,
+            "y": 404,
+            "width": 1284,
+            "height": 556
           }
         }
       ]
@@ -1441,50 +1381,50 @@
           "num": 1,
           "label": "City-Wide Community Reports Monitoring Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 298,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Territorial Barangay Filter Dropdown (All 89 Barangays)",
+          "label": "Resolution Status Filter Tabs (Lahat, Bago, Inaaksyunan, Nalutas, Ibinasura)",
           "box": {
-            "x": 260,
-            "y": 90,
-            "width": 280,
-            "height": 42
+            "x": 285,
+            "y": 173,
+            "width": 627,
+            "height": 52
           }
         },
         {
           "num": 3,
-          "label": "Resolution Status Filter Tabs (Lahat, Bago, Inaaksyunan, Naresolba)",
+          "label": "Consolidated City-Wide Incident Records Table",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 286,
+            "y": 236,
+            "width": 1284,
+            "height": 724
           }
         },
         {
           "num": 4,
-          "label": "Consolidated City-Wide Incident Records Table",
+          "label": "Originating Barangay Jurisdiction Identification",
           "box": {
-            "x": 289,
-            "y": 239,
-            "width": 958,
-            "height": 2812
+            "x": 518,
+            "y": 277,
+            "width": 175,
+            "height": 71
           }
         },
         {
           "num": 5,
-          "label": "Executive Incident Oversight & Status Update Action",
+          "label": "Current Operational Resolution Status Badge",
           "box": {
-            "x": 1092,
-            "y": 280,
-            "width": 155,
-            "height": 65
+            "x": 1217,
+            "y": 277,
+            "width": 166,
+            "height": 71
           }
         }
       ]
@@ -1502,50 +1442,40 @@
           "num": 1,
           "label": "Civic News & Legislative Broadcasts Desk Header",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 277,
+            "y": 7,
+            "width": 298,
+            "height": 34
           }
         },
         {
           "num": 2,
-          "label": "Publish New Advisory Action Button ('Maglathala ng Anunsyo')",
+          "label": "Publish New Advisory Action Button ('+ Magdagdag ng Anunsyo')",
           "box": {
-            "x": 1040,
-            "y": 32,
-            "width": 200,
-            "height": 44
+            "x": 1364,
+            "y": 173,
+            "width": 207,
+            "height": 50
           }
         },
         {
           "num": 3,
-          "label": "Published Public News & Emergency Advisories List",
+          "label": "Published Public News & Advisories Table",
           "box": {
-            "x": 313,
-            "y": 245,
-            "width": 910,
-            "height": 279
+            "x": 310,
+            "y": 242,
+            "width": 1236,
+            "height": 285
           }
         },
         {
           "num": 4,
-          "label": "Priority Pinning Toggle for Urgent Civic Directives",
-          "box": {
-            "x": 920,
-            "y": 120,
-            "width": 120,
-            "height": 36
-          }
-        },
-        {
-          "num": 5,
           "label": "Advisory Management Controls (Edit, Delete, Sync to Public Feed)",
           "box": {
-            "x": 1060,
-            "y": 120,
-            "width": 160,
-            "height": 36
+            "x": 1366,
+            "y": 291,
+            "width": 180,
+            "height": 83
           }
         }
       ]
@@ -1561,52 +1491,42 @@
       "elements": [
         {
           "num": 1,
-          "label": "Legislative Report Structure Selector (All, by Month, Barangay, Category, Status)",
+          "label": "Legislative Report Structure Selector Card (8 Standardized Structures)",
           "box": {
-            "x": 260,
-            "y": 90,
-            "width": 310,
-            "height": 260
+            "x": 285,
+            "y": 173,
+            "width": 427,
+            "height": 452
           }
         },
         {
           "num": 2,
-          "label": "Multi-Criteria Filter Parameters (Year, Status, Category, Origin)",
+          "label": "Multi-Criteria Filter Parameters Panel (Year, Status, Category, Origin)",
           "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
+            "x": 722,
+            "y": 173,
+            "width": 849,
+            "height": 452
           }
         },
         {
           "num": 3,
           "label": "Execute Report Generation Action Button",
           "box": {
-            "x": 636,
-            "y": 469,
-            "width": 193,
-            "height": 44
+            "x": 739,
+            "y": 466,
+            "width": 199,
+            "height": 50
           }
         },
         {
           "num": 4,
-          "label": "Official Government Header Preview with Cabanatuan City Seal",
-          "box": {
-            "x": 0,
-            "y": 0,
-            "width": 1280,
-            "height": 800
-          }
-        },
-        {
-          "num": 5,
           "label": "Export Formal PDF Document Action Button ('I-download bilang PDF')",
           "box": {
-            "x": 1024,
-            "y": 659,
-            "width": 207,
-            "height": 44
+            "x": 1341,
+            "y": 656,
+            "width": 213,
+            "height": 50
           }
         }
       ]
@@ -1622,52 +1542,52 @@
       "elements": [
         {
           "num": 1,
-          "label": "Governance Analytics & Policy Intelligence Header",
+          "label": "Governance Analytics & Policy Intelligence Header Card",
           "box": {
-            "x": 280,
-            "y": 10,
-            "width": 292,
-            "height": 28
+            "x": 285,
+            "y": 93,
+            "width": 1286,
+            "height": 80
           }
         },
         {
           "num": 2,
-          "label": "Legislative Enactment Velocity Trend Chart (Yearly Trajectory)",
+          "label": "Legislative Year Filter Dropdown Selector",
           "box": {
-            "x": 260,
-            "y": 90,
-            "width": 640,
-            "height": 320
+            "x": 1408,
+            "y": 111,
+            "width": 146,
+            "height": 44
           }
         },
         {
           "num": 3,
-          "label": "Policy Category Distribution Breakdown Chart",
+          "label": "Executive Key Performance Indicators (KPI) Summary Banner",
           "box": {
-            "x": 920,
-            "y": 90,
-            "width": 320,
-            "height": 320
+            "x": 285,
+            "y": 199,
+            "width": 1286,
+            "height": 116
           }
         },
         {
           "num": 4,
-          "label": "Barangay Legislative Participation & Enactment Ranking",
+          "label": "Policy Category Distribution Breakdown Chart",
           "box": {
-            "x": 260,
-            "y": 430,
-            "width": 480,
-            "height": 310
+            "x": 285,
+            "y": 341,
+            "width": 851,
+            "height": 392
           }
         },
         {
           "num": 5,
-          "label": "Citizen Report Resolution Rate & Efficiency Metrics",
+          "label": "Legislative Status Breakdown Distribution Chart",
           "box": {
-            "x": 760,
-            "y": 430,
-            "width": 480,
-            "height": 310
+            "x": 1154,
+            "y": 341,
+            "width": 417,
+            "height": 392
           }
         }
       ]
