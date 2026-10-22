@@ -20,17 +20,17 @@
     }
     .erd-container {
       position: relative;
-      width: 1580px;
-      height: 1100px;
+      width: 1680px;
+      height: 1020px;
       background: #ffffff;
     }
     svg.connector-layer {
       position: absolute;
       top: 0;
       left: 0;
-      width: 1580px;
-      height: 1100px;
-      z-index: 5; /* Render ON TOP of entity boxes so arrows are never cut off */
+      width: 1680px;
+      height: 1020px;
+      z-index: 5; /* Render ON TOP of entity boxes so markers and lines are never cut off */
       pointer-events: none;
     }
     .entity-box {
@@ -42,31 +42,43 @@
     }
     .entity-header {
       font-weight: bold;
-      font-size: 13.5px;
+      font-size: 14px;
       text-align: center;
-      padding: 5px 8px;
+      padding: 6px 10px;
       background: #f8fafc;
       border-bottom: 1.8px solid #000000;
       letter-spacing: 0.3px;
     }
     .entity-body {
-      padding: 7px 11px;
-      font-size: 11.5px;
-      line-height: 1.42;
+      padding: 6px 12px;
+      font-size: 11px;
+      line-height: 1.44;
     }
     .row {
       display: flex;
-      align-items: flex-start;
+      align-items: baseline;
       padding: 0.5px 0;
     }
     .key-col {
-      width: 34px;
+      width: 28px;
       flex-shrink: 0;
       font-weight: bold;
-      font-size: 10.5px;
+      font-size: 10px;
+      color: #000000;
     }
     .attr-col {
       flex-grow: 1;
+      font-size: 11px;
+      padding-right: 14px;
+      white-space: nowrap;
+    }
+    .type-col {
+      flex-shrink: 0;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #334155;
+      text-align: right;
+      letter-spacing: -0.2px;
     }
     .pk {
       font-weight: bold;
@@ -77,14 +89,14 @@
     }
     .rel-badge {
       font-family: Arial, sans-serif;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: bold;
       fill: #0f172a;
     }
     .rel-bg {
       fill: #ffffff;
-      stroke: #64748b;
-      stroke-width: 1;
+      stroke: #475569;
+      stroke-width: 1.1;
       rx: 4px;
     }
   </style>
@@ -101,6 +113,12 @@
           <path d="M 3 2 L 3 14 M 7 2 L 7 14" fill="none" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
         </marker>
 
+        <!-- Zero-or-One: o| (start marker) -->
+        <marker id="zero-one-start" viewBox="0 0 18 16" refX="2" refY="8" markerWidth="12" markerHeight="10" orient="auto" overflow="visible">
+          <circle cx="5" cy="8" r="3.2" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+          <path d="M 11 2 L 11 14" fill="none" stroke="#000000" stroke-width="1.6" stroke-linecap="round" />
+        </marker>
+
         <!-- Zero-to-Many: Circle + Crow's foot (end marker) -->
         <marker id="zero-many-end" viewBox="0 0 22 16" refX="19" refY="8" markerWidth="14" markerHeight="11" orient="auto" overflow="visible">
           <circle cx="5" cy="8" r="3.2" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
@@ -114,260 +132,197 @@
       </defs>
 
       <!-- ==========================================
-           1. BARANGAYS to USERS
-           From (660, 95) -> (195, 95) -> (195, 178)
-           Horizontal gap: 660 to 195. Midpoint = 427.5
+           1. BARANGAYS to USERS (administers / resident of)
+           From (680, 105) -> (230, 105) -> (230, 218)
+           Horizontal gap: 680 to 230. Midpoint = 455
            ========================================== -->
-      <path d="M 660 95 L 195 95 L 195 178" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge on Horizontal Segment at (427.5, 95) -->
+      <path d="M 680 105 L 230 105 L 230 218" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
+      <!-- Centered Badge at (455, 105) -->
       <g>
-        <rect x="345" y="85" width="165" height="20" class="rel-bg" />
-        <text x="427.5" y="95" dominant-baseline="central" text-anchor="middle" class="rel-badge">1 : 0..* (barangay_id)</text>
+        <rect x="345" y="94" width="220" height="22" class="rel-bg" />
+        <text x="455" y="105" dominant-baseline="central" text-anchor="middle" class="rel-badge">administers / resident of (1 : 0..*)</text>
       </g>
 
       <!-- ==========================================
-           2. BARANGAYS to ORDINANCES
-           From (800, 150) -> (800, 248)
-           Vertical line. Midpoint = 199
+           2. BARANGAYS to ORDINANCES (enacts)
+           From (840, 170) -> (840, 248)
+           Vertical line. Gap: 170 to 248. Midpoint = 209
            ========================================== -->
-      <path d="M 800 150 L 800 248" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (800, 199) -->
+      <path d="M 840 170 L 840 248" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
+      <!-- Centered Badge at (840, 209) -->
       <g>
-        <rect x="715" y="189" width="170" height="20" class="rel-bg" />
-        <text x="800" y="199" dominant-baseline="central" text-anchor="middle" class="rel-badge">1 : 0..* (local ordinance)</text>
+        <rect x="750" y="198" width="180" height="22" class="rel-bg" />
+        <text x="840" y="209" dominant-baseline="central" text-anchor="middle" class="rel-badge">enacts (1 : 0..*)</text>
       </g>
 
       <!-- ==========================================
-           3. BARANGAYS to REPORTS
-           From (930, 95) -> (1380, 95) -> (1380, 178)
-           Horizontal gap: 930 to 1380. Midpoint = 1155
+           3. BARANGAYS to REPORTS (receives)
+           From (1000, 105) -> (1440, 105) -> (1440, 218)
+           Horizontal gap: 1000 to 1440. Midpoint = 1220
            ========================================== -->
-      <path d="M 930 95 L 1380 95 L 1380 178" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (1155, 95) -->
+      <path d="M 1000 105 L 1440 105 L 1440 218" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#one-many-end)" />
+      <!-- Centered Badge at (1220, 105) -->
       <g>
-        <rect x="1075" y="85" width="160" height="20" class="rel-bg" />
-        <text x="1155" y="95" dominant-baseline="central" text-anchor="middle" class="rel-badge">1 : 0..* (jurisdiction)</text>
+        <rect x="1130" y="94" width="180" height="22" class="rel-bg" />
+        <text x="1220" y="105" dominant-baseline="central" text-anchor="middle" class="rel-badge">receives (1 : 1..*)</text>
       </g>
 
       <!-- ==========================================
            4. USERS to ORDINANCES [submits]
-           From (330, 290) -> (638, 290)
-           Horizontal line. Gap = 330 to 638. Midpoint = 484
+           From (400, 300) -> (638, 300)
+           Horizontal line. Gap: 400 to 638 (238px). Midpoint = 519
            ========================================== -->
-      <path d="M 330 290 L 638 290" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (484, 290) -->
+      <path d="M 400 300 L 638 300" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#one-many-end)" />
+      <!-- Centered Badge at (519, 300) -->
       <g>
-        <rect x="419" y="280" width="130" height="20" class="rel-bg" />
-        <text x="484" y="290" dominant-baseline="central" text-anchor="middle" class="rel-badge">submits (1 : 0..*)</text>
+        <rect x="444" y="289" width="150" height="22" class="rel-bg" />
+        <text x="519" y="300" dominant-baseline="central" text-anchor="middle" class="rel-badge">submits (1 : 1..*)</text>
       </g>
 
       <!-- ==========================================
            5. USERS to ORDINANCES [reviews]
-           From (330, 360) -> (638, 360)
-           Horizontal line. Gap = 330 to 638. Midpoint = 484
+           From (400, 370) -> (638, 370)
+           Horizontal line. Gap: 400 to 638 (238px). Midpoint = 519
            ========================================== -->
-      <path d="M 330 360 L 638 360" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (484, 360) -->
+      <path d="M 400 370 L 638 370" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#zero-one-start)" marker-end="url(#zero-many-end)" />
+      <!-- Centered Badge at (519, 370) -->
       <g>
-        <rect x="419" y="350" width="130" height="20" class="rel-bg" />
-        <text x="484" y="360" dominant-baseline="central" text-anchor="middle" class="rel-badge">reviews (0..1 : 0..*)</text>
+        <rect x="444" y="359" width="150" height="22" class="rel-bg" />
+        <text x="519" y="370" dominant-baseline="central" text-anchor="middle" class="rel-badge">reviews (0..1 : 0..*)</text>
       </g>
 
       <!-- ==========================================
            6. USERS to CHAT_SESSIONS [initiates]
-           From (195, 400) -> (195, 508)
-           Vertical line. Gap = 400 to 508. Midpoint = 454
+           From (230, 460) -> (230, 578)
+           Vertical line. Gap: 460 to 578 (118px). Midpoint = 519
            ========================================== -->
-      <path d="M 195 400 L 195 508" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (195, 454) -->
+      <path d="M 230 460 L 230 578" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#zero-one-start)" marker-end="url(#zero-many-end)" />
+      <!-- Centered Badge at (230, 519) -->
       <g>
-        <rect x="105" y="444" width="180" height="20" class="rel-bg" />
-        <text x="195" y="454" dominant-baseline="central" text-anchor="middle" class="rel-badge">initiates session (0..1 : 0..*)</text>
-      </g>
-
-      <!-- ==========================================
-           7. CHAT_SESSIONS to CHAT_MESSAGES [contains]
-           From (195, 620) -> (195, 728)
-           Vertical line. Gap = 620 to 728. Midpoint = 674
-           ========================================== -->
-      <path d="M 195 620 L 195 728" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#one-many-end)" />
-      <!-- Centered Badge at (195, 674) -->
-      <g>
-        <rect x="120" y="664" width="150" height="20" class="rel-bg" />
-        <text x="195" y="674" dominant-baseline="central" text-anchor="middle" class="rel-badge">contains (1 : 1..*)</text>
-      </g>
-
-      <!-- ==========================================
-           8. ORDINANCES to ORDINANCE_TAGS [indexed by]
-           From (800, 850) -> (800, 958)
-           Vertical line. Gap = 850 to 958. Midpoint = 904
-           ========================================== -->
-      <path d="M 800 850 L 800 958" fill="none" stroke="#000000" stroke-width="1.6" marker-start="url(#one-start)" marker-end="url(#zero-many-end)" />
-      <!-- Centered Badge at (800, 904) -->
-      <g>
-        <rect x="720" y="894" width="160" height="20" class="rel-bg" />
-        <text x="800" y="904" dominant-baseline="central" text-anchor="middle" class="rel-badge">indexed by (1 : 0..*)</text>
+        <rect x="135" y="508" width="190" height="22" class="rel-bg" />
+        <text x="230" y="519" dominant-baseline="central" text-anchor="middle" class="rel-badge">initiates session (0..1 : 0..*)</text>
       </g>
     </svg>
 
     <!-- ==========================================
          ENTITY 1: BARANGAYS (Top Center)
-         left: 670px, top: 40px, width: 260px, height: 110px
+         left: 680px, top: 40px, width: 320px
          ========================================== -->
-    <div class="entity-box" style="left: 670px; top: 40px; width: 260px;">
+    <div class="entity-box" style="left: 680px; top: 40px; width: 320px;">
       <div class="entity-header">barangays</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">UQ</div><div class="attr-col">name</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">name</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 
     <!-- ==========================================
          ENTITY 2: USERS (Left Upper)
-         left: 60px, top: 180px, width: 270px, height: 220px
+         left: 60px, top: 220px, width: 340px
          ========================================== -->
-    <div class="entity-box" style="left: 60px; top: 180px; width: 270px;">
+    <div class="entity-box" style="left: 60px; top: 220px; width: 340px;">
       <div class="entity-header">users</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">UQ</div><div class="attr-col">email</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">password_hash</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">name</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">role</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">email</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">password_hash</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">name</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">role</div><div class="type-col">VARCHAR(20)</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 
     <!-- ==========================================
          ENTITY 3: ORDINANCES (Center Middle)
-         left: 640px, top: 250px, width: 320px, height: 600px
+         left: 640px, top: 250px, width: 400px
          ========================================== -->
-    <div class="entity-box" style="left: 640px; top: 250px; width: 320px;">
+    <div class="entity-box" style="left: 640px; top: 250px; width: 400px;">
       <div class="entity-header">ordinances</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">UQ</div><div class="attr-col">slug</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">title</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">resolution_number</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">ordinance_label</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">series</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">type</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">status</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">category</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">penalties</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">signatories</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">pdf_url</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">date_enacted</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">year</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">coverage</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">articles</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">enforcement</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">submitted_by_id</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">reviewed_by_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">approved_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">rejected_reason</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">slug</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">title</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">resolution_number</div><div class="type-col">VARCHAR(100)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">ordinance_label</div><div class="type-col">VARCHAR(100)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">series</div><div class="type-col">VARCHAR(50)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">type</div><div class="type-col">VARCHAR(20)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">status</div><div class="type-col">VARCHAR(20)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">content</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">category</div><div class="type-col">VARCHAR(100)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">penalties</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">signatories</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">pdf_url</div><div class="type-col">VARCHAR(500)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">date_enacted</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">year</div><div class="type-col">INTEGER</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">tags</div><div class="type-col">JSON</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">coverage</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">articles</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">enforcement</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">submitted_by_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">reviewed_by_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">approved_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">rejected_reason</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 
     <!-- ==========================================
-         ENTITY 4: ORDINANCE_TAGS (Center Bottom)
-         left: 670px, top: 960px, width: 260px, height: 95px
+         ENTITY 4: REPORTS (Right Upper)
+         left: 1260px, top: 220px, width: 360px
          ========================================== -->
-    <div class="entity-box" style="left: 670px; top: 960px; width: 260px;">
-      <div class="entity-header">ordinance_tags</div>
-      <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">ordinance_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">tag_name</div></div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         ENTITY 5: REPORTS (Right Upper)
-         left: 1240px, top: 180px, width: 280px, height: 280px
-         ========================================== -->
-    <div class="entity-box" style="left: 1240px; top: 180px; width: 280px;">
+    <div class="entity-box" style="left: 1260px; top: 220px; width: 360px;">
       <div class="entity-header">reports</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">type</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">photo_url</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">contact_name</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">contact_phone</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">is_anonymous</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">status</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">submitted_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">resolved_at</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">type</div><div class="type-col">VARCHAR(50)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">photo_url</div><div class="type-col">VARCHAR(500)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">contact_name</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">contact_phone</div><div class="type-col">VARCHAR(50)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">is_anonymous</div><div class="type-col">BOOLEAN</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">status</div><div class="type-col">VARCHAR(20)</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">submitted_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">resolved_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 
     <!-- ==========================================
-         ENTITY 6: CHAT_SESSIONS (Left Middle)
-         left: 60px, top: 510px, width: 270px, height: 110px
+         ENTITY 5: CHAT_SESSIONS (Left Lower)
+         left: 60px, top: 580px, width: 340px
          ========================================== -->
-    <div class="entity-box" style="left: 60px; top: 510px; width: 270px;">
+    <div class="entity-box" style="left: 60px; top: 580px; width: 340px;">
       <div class="entity-header">chat_sessions</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">user_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">user_id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">messages</div><div class="type-col">JSON</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 
     <!-- ==========================================
-         ENTITY 7: CHAT_MESSAGES (Left Bottom)
-         left: 60px, top: 730px, width: 270px, height: 145px
+         ENTITY 6: NEWS_ITEMS (Right Lower)
+         left: 1260px, top: 620px, width: 360px
          ========================================== -->
-    <div class="entity-box" style="left: 60px; top: 730px; width: 270px;">
-      <div class="entity-header">chat_messages</div>
-      <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">session_id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">role</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">sent_at</div></div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         ENTITY 8: NEWS_ITEMS (Right Lower)
-         left: 1240px, top: 540px, width: 280px, height: 205px
-         ========================================== -->
-    <div class="entity-box" style="left: 1240px; top: 540px; width: 280px;">
+    <div class="entity-box" style="left: 1260px; top: 620px; width: 360px;">
       <div class="entity-header">news_items</div>
       <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">title</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">category</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">is_pinned</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">published_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         ENTITY 9: SYSTEM_SETTINGS (Right Bottom)
-         left: 1240px, top: 810px, width: 280px, height: 120px
-         ========================================== -->
-    <div class="entity-box" style="left: 1240px; top: 810px; width: 280px;">
-      <div class="entity-header">system_settings</div>
-      <div class="entity-body">
-        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">setting_key</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">setting_value</div></div>
-        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div><div class="type-col">VARCHAR(30)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">title</div><div class="type-col">VARCHAR(255)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">content</div><div class="type-col">TEXT</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">category</div><div class="type-col">VARCHAR(20)</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">is_pinned</div><div class="type-col">BOOLEAN</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">published_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div><div class="type-col">DATETIME</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div><div class="type-col">DATETIME</div></div>
       </div>
     </div>
 

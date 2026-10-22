@@ -9,7 +9,7 @@ async function renderDiagrams() {
   });
 
   const files = [
-    { html: '00_erd.html', output: '00_ERD_Cabanatuan_Ordinance_Portal.png', width: 1640, height: 1160 },
+    { html: '00_erd.html', output: '00_ERD_Cabanatuan_Ordinance_Portal.png', width: 1720, height: 1080 },
     { html: '01_unf.html', output: '01_UNF_Cabanatuan_Ordinance_Portal.png', width: 1040, height: 1100 },
     { html: '02_1nf.html', output: '02_1NF_Cabanatuan_Ordinance_Portal.png', width: 1300, height: 980 },
     { html: '03_2nf.html', output: '03_2NF_Cabanatuan_Ordinance_Portal.png', width: 1300, height: 980 },
