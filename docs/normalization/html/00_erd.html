@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cabanatuan City Ordinance Portal - Entity Relationship Diagram (ERD)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #ffffff;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      padding: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .erd-container {
+      position: relative;
+      width: 1420px;
+      height: 960px;
+      background: #ffffff;
+    }
+    svg.connector-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1420px;
+      height: 960px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .entity-box {
+      position: absolute;
+      border: 1.8px solid #000000;
+      background: #ffffff;
+      z-index: 2;
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.06);
+    }
+    .entity-header {
+      font-weight: bold;
+      font-size: 13.5px;
+      text-align: center;
+      padding: 5px 8px;
+      background: #f8fafc;
+      border-bottom: 1.8px solid #000000;
+      letter-spacing: 0.3px;
+    }
+    .entity-body {
+      padding: 7px 11px;
+      font-size: 11.5px;
+      line-height: 1.42;
+    }
+    .row {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.5px 0;
+    }
+    .key-col {
+      width: 34px;
+      flex-shrink: 0;
+      font-weight: bold;
+      font-size: 10.5px;
+    }
+    .attr-col {
+      flex-grow: 1;
+    }
+    .pk {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .fk {
+      font-style: italic;
+    }
+    .rel-badge {
+      font-size: 10px;
+      font-weight: bold;
+      fill: #1e293b;
+    }
+    .rel-bg {
+      fill: #ffffff;
+      stroke: #94a3b8;
+      stroke-width: 0.8;
+      rx: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="erd-container">
+
+    <!-- SVG CONNECTOR LAYER -->
+    <svg class="connector-layer" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Marker: Arrow / Crow's Foot -->
+        <marker id="crowsfoot" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M 0 1 L 10 6 L 0 11 M 10 1 L 10 11" fill="none" stroke="#000000" stroke-width="1.4" />
+        </marker>
+        <marker id="one-one" viewBox="0 0 10 12" refX="2" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M 2 1 L 2 11 M 6 1 L 6 11" fill="none" stroke="#000000" stroke-width="1.4" />
+        </marker>
+        <marker id="zero-many" viewBox="0 0 16 12" refX="14" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+          <circle cx="4" cy="6" r="3" fill="#ffffff" stroke="#000000" stroke-width="1.3" />
+          <path d="M 8 1 L 15 6 L 8 11 M 15 1 L 15 11" fill="none" stroke="#000000" stroke-width="1.3" />
+        </marker>
+      </defs>
+
+      <!-- 1. BARANGAYS to USERS (1 : 0..*) -->
+      <!-- From (470, 85) -> (170, 85) -> (170, 160) -->
+      <path d="M 470 85 L 170 85 L 170 160" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="230" y="73" width="135" height="18" class="rel-bg" />
+      <text x="297" y="86" text-anchor="middle" class="rel-badge">1 : 0..* (barangay_id)</text>
+
+      <!-- 2. BARANGAYS to ORDINANCES (1 : 0..*) -->
+      <!-- From (605, 140) -> (605, 200) -->
+      <path d="M 605 140 L 605 200" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="615" y="158" width="145" height="18" class="rel-bg" />
+      <text x="687" y="171" text-anchor="middle" class="rel-badge">1 : 0..* (local ordinance)</text>
+
+      <!-- 3. BARANGAYS to REPORTS (1 : 0..*) -->
+      <!-- From (730, 85) -> (1230, 85) -> (1230, 140) -->
+      <path d="M 730 85 L 1230 85 L 1230 140" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="910" y="73" width="145" height="18" class="rel-bg" />
+      <text x="982" y="86" text-anchor="middle" class="rel-badge">1 : 0..* (jurisdiction)</text>
+
+      <!-- 4. USERS to ORDINANCES [submits] (1 : 0..*) -->
+      <!-- From (300, 260) -> (450, 260) -->
+      <path d="M 300 260 L 450 260" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="320" y="244" width="112" height="18" class="rel-bg" />
+      <text x="376" y="257" text-anchor="middle" class="rel-badge">submits (1 : 0..*)</text>
+
+      <!-- 5. USERS to ORDINANCES [reviews] (1 : 0..*) -->
+      <!-- From (300, 320) -> (450, 320) -->
+      <path d="M 300 320 L 450 320" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="320" y="304" width="112" height="18" class="rel-bg" />
+      <text x="376" y="317" text-anchor="middle" class="rel-badge">reviews (0..1 : 0..*)</text>
+
+      <!-- 6. USERS to CHAT_SESSIONS (0..1 : 0..*) -->
+      <!-- From (170, 395) -> (170, 480) -->
+      <path d="M 170 395 L 170 480" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="85" y="428" width="170" height="18" class="rel-bg" />
+      <text x="170" y="441" text-anchor="middle" class="rel-badge">initiates session (0..1 : 0..*)</text>
+
+      <!-- 7. CHAT_SESSIONS to CHAT_MESSAGES (1 : 1..*) -->
+      <!-- From (170, 580) -> (170, 650) -->
+      <path d="M 170 580 L 170 650" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#crowsfoot)" />
+      <rect x="95" y="605" width="150" height="18" class="rel-bg" />
+      <text x="170" y="618" text-anchor="middle" class="rel-badge">contains (1 : 1..*)</text>
+
+      <!-- 8. ORDINANCES to ORDINANCE_TAGS (1 : 0..*) -->
+      <!-- From (605, 805) -> (605, 845) -->
+      <path d="M 605 805 L 605 845" fill="none" stroke="#000000" stroke-width="1.5" marker-end="url(#zero-many)" />
+      <rect x="525" y="817" width="160" height="18" class="rel-bg" />
+      <text x="605" y="830" text-anchor="middle" class="rel-badge">indexed by (1 : 0..*)</text>
+    </svg>
+
+    <!-- ENTITY 1: BARANGAYS (Center Top) -->
+    <div class="entity-box" style="left: 470px; top: 25px; width: 260px;">
+      <div class="entity-header">barangays</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">name</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 2: USERS (Left Top) -->
+    <div class="entity-box" style="left: 40px; top: 160px; width: 260px;">
+      <div class="entity-header">users</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">email</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">password_hash</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">name</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">role</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 3: ORDINANCES (Center Middle) -->
+    <div class="entity-box" style="left: 450px; top: 200px; width: 310px;">
+      <div class="entity-header">ordinances</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">UQ</div><div class="attr-col">slug</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">title</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">resolution_number</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">ordinance_label</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">series</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">type</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">status</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">category</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">penalties</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">signatories</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">pdf_url</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">date_enacted</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">year</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">coverage</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">articles</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">enforcement</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">submitted_by_id</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">reviewed_by_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">approved_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">rejected_reason</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 4: ORDINANCE_TAGS (Center Bottom) -->
+    <div class="entity-box" style="left: 480px; top: 845px; width: 250px;">
+      <div class="entity-header">ordinance_tags</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">ordinance_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">tag_name</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 5: REPORTS (Right Middle) -->
+    <div class="entity-box" style="left: 1100px; top: 140px; width: 270px;">
+      <div class="entity-header">reports</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">type</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">photo_url</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">contact_name</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">contact_phone</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">is_anonymous</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">status</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">barangay_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">submitted_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">resolved_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 6: CHAT_SESSIONS (Left Middle) -->
+    <div class="entity-box" style="left: 40px; top: 480px; width: 260px;">
+      <div class="entity-header">chat_sessions</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">user_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 7: CHAT_MESSAGES (Left Bottom) -->
+    <div class="entity-box" style="left: 40px; top: 650px; width: 260px;">
+      <div class="entity-header">chat_messages</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col">FK</div><div class="attr-col fk">session_id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">role</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">sent_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 8: NEWS_ITEMS (Right Bottom - Left) -->
+    <div class="entity-box" style="left: 810px; top: 610px; width: 260px;">
+      <div class="entity-header">news_items</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">id</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">title</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">content</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">category</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">is_pinned</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">published_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">created_at</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">updated_at</div></div>
+      </div>
+    </div>
+
+    <!-- ENTITY 9: SYSTEM_SETTINGS (Right Bottom - Right) -->
+    <div class="entity-box" style="left: 1100px; top: 610px; width: 270px;">
+      <div class="entity-header">system_settings</div>
+      <div class="entity-body">
+        <div class="row"><div class="key-col">PK</div><div class="attr-col pk">setting_key</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">setting_value</div></div>
+        <div class="row"><div class="key-col"></div><div class="attr-col">description</div></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

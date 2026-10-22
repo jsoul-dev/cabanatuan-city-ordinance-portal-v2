@@ -1,38 +1,64 @@
-# Database Normalization (UNF, 1NF, 2NF, 3NF)
+# Database Design & Normalization (ERD, UNF, 1NF, 2NF, 3NF)
 ## Web-Based AI-Assisted Ordinance Information System (Cabanatuan City Ordinance Portal)
 
 ---
 
 ### Executive Overview
 
-Database normalization is a systematic design technique pioneered by Edgar F. Codd that organizes relational tables to minimize data redundancy, avoid anomalies during data manipulation (insert, update, delete), and ensure that data dependencies make logical sense. 
+Database design and normalization are fundamental software engineering disciplines that ensure relational data structures minimize data redundancy, avoid insertion, update, and deletion anomalies, and guarantee referential integrity across transactional workloads.
 
-This document traces the complete normalization journey of the **Cabanatuan City Ordinance Portal** from an **Unnormalized Form (UNF)** to the fully optimized **Third Normal Form (3NF)**, conforming directly with the system's operational architecture and Prisma schema.
+This document presents the complete database architecture of the **Cabanatuan City Ordinance Portal**, comprising:
+1. **Entity Relationship Diagram (ERD)** (Figure 14) modeling the conceptual and logical entities, primary/foreign keys, and cardinalities.
+2. **Progressive Normalization Walkthrough (UNF $\to$ 1NF $\to$ 2NF $\to$ 3NF)** (Figures 15 through 18) following Edgar F. Codd's Relational Database Theory, perfectly aligning with the Prisma schema (`schema.prisma`) and SQLite implementation.
 
 ```
 ┌─────────────────────────────────┐
-│  Unnormalized Form (UNF)        │  Monolithic data structure with repeating groups & non-atomic fields
+│ Entity Relationship Diagram     │  Conceptual & Logical Relational Schema (Figure 14)
+└────────────────┬────────────────┘
+                 │  Progressive Relational Normalization
+                 ▼
+┌─────────────────────────────────┐
+│  Unnormalized Form (UNF)        │  Monolithic data structure with repeating groups (Figure 15)
 └────────────────┬────────────────┘
                  │
                  ▼  Rule 1: Eliminate repeating groups, flatten attributes, assign primary keys
 ┌─────────────────────────────────┐
-│  First Normal Form (1NF)        │  Atomic attributes, atomic rows, composite primary keys on child relations
+│  First Normal Form (1NF)        │  Atomic attributes, atomic rows, composite primary keys (Figure 16)
 └────────────────┬────────────────┘
                  │
                  ▼  Rule 2: Eliminate partial functional dependencies on composite keys
 ┌─────────────────────────────────┐
-│  Second Normal Form (2NF)       │  Full functional dependency on entire PK; surrogate keys introduced
+│  Second Normal Form (2NF)       │  Full functional dependency on entire PK; surrogate keys (Figure 17)
 └────────────────┬────────────────┘
                  │
                  ▼  Rule 3: Eliminate transitive functional dependencies (X → Y → Z)
 ┌─────────────────────────────────┐
-│  Third Normal Form (3NF)        │  Strict dependency on the key, the whole key, and nothing but the key
+│  Third Normal Form (3NF)        │  Strict dependency on the key, the whole key, and nothing but the key (Figure 18)
 └─────────────────────────────────┘
 ```
 
 ---
 
-## 1. Summary of Normalization Stages
+## 1. Entity Relationship Diagram (ERD)
+
+### 1.1 Academic Manuscript Discussion
+
+The Entity Relationship Diagram (ERD) shown in Figure 14 was developed to represent the data entities of the Web-Based AI-Assisted Ordinance Information System (Cabanatuan City Ordinance Portal) and the relationships established among them within the relational database. The design included nine entities: `users`, `barangays`, `ordinances`, `ordinance_tags`, `reports`, `news_items`, `chat_sessions`, `chat_messages`, and `system_settings`. Primary and foreign keys were used to establish the relationships necessary to support account authentication, role-based access control (RBAC: `CITIZEN`, `BARANGAY_ADMIN`, and `LGU_ADMIN`), geopolitical barangay jurisdiction routing, legislative ordinance drafting and Sanggunian resolution lifecycle management (`DRAFT`, `PENDING`, `APPROVED`, and `REJECTED`), multi-page scanned legal PDF document archiving, AI OCR document parsing, citizen community violation complaint submission and administrative triage, civic news and public advisory broadcasting, and bilingual (Tagalog/English) AI ordinance consultation powered by Google Gemini via Retrieval-Augmented Generation (RAG).
+
+The `ordinances` entity served as the principal transactional and repository record for legislative operations. It maintained the official title, resolution number, ordinance classification label, legislative series year, jurisdiction scope (`BARANGAY` or `CITY`), statutory lifecycle status (`DRAFT`, `PENDING`, `APPROVED`, or `REJECTED`), full statutory transcript, structured article breakdown, prescribed penal sanctions, signatories, official scanned PDF file path, enactment date, calendar year, coverage boundary, and designated implementing enforcement agencies. Its relationships enforce rigorous administrative accountability through two foreign keys referencing the `users` entity: `submitted_by_id` identifies the local official who authored or encoded the enactment, while `reviewed_by_id` identifies the LGU administrator responsible for statutory review, approval, or formal rejection (with corresponding administrative feedback recorded in `rejected_reason`). The `ordinances` entity is also linked to `barangays` via `barangay_id`, which designates the enacting local barangay council for localized ordinances or remains null for city-wide statutes that apply across all 89 barangays of Cabanatuan City. Supporting records were linked to an ordinance through `ordinance_tags` to enable multi-field weighted heuristic scoring ($10\times\text{Title} + 8\times\text{Tags} + 6\times\text{Category} + 4\times\text{Desc} + 3\times\text{Articles} + 3\times\text{Penalties} + 2\times\text{Content}$) during RAG vector context retrieval.
+
+The `barangays` entity maintained one-to-many relationships with `users`, `ordinances`, and `reports`, establishing the geopolitical foundation of the portal. It links to `users` to delineate administrative jurisdiction for Barangay Administrators and residence for registered citizens, to `ordinances` to organize localized legislative archives, and to `reports` to direct community violation tickets directly to the concerned barangay hall. The `reports` entity enabled residents to lodge localized violation complaints across defined categories (`TRASH_BURNING`, `NOISE`, `ROAD_OBSTRUCTION`, and `OTHER`) with uploaded photographic evidence and optional contact verification (`contact_name` and `contact_phone`); it incorporates an `is_anonymous` boolean flag to safeguard citizen whistleblower privacy by permitting unauthenticated or anonymized submissions while retaining administrative status triage (`NEW`, `IN_PROGRESS`, `RESOLVED`, and `DISMISSED`). The `chat_sessions` and `chat_messages` entities captured the multi-turn conversational interactions between citizens and the AI legal assistant. `chat_sessions` maintained a nullable foreign key to `users` (`user_id`), allowing unauthenticated guest citizens to consult local ordinances with zero onboarding friction while permitting registered users to retain multi-turn dialogue histories. Each session contained one or more `chat_messages` capturing the interlocutor role (`user` or `assistant`), prompt queries, cited statutory resolution numbers, and timestamps. The `news_items` entity disseminated public advisories categorized by territorial scope (`CITY` or `BARANGAY`) with pinning capabilities (`is_pinned`). Finally, the `system_settings` entity stored runtime configuration parameters—such as the RAG top-$k$ threshold, similarity cutoffs, Gemini model temperature, and file upload size limits—as dynamic key-value records.
+
+Overall, the ERD established the structural organization of the principal records required by the Cabanatuan City Ordinance Portal. It provided the basis for implementing relationships among system data while supporting referential consistency, cascade constraints, and reducing unnecessary duplication. The logical data structure was further refined through the database normalization process from Unnormalized Form to Third Normal Form.
+
+**Figure 14**  
+*Entity Relationship Diagram of Cabanatuan City Ordinance Portal System*
+
+![Figure 14: Entity Relationship Diagram of Cabanatuan City Ordinance Portal System](file:///c:/.JC/Antigravity-Projects/Capstone%20Project%20v2/app/docs/normalization/output/00_ERD_Cabanatuan_Ordinance_Portal.png)
+
+---
+
+## 2. Summary of Normalization Stages
 
 | Normal Form | Core Criterion / Rule Applied | System Structural Transformations | Anomalies Resolved |
 |---|---|---|---|

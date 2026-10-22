@@ -9,6 +9,7 @@ async function renderDiagrams() {
   });
 
   const files = [
+    { html: '00_erd.html', output: '00_ERD_Cabanatuan_Ordinance_Portal.png', width: 1500, height: 1040 },
     { html: '01_unf.html', output: '01_UNF_Cabanatuan_Ordinance_Portal.png', width: 1040, height: 1100 },
     { html: '02_1nf.html', output: '02_1NF_Cabanatuan_Ordinance_Portal.png', width: 1300, height: 980 },
     { html: '03_2nf.html', output: '03_2NF_Cabanatuan_Ordinance_Portal.png', width: 1300, height: 980 },
@@ -28,8 +29,8 @@ async function renderDiagrams() {
     await page.setViewportSize({ width: item.width, height: item.height });
     await page.goto(filePath, { waitUntil: 'networkidle' });
 
-    // Find the main card or canvas element
-    const element = await page.$('.unf-card, .canvas');
+    // Find the main card, canvas, or container element
+    const element = await page.$('.erd-container, .unf-card, .canvas');
     const outPath = path.join(outputDir, item.output);
 
     if (element) {
