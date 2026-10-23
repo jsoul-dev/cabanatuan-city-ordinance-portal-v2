@@ -6,12 +6,11 @@ import fs from "node:fs";
 
 /**
  * Prisma 7 singleton for local SQLite.
- * Uses @prisma/adapter-better-sqlite3 for high performance on local low-spec Windows machines.
- * Enables WAL mode, NORMAL synchronous mode, and foreign keys for fast, corruption-resistant local execution.
+ * Uses @prisma/adapter-better-sqlite3 for high performance on local low-spec machines and Linux containers.
+ * Actively configures WAL mode, NORMAL synchronous mode, foreign keys, and 5000ms busy timeout.
  */
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
-  db: Database.Database | undefined;
 };
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -37,7 +36,19 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-const adapter = new PrismaBetterSqlite3({ url: dbUrl });
+// Enforce WAL mode, NORMAL synchronous mode, busy timeout, and foreign keys on SQLite handle
+try {
+  const initDb = new Database(dbUrl, { timeout: 5000 });
+  initDb.pragma("journal_mode = WAL");
+  initDb.pragma("synchronous = NORMAL");
+  initDb.pragma("busy_timeout = 5000");
+  initDb.pragma("foreign_keys = ON");
+  initDb.close();
+} catch (pragmaErr) {
+  console.error("Failed to initialize SQLite WAL pragmas:", pragmaErr);
+}
+
+const adapter = new PrismaBetterSqlite3({ url: dbUrl, timeout: 5000 });
 
 export const prisma =
   globalForPrisma.prisma ??
@@ -47,4 +58,3 @@ export const prisma =
   });
 
 if (!isProduction) globalForPrisma.prisma = prisma;
-

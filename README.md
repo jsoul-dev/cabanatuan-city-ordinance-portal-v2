@@ -123,7 +123,7 @@ cabanatuan-city-ordinance-portal-v2/
 | **Framework** | [Next.js 16 (App Router + Turbopack)](https://nextjs.org/) | React 19 Server Components, Server Actions, API Routes |
 | **Language** | [TypeScript 5](https://www.typescriptlang.org/) | End-to-end type safety across client and server |
 | **Styling** | [Tailwind CSS v4 + CVA](https://tailwindcss.com/) | Design tokens, responsive layouts, theme-aware styling |
-| **ORM & Database** | [Prisma 7.9 + better-sqlite3](https://prisma.io/) | 100% local SQLite database (`prisma/dev.db`) with WAL mode |
+| **ORM & Database** | [Prisma 7.9 + better-sqlite3](https://prisma.io/) | 100% local SQLite database (prisma/dev.db) enforced with WAL mode (PRAGMA journal_mode = WAL, synchronous = NORMAL, usy_timeout = 5000) |
 | **File Storage** | Local Disk Storage (`/public/uploads/`) | Zero-config local document storage via `/api/files/` |
 | **AI & LLM** | [Google Gemini 3.5 Flash Lite (`@google/genai`)](https://ai.google.dev/) | Bilingual ordinance chat streaming, multimodal OCR PDF parser (Only External Call) |
 | **UI Components** | Radix UI / Base UI / Sonner | Accessible modals, toast notifications |
@@ -171,6 +171,9 @@ Initialize the local SQLite database schema and seed realistic ordinances, baran
 ```bash
 npm run db:setup
 ```
+
+> **Operational Note on SQLite WAL Mode & Live Backups:**
+> The SQLite database operates with Write-Ahead Logging (`PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL; PRAGMA busy_timeout = 5000;`). While WAL enables concurrent non-blocking reads during writes, recent transactions reside in `prisma/dev.db-wal` before being checkpointed. **Copying only `dev.db` while the server is active can result in an incomplete or corrupted backup.** Live backups must capture all three files (`dev.db`, `dev.db-wal`, `dev.db-shm`) atomically, use SQLite `VACUUM INTO 'backup.db'`, or execute `PRAGMA wal_checkpoint(TRUNCATE)` prior to copying.
 
 > **Seeded Test Credentials:**
 > - **LGU Super Admin:** `admin@cabanatuan.gov.ph` / `admin123`
