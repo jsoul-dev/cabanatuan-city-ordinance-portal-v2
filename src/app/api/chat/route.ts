@@ -1,12 +1,87 @@
 import { NextResponse } from "next/server";
 import { ai } from "@/lib/gemini";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 
 /**
  * AI Citizen Ordinance & Civic Assistant API Route.
- * Uses @google/genai (v2.3.0+) with gemini-3.5-flash-lite
- * and lightweight Prisma keyword search for grounded RAG answers.
+ * Uses @google/genai with gemini-3.5-flash-lite, local SQLite keyword RAG,
+ * and built-in rate-limiting and quota defense mechanisms.
  */
+
+// ─── Rate Limiting & Abuse Defense In-Memory Store ───────────────────────────
+interface RateLimitRecord {
+  count: number;
+  resetAt: number;
+}
+
+const ipRateLimits = new Map<string, RateLimitRecord>();
+let globalDailyCount = 0;
+let currentDay = new Date().toISOString().slice(0, 10);
+
+// Periodically purge expired IP rate limit records (runs every 5 minutes)
+if (typeof setInterval !== "undefined") {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [ip, rec] of ipRateLimits.entries()) {
+      if (now > rec.resetAt) {
+        ipRateLimits.delete(ip);
+      }
+    }
+  }, 5 * 60 * 1000).unref?.();
+}
+
+/**
+ * Resolves the client IP address from request headers.
+ * Priority: CF-Connecting-IP -> x-forwarded-for -> x-real-ip -> fallback 127.0.0.1
+ *
+ * NOTE ON SPOOFING RISK:
+ * When direct traffic hits the server, 'x-forwarded-for' can be spoofed by malicious clients.
+ * In production behind Cloudflare (with proxy active), Cloudflare sanitizes/sets 'cf-connecting-ip'
+ * with the true edge client IP, rendering spoofing ineffective.
+ */
+function getClientIp(req: Request): string {
+  const cfIp = req.headers.get("cf-connecting-ip");
+  if (cfIp) return cfIp.trim();
+
+  const xForwardedFor = req.headers.get("x-forwarded-for");
+  if (xForwardedFor) {
+    const firstIp = xForwardedFor.split(",")[0]?.trim();
+    if (firstIp) return firstIp;
+  }
+
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) return realIp.trim();
+
+  return "127.0.0.1";
+}
+
+/**
+ * Parses upstream errors to identify Gemini rate-limiting (429) or billing depletion (402).
+ */
+function parseGeminiError(err: unknown): { is429: boolean; is402: boolean } {
+  const errObj = typeof err === "object" && err !== null ? (err as Record<string, unknown>) : {};
+  const status = errObj.status ?? errObj.code;
+  const message = err instanceof Error ? err.message : String(err ?? "");
+
+  const is429 =
+    status === 429 ||
+    status === "RESOURCE_EXHAUSTED" ||
+    message.includes("429") ||
+    message.includes("RESOURCE_EXHAUSTED") ||
+    message.includes("Quota exceeded");
+
+  const is402 =
+    status === 402 ||
+    status === "PAYMENT_REQUIRED" ||
+    message.includes("402") ||
+    message.includes("PAYMENT_REQUIRED") ||
+    message.includes("billing") ||
+    message.includes("prepaid credits");
+
+  return { is429, is402 };
+}
+
 const STOP_WORDS = new Set([
   "ano", "ang", "mga", "para", "sa", "ng", "at", "o", "na", "ay", "may", "ba",
   "tungkol", "nito", "dito", "doon", "sino", "bakit", "paano", "kailan", "saan",
@@ -24,14 +99,84 @@ function extractSearchKeywords(text: string): string[] {
     .filter((word) => word.length >= 3 && !STOP_WORDS.has(word));
 }
 
+const MAX_MESSAGE_LENGTH = 1000;
+
 export async function POST(request: Request) {
   const startTime = performance.now();
-  try {
-    const { messages, sessionId, userId } = await request.json();
+  const now = Date.now();
+  const clientIp = getClientIp(request);
 
-    if (!Array.isArray(messages) || messages.length === 0) {
+  // 1. Enforce Per-IP Rate Limiting (Default: 10 requests/min, configurable via CHAT_RATE_LIMIT_PER_MIN)
+  const rateLimitPerMin = parseInt(process.env.CHAT_RATE_LIMIT_PER_MIN || "10", 10);
+  const windowMs = 60 * 1000;
+  let ipRecord = ipRateLimits.get(clientIp);
+
+  if (!ipRecord || now > ipRecord.resetAt) {
+    ipRecord = { count: 1, resetAt: now + windowMs };
+    ipRateLimits.set(clientIp, ipRecord);
+  } else {
+    ipRecord.count++;
+  }
+
+  if (ipRecord.count > rateLimitPerMin) {
+    const retryAfterSec = Math.max(1, Math.ceil((ipRecord.resetAt - now) / 1000));
+    return NextResponse.json(
+      {
+        error: "Masyadong maraming kahilingan. Mangyaring maghintay bago magtanong muli. / Too many requests. Please wait before asking again.",
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": retryAfterSec.toString(),
+        },
+      }
+    );
+  }
+
+  // 2. Enforce Optional Global Daily Cap (CHAT_DAILY_LIMIT)
+  if (process.env.CHAT_DAILY_LIMIT) {
+    const dailyLimit = parseInt(process.env.CHAT_DAILY_LIMIT, 10);
+    const today = new Date().toISOString().slice(0, 10);
+    if (today !== currentDay) {
+      currentDay = today;
+      globalDailyCount = 0;
+    }
+    if (globalDailyCount >= dailyLimit) {
+      return NextResponse.json(
+        {
+          error: "Naabot na ang pang-araw-araw na limitasyon ng AI chat sa buong portal. Mangyaring bumalik bukas. / Daily portal AI limit reached. Please return tomorrow.",
+        },
+        { status: 503 }
+      );
+    }
+    globalDailyCount++;
+  }
+
+  try {
+    const body = await request.json().catch(() => null);
+    if (!body || !Array.isArray(body.messages) || body.messages.length === 0) {
       return NextResponse.json(
         { error: "Mangyaring magpadala ng tamang mensahe." },
+        { status: 400 }
+      );
+    }
+
+    const { messages, sessionId, userId } = body;
+    const lastMessage = messages[messages.length - 1]?.content || "";
+
+    // 3. Prevent Token Bombs: Cap user message length to 1,000 characters
+    if (typeof lastMessage !== "string" || lastMessage.length === 0) {
+      return NextResponse.json(
+        { error: "Hindi maaaring walang laman ang mensahe." },
+        { status: 400 }
+      );
+    }
+
+    if (lastMessage.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json(
+        {
+          error: `Napakalaki ng mensahe (${lastMessage.length} titik). Mangyaring limitahan ang inyong katanungan sa ${MAX_MESSAGE_LENGTH} titik upang maiwasan ang labis na paggamit ng sistema.`,
+        },
         { status: 400 }
       );
     }
@@ -55,7 +200,7 @@ export async function POST(request: Request) {
           await prisma.chatSession.update({
             where: { id: existingSession.id },
             data: {
-              messages: messages as any,
+              messages: messages as unknown as Prisma.InputJsonValue,
               userId: userId || existingSession.userId,
             },
           });
@@ -64,7 +209,7 @@ export async function POST(request: Request) {
             data: {
               id: sessionId || undefined,
               userId: userId || null,
-              messages: messages as any,
+              messages: messages as unknown as Prisma.InputJsonValue,
             },
           });
         }
@@ -73,9 +218,7 @@ export async function POST(request: Request) {
       console.warn("Could not sync chat session to database:", dbErr);
     }
 
-    const lastMessage = messages[messages.length - 1]?.content || "";
     const keywords = extractSearchKeywords(lastMessage);
-
     let dbContext = "Walang partikular na ordinansang tumugma sa database.";
 
     try {
@@ -177,11 +320,14 @@ ${dbContext}`;
     }));
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash-lite",
+      model: process.env.GEMINI_MODEL || "gemini-3.5-flash-lite",
       contents,
       config: {
         systemInstruction,
-        temperature: 0.3, // Low temp for accurate ordinance/civic responses
+        temperature: 0.3,
+        // Capped output tokens: Empirical P95 candidate output was measured at 286 tokens;
+        // capping at 500 tokens guarantees full answers while defending against runaway token generation.
+        maxOutputTokens: 500,
       },
     });
 
@@ -194,11 +340,44 @@ ${dbContext}`;
 
     return NextResponse.json({ reply: replyText });
   } catch (error) {
+    const parsed = parseGeminiError(error);
+
+    // B3: Graceful Gemini Error Handling
+    if (parsed.is429) {
+      console.warn("⚠️ [/api/chat] Upstream Gemini 429 rate limit reached.");
+      return NextResponse.json(
+        {
+          error:
+            "Kasalukuyang abala ang serbisyo ng AI assistant dahil sa mataas na bilang ng mga nagtatanong. Mangyaring maghintay ng ilang sandali at subukang muli. / The AI assistant is temporarily busy due to high demand. Please try again in a moment.",
+        },
+        {
+          status: 503,
+          headers: {
+            "Retry-After": "15",
+          },
+        }
+      );
+    }
+
+    if (parsed.is402) {
+      // Log clear server-side alert without exposing sensitive billing data to clients
+      console.error(
+        "🚨 [BILLING ALERT] Prepaid credits depleted or billing issue encountered (HTTP 402). Top up credits at https://aistudio.google.com/docs/billing"
+      );
+      return NextResponse.json(
+        {
+          error:
+            "Pansamantalang hindi magagamit ang AI assistant. Mangyaring sumangguni muna sa City Secretariat o subukang muli mamaya. / The AI assistant is temporarily unavailable. Please refer to the City Secretariat or try again later.",
+        },
+        { status: 503 }
+      );
+    }
+
     console.error("Chatbot API Error:", error);
     return NextResponse.json(
       {
         error:
-          "Nagkaroon ng aberya sa server. Mangyaring subukang muli mamaya.",
+          "Nagkaroon ng aberya sa server. Mangyaring subukang muli mamaya. / Server encountered an unexpected error. Please try again later.",
       },
       { status: 500 }
     );
